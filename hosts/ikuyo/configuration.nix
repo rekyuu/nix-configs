@@ -150,10 +150,13 @@
   };
 
   security = {
+    pam.services = {
+      gnome-keyring = {};
+      hyprlock = {};
+    };
+    polkit.enable = true;
     # FIXME: this
     sudo.wheelNeedsPassword = false;
-    polkit.enable = true;
-    pam.services.hyprlock = {};
   };
 
   nix = {
@@ -190,17 +193,25 @@
   ];
 
   programs = {
-    mtr.enable = true;
-    zsh.enable = true;
-
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
+
+    mtr.enable = true;
+    zsh.enable = true;
   };
   
   services = {
-    displayManager.sessionPackages = [ pkgs.hyprland ];
+    displayManager = {
+      sessionPackages = [ pkgs.sway ];
+      defaultSession = "sway";
+      sddm = {
+        enable = true;
+        autoNumlock = true;
+        theme = "breeze";
+      };
+    };
     
     openssh = {
       enable = true;
@@ -224,10 +235,7 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe0", TAG+="uaccess"
     '';
 
-    # xserver = {
-    #   enable = true;
-    #   videoDrivers = [ "amdgpu" ];
-    # };
+    xserver.enable = true;
   };
 
   systemd = {
