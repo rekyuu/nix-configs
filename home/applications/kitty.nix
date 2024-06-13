@@ -13,8 +13,8 @@
       copy_on_select = "yes";
       window_padding_width = "10 12";
       tab_bar_style = "separator";
-      tab_separator = "";
-      tab_title_template = " {title} ";
+      tab_separator = "\"\"";
+      tab_title_template = "\" {title} \"";
       active_tab_font_style = "bold-italic";
       inactive_tab_font_style = "normal";
       tab_bar_background = "none";

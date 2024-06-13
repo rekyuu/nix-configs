@@ -1,9 +1,4 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
-  inputs,
-  lib,
-  config,
   pkgs,
   ...
 }: {
@@ -11,7 +6,10 @@
   imports = [
     ./applications/hyprland.nix
     ./applications/kitty.nix
+    ./applications/mpd.nix
+    ./applications/rofi.nix
     ./applications/vscode.nix
+    ./applications/waybar.nix
     ./applications/zsh.nix
   ];
 
@@ -20,15 +18,36 @@
     homeDirectory = "/home/rekyuu";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
+  qt = {
+    enable = true;
+  };
+
+  gtk = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
+    bc
+    btop
     firefox
+    freerdp3
+    gammastep
     goxlr-utility
     gnome.nautilus
+    jq
+    lm_sensors
+    mpc-cli
+    nil
     pavucontrol
+    python3
     telegram-desktop
-    xorg.xrandr
+    vesktop
+    ymuse
+    (callPackage ../pkgs/jellyfin-rpc {})
+  ];
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
   ];
 
   home.sessionVariables = {
@@ -54,8 +73,9 @@
     SYSTEMD_EDITOR = "vim";
 
     # TODO: do I need these?
-    # QT_QPA_PLATFORM = "wayland;xcb";
-    # GDK_BACKEND = "wayland,x11";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    GDK_BACKEND = "wayland,x11";
+    NIXOS_OZONE_WL = "1";
 
     # TODO: xivlauncher
     # DALAMUD_HOME = "$HOME/.xlcore/dalamud/Hooks/dev";
@@ -63,11 +83,11 @@
     # VDPAU_DRIVER = "radeonsi";
     # LIBVA_DRIVER_NAME = "radeonsi";
 
-    MOZ_ENABLE_WAYLAND = 0; # cocksuckers!!
-    _JAVA_AWT_WM_NONREPARENTING = 1;
+    # MOZ_ENABLE_WAYLAND = "0"; # cocksuckers!!
+    _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 
-  # Enable home-manager and git
+  programs.bash.enable = true;
   programs.home-manager.enable = true;
 
   programs.git = {
