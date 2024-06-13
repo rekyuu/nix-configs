@@ -1,14 +1,26 @@
-{...}: {
+{
+  config,
+  ...
+}: 
+let
+  inherit (config.lib.formats.rasi) mkLiteral;
+
+  backgroundColor = "#151718";
+  foregroundColor = "#d6d6d6";
+  urgentColor = "#cd3f45";
+in {
   programs.rofi = {
     enable = true;
+
+    font = "Cascadia Code 11";
     theme = {
       configuration = {
         show-icons = true;
         m = "primary";
-        display-drun = "<b>rekyuu@ikuyo <span foreground='#cd3f45'>share/applications</span> »</b>";
-        display-run = "<b>rekyuu@ikuyo <span foreground='#cd3f45'>~</span> »</b>";
+        display-drun = "<b>rekyuu@ikuyo <span foreground='${urgentColor}'>share/applications</span> »</b>";
+        display-run = "<b>rekyuu@ikuyo <span foreground='${urgentColor}'>~</span> »</b>";
         disable-history = false;
-        modes = [ "drun" "run" ];
+        modes = map mkLiteral [ "drun" "run" ];
       };
 
       entry = {
@@ -16,27 +28,44 @@
       };
 
       "*" = {
-        font = "Cascadia Code 11";
-        foreground = "#d6d6d6";
-        background-color = "#151718";
-        active-foreground = "@background-color";
-        active-background = "@foreground";
-        urgent-foreground = "#cd3f45";
-        urgent-background = "@background-color";
-        selected-background = "@foreground";
-        selected-urgent-background = "@urgent-foreground";
-        selected-active-background = "@foreground";
-        separatorcolor = "@background-color";
-        bordercolor = "@background-color";
+        text-color = mkLiteral foregroundColor;
+        background-color = mkLiteral backgroundColor;
+        separatorcolor = mkLiteral backgroundColor;
+        bordercolor = mkLiteral backgroundColor;
+      };
+
+      "normal.active" = {
+        text-color = mkLiteral backgroundColor;
+        background-color = mkLiteral foregroundColor;
+      };
+
+      "normal.urgent" = {
+        text-color = mkLiteral urgentColor;
+        background-color = mkLiteral backgroundColor;
+      };
+
+      "selected" = {
+        text-color = mkLiteral backgroundColor;
+        background-color = mkLiteral foregroundColor;
+      };
+
+      "selected.active" = {
+        text-color = mkLiteral backgroundColor;
+        background-color = mkLiteral foregroundColor;
+      };
+
+      "selected.urgent" = {
+        text-color = mkLiteral backgroundColor;
+        background-color = mkLiteral urgentColor;
       };
 
       window = {
-        background-color = "@background-color";
+        background-color = mkLiteral backgroundColor;
+        border-color = mkLiteral backgroundColor;
         border = 0;
         border-radius = 0;
-        border-color = "@background-color";
-        padding = "10 12";
-        width = "36em";
+        padding = mkLiteral "10 12";
+        width = mkLiteral "36em";
       };
 
       mainbox = {
@@ -45,17 +74,16 @@
       };
 
       prompt = {
-        font = "Cascadia Code 11 Bold";
-        margin = "0px 0.25em 0em 0em";
-        text-color = "@foreground";
+        text-color = mkLiteral foregroundColor;
+        margin = mkLiteral "0px 0.25em 0em 0em";
         markup = true;
       };
 
       textbox-prompt-colon = {
+        text-color = mkLiteral foregroundColor;
         expand = false;
         str = "";
-        margin = "0em 0em 0em 0.33em";
-        text-color = "@foreground";
+        margin = mkLiteral "0em 0em 0em 0.33em";
       };
 
       listview = {
@@ -63,18 +91,18 @@
       };
 
       "element normal normal" = {
-        background-color = "@background-color";
-        text-color = "@foreground";
+        text-color = mkLiteral foregroundColor;
+        background-color = mkLiteral backgroundColor;
       };
 
       "element alternate normal" = {
-        background-color = "@background-color";
-        text-color = "@foreground";
+        text-color = mkLiteral foregroundColor;
+        background-color = mkLiteral backgroundColor;
       };
 
       "element selected normal" = {
-        background-color = "@foreground";
-        text-color = "@background-color";
+        text-color = mkLiteral backgroundColor;
+        background-color = mkLiteral foregroundColor;
       };
     };
   };
