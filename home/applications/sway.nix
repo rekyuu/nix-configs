@@ -236,7 +236,7 @@ in {
         { command = "gammastep -O 4500"; }
         # { command = "transmission-qt"; }
         { command = "telegram-desktop"; }
-        { command = "vesktop"; }
+        { command = "discord.sh"; }
         # { command = "nm-applet"; }
         { command = "firefox"; }
         # { command = "steam"; }
