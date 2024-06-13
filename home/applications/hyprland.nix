@@ -11,10 +11,17 @@ let
 in
 {
   imports = [inputs.hyprland.homeManagerModules.default];
-  home.packages = with pkgs; [jaq xorg.xprop];
+
+  home.packages = with pkgs; [
+    xorg.xhost
+    xorg.xprop
+    xorg.xrandr
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.variables = ["--all"];
+    
     settings = {
       monitor = [
         "${monitorL}, 2560x2880@60, 0x0, 1"
@@ -68,6 +75,12 @@ in
 
       gestures = {
         workspace_swipe = "off";
+      };
+
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+        disable_autoreload = false;
       };
 
       workspace = [
@@ -142,8 +155,8 @@ in
 
         # Workspace assignments
         # ----------------------------------------------------------------
-        "workspace 7, class:^(bpytop)$"
-        "workspace 7, class:^(discord)$"
+        "workspace 7, class:^(btop)$"
+        "workspace 7, class:^(vesktop)$"
         "workspace 9, class:^(firefox)$"
         "workspace 5, class:^(steam)$"
         "workspace 5, class:^(steamwebhelper)$"
@@ -186,10 +199,10 @@ in
         ", XF86AudioLowerVolume, exec, set-volume down"
         ", XF86AudioMute, exec, set-volume mute"
         ", XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-        ", XF86AudioPlay, exec, media-control-with-cooldown toggle"
-        ", XF86AudioPrev, exec, media-control-with-cooldown cdprev"
-        ", XF86AudioNext, exec, media-control-with-cooldown next"
-        ", XF86AudioStop, exec, mpc-toggle-random"
+        ", XF86AudioPlay, exec, media-control-with-cooldown.sh toggle"
+        ", XF86AudioPrev, exec, media-control-with-cooldown.sh cdprev"
+        ", XF86AudioNext, exec, media-control-with-cooldown.sh next"
+        ", XF86AudioStop, exec, mpc-toggle-random.sh"
 
         # Standard
         # "SUPER, KP_End, workspace, 1"
@@ -239,23 +252,154 @@ in
       exec-once = [
         "xrandr --output \"${monitorC}\" --primary --preferred"
         "dbus-update-activation-environment --systemd --all"
-        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME"
-        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-        # "hyprpaper"
-        # "hypridle"
+        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME"
         # "mako"
-        # "waybar"
+        "waybar"
         # "fcitx5"
         "goxlr-daemon"
-        # "gammastep -O 4500"
+        "gammastep -O 4500"
         # "transmission-qt"
         "telegram-desktop"
-        # "discord.sh"
+        "vesktop"
         # "nm-applet"
         "firefox"
         # "steam"
         # "mpd-notify"
-        # "kitty --class=bpytop bpytop"
+        "kitty --class=btop btop"
+      ];
+    };
+  };
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        hide_cursor = true;
+      };
+
+      background = [
+        {
+          monitor = monitorL;
+          color = "rgba(0, 0, 0, 1.0)";
+        }
+        {
+          monitor = monitorC;
+          path = "$HOME/Pictures/wallhaven-eyk71r-no-drop-shadow-darkened-blur.png";
+        }
+        {
+          monitor = monitorR;
+          color = "rgba(0, 0, 0, 1.0)";
+        }
+      ];
+
+      label = [
+        {
+          monitor = monitorC;
+
+          text = "cmd[update:1000] date +\"%H:%M\"";
+          text_align = "center";
+          color = "rgba(200, 200, 200, 1.0)";
+          font_size = 128;
+          font_family = "Noto Sans Black";
+          rotate = 0; # degrees, counter-clockwise
+
+          position = "0, 20";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          monitor = monitorC;
+
+          text = "cmd[update:1000] date +\"%A, %B %e, %Y\"";
+          text_align = "center";
+          color = "rgba(200, 200, 200, 1.0)";
+          font_size = 32;
+          font_family = "Noto Sans ExtraLight";
+          rotate = 0; # degrees, counter-clockwise
+
+          position = "0, -20";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+
+      input-field = {
+        monitor = monitorC;
+
+        size = "480, 64";
+        outline_thickness = 3;
+        # Scale of input-field height, 0.2 - 0.8
+        dots_size = 0.33;
+        # Scale of dots' absolute size, 0.0 - 1.0
+        dots_spacing = 0.15; 
+        dots_center = false;
+        # -1 default circle, -2 follow input-field rounding
+        dots_rounding = -1;
+        outer_color = "rgb(151515)";
+        inner_color = "rgb(200, 200, 200)";
+        font_color = "rgb(10, 10, 10)";
+        fade_on_empty = true;
+        # Milliseconds before fade_on_empty is triggered.
+        fade_timeout = 1000;
+        # Text rendered in the input box when it's empty.
+        placeholder_text = "<i>Input Password...</i>";
+        hide_input = false;
+        # -1 means complete rounding (circle/oval)
+        rounding = -1;
+        check_color = "rgb(204, 136, 34)";
+        # if authentication failed, changes outer_color and fail message color
+        fail_color = "rgb(204, 34, 34)";
+        # can be set to empty
+        fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+        # transition time in ms between normal outer_color and fail_color
+        fail_transition = 300;
+        capslock_color = -1;
+        numlock_color = -1;
+        # when both locks are active. -1 means don't change outer color (same for above)
+        bothlock_color = -1; 
+        # change color if numlock is off
+        invert_numlock = false; 
+        # see below
+        swap_font_color = false; 
+
+        position = "0, -100";
+        halign = "center";
+        valign = "center";
+      };
+    };
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = ["~/Pictures/wallhaven-zxvkmy.jpg"];
+      wallpaper = [
+        "${monitorL},~/Pictures/wallhaven-zxvkmy.jpg"
+        "${monitorC},~/Pictures/wallhaven-zxvkmy.jpg"
+        "${monitorR},~/Pictures/wallhaven-zxvkmy.jpg"
+      ];
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 600;
+          on-timeout = "hyprctl dispatch dpms off && pkill gammastep";
+          on-resume = "hyprctl dispatch dpms on && gammastep -O 4500";
+        }
       ];
     };
   };

@@ -19,7 +19,7 @@
 
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-      kernelModules = [ ];
+      kernelModules = [ "amdgpu" "nfs" ];
     };
 
     kernelModules = [ "kvm-amd" ];
@@ -39,9 +39,25 @@
   };
 
   time.timeZone = "America/Boise";
-
+  
   i18n = {
     defaultLocale = "en_US.UTF-8";
+    supportedLocales = ["en_US.UTF-8/UTF-8"];
+
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_COLLATE = "en_US.UTF-8";
+      LC_CTYPE = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MESSAGES = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
   };
 
   fileSystems = {
@@ -76,14 +92,21 @@
 
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
     opengl = {
       enable = true;
+
       driSupport = true;
       driSupport32Bit = true;
+
       extraPackages = with pkgs; [
         amdvlk
-        rocmPackages.clr.icd
         rocmPackages.clr
+        rocmPackages.clr.icd
+      ];
+
+      extraPackages32 = with pkgs; [
+        driversi686Linux.amdvlk
       ];
     };
   };
@@ -103,6 +126,7 @@
     # FIXME: this
     sudo.wheelNeedsPassword = false;
     polkit.enable = true;
+    pam.services.hyprlock = {};
   };
 
   nix = {
@@ -130,6 +154,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    bash
     git
     tree
     vim
@@ -148,13 +173,22 @@
   };
   
   services = {
+    displayManager.sessionPackages = [ pkgs.hyprland ];
+    
     openssh = {
       enable = true;
     };
 
     pipewire = {
       enable = true;
+      
+      wireplumber.enable = true;
       pulse.enable = true;
+      jack.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
     };
 
     udev.extraRules = ''
@@ -162,6 +196,33 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe4", TAG+="uaccess"
       SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe0", TAG+="uaccess"
     '';
+
+    # xserver = {
+    #   enable = true;
+    #   videoDrivers = [ "amdgpu" ];
+    # };
+  };
+
+  systemd = {
+    tmpfiles.rules = [
+      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
+
+    user.services = {
+      polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
+    };
   };
 
   users.users.rekyuu = {
@@ -170,8 +231,29 @@
     shell = pkgs.zsh;
   };
 
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
+    ];
+
+    configPackages = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
+    ];
+
+    config.common.default = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr
+    ];
+  };
+
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
 
