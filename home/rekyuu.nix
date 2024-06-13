@@ -4,10 +4,12 @@
 }: {
   # You can import other home-manager modules here
   imports = [
-    ./applications/hyprland.nix
+    ./applications/hyprlock.nix
+    ./applications/hyprpaper.nix
     ./applications/kitty.nix
     ./applications/mpd.nix
     ./applications/rofi.nix
+    ./applications/sway.nix
     ./applications/vscode.nix
     ./applications/waybar.nix
     ./applications/zsh.nix
@@ -28,12 +30,17 @@
 
   home.packages = with pkgs; [
     bc
+    blender-hip
     btop
+    comma
     firefox
     freerdp3
+    gamescope
     gammastep
-    goxlr-utility
+    gnome.gnome-calculator
+    gnome.gnome-clocks
     gnome.nautilus
+    goxlr-utility
     jq
     lm_sensors
     mpc-cli

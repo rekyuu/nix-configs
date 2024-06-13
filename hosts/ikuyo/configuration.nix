@@ -12,8 +12,13 @@
 
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      systemd-boot.configurationLimit = 4;
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+        editor = false;
+        configurationLimit = 4;
+      };
+
       efi.canTouchEfiVariables = true;
     };
 
@@ -24,6 +29,17 @@
 
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
+
+    kernelParams = [
+      # power cycle fix
+      # "power_dpm_force_performance_level=high"
+      # eth random shutdown fix
+      "amd_pstate=active"
+      "processor.max_cstate=9"
+      "workqueue.power_efficient=1"
+      "pcie_port_pm=off"
+      "pcie_aspm.policy=performance"
+    ];
   };
 
   networking = {
@@ -77,6 +93,12 @@
       fsType = "ext4";
     };
 
+    "/mnt/arch/boot" = { 
+      device = "/dev/disk/by-uuid/9DED-37F5";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
     "/mnt/games" = { 
       device = "/dev/disk/by-uuid/ba48884f-bc76-4847-ad10-915920e13b82";
       fsType = "ext4";
@@ -109,6 +131,11 @@
         driversi686Linux.amdvlk
       ];
     };
+  };
+
+  environment.variables = {
+    # AMD_VULKAN_ICD = "RADV";
+    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
   };
 
   fonts = {
