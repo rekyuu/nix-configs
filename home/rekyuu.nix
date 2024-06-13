@@ -40,8 +40,10 @@
     gnome.gnome-calculator
     gnome.gnome-clocks
     gnome.nautilus
+    gnome.seahorse
     goxlr-utility
     jq
+    libsecret
     lm_sensors
     mpc-cli
     nil
@@ -94,15 +96,26 @@
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 
-  programs.bash.enable = true;
-  programs.home-manager.enable = true;
+  programs = {
+    bash.enable = true;
 
-  programs.git = {
-    enable = true;
-    userName = "rekyuu";
-    extraConfig = {
-      init.defaultBranch = "main";
-      commit.gpgsign = true;
+    git = {
+      enable = true;
+      userName = "rekyuu";
+      extraConfig = {
+        init.defaultBranch = "main";
+        commit.gpgsign = true;
+      };
+    };
+
+    home-manager.enable = true;
+  };
+
+  services = {    
+    gnome-keyring.enable = true;
+    gpg-agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-gtk2;
     };
   };
 
