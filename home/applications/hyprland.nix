@@ -13,6 +13,7 @@ in
   imports = [inputs.hyprland.homeManagerModules.default];
 
   home.packages = with pkgs; [
+    grimblast
     xorg.xhost
     xorg.xprop
     xorg.xrandr

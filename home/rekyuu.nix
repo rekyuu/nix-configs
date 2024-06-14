@@ -53,6 +53,7 @@
     btop
     comma
     dconf
+    feh
     fflogs
     firefox
     freerdp3
@@ -63,6 +64,7 @@
     gnome.nautilus
     gnome.seahorse
     goxlr-utility
+    grim
     jetbrains.clion
     jetbrains.datagrip
     jetbrains.pycharm-professional
@@ -77,11 +79,15 @@
     pavucontrol
     prismlauncher # minecraft
     python3
+    slurp
     steam
     telegram-desktop
     transmission-qt
+    ungoogled-chromium
     vesktop
     xivlauncher
+    wf-recorder
+    wl-clipboard
     ymuse
     (callPackage ../pkgs/jellyfin-rpc {})
   ];
