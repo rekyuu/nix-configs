@@ -53,8 +53,7 @@
     gnome.nautilus
     gnome.seahorse
     goxlr-utility
-    jq
-    libsecret
+    jq    
     lm_sensors
     mpc-cli
     nil
@@ -118,11 +117,10 @@
     home-manager.enable = true;
   };
 
-  services = {    
-    gnome-keyring.enable = true;
+  services = {
     gpg-agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-gtk2;
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
   };
 

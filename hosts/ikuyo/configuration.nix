@@ -4,7 +4,37 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+let
+  monitorL = "HDMI-A-1";
+  monitorC = "DP-1";
+  monitorR = "DP-2";
+  vr = "DP-3";
+
+  westonConfig = pkgs.writeShellScript "weston.ini" ''
+    [core]
+    shell=fullscreen-shell.so
+
+    [output]
+    name=${monitorL}
+    mode=off
+
+    [output]
+    name=${monitorC}
+    mode=3440x1440@144
+
+    [output]
+    name=${monitorR}
+    mode=off
+
+    [output]
+    name=${vr}
+    mode=off
+
+    [keyboard]
+    numlock-on=true
+  '';
+in {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -138,27 +168,6 @@
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
   };
 
-  fonts = {
-    packages = with pkgs; [
-      cascadia-code
-      noto-fonts
-      noto-fonts-emoji
-      noto-fonts-monochrome-emoji
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-    ];
-  };
-
-  security = {
-    pam.services = {
-      gnome-keyring = {};
-      hyprlock = {};
-    };
-    polkit.enable = true;
-    # FIXME: this
-    sudo.wheelNeedsPassword = false;
-  };
-
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
@@ -183,11 +192,24 @@
     };
   };
 
+  fonts = {
+    packages = with pkgs; [
+      cascadia-code
+      noto-fonts
+      noto-fonts-emoji
+      noto-fonts-monochrome-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     bash
     git
+    libsecret
     tree
     vim
+    weston
     wget
     zsh
   ];
@@ -206,12 +228,28 @@
     displayManager = {
       sessionPackages = [ pkgs.sway ];
       defaultSession = "sway";
+
       sddm = {
         enable = true;
         autoNumlock = true;
-        theme = "breeze";
+        theme = "${(pkgs.callPackage ../../pkgs/reactionary-sddm-theme {})}/share/sddm/themes/reactionary";
+        
+        wayland = {
+          enable = true;
+          compositor = "weston";
+          compositorCommand = "weston -c ${westonConfig}";
+        };
+
+        settings = {
+          General = {
+            GreeterEnvironment = "QT_WAYLAND_SHELL_INTEGRATION=fullscreen-shell-v1";
+          };
+        };
       };
     };
+    
+    # Make sure to use the Login collection as the default keyring
+    gnome.gnome-keyring.enable = true;
     
     openssh = {
       enable = true;
@@ -234,14 +272,25 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe4", TAG+="uaccess"
       SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe0", TAG+="uaccess"
     '';
-
-    xserver.enable = true;
   };
 
   systemd = {
     tmpfiles.rules = [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
+
+    services = {
+      numLockOnTty = {
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          ExecStart = lib.mkForce (pkgs.writeShellScript "numLockOnTty" ''
+            for tty in /dev/tty{1..6}; do
+                ${pkgs.kbd}/bin/setleds -D +num < "$tty";
+            done
+          '');
+        };
+      };
+    };
 
     user.services = {
       polkit-gnome-authentication-agent-1 = {
@@ -258,6 +307,16 @@
         };
       };
     };
+  };
+
+  security = {
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      hyprlock = {};
+    };
+    polkit.enable = true;
+    # FIXME: this
+    sudo.wheelNeedsPassword = false;
   };
 
   users.users.rekyuu = {
