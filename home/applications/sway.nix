@@ -87,18 +87,6 @@ in {
         titlebar = false;
         commands = [
           {
-            criteria = { app_id = "blender"; title = "Blender Render"; };
-            command = "floating enable; move position center";
-          }
-          {
-            criteria = { app_id = "blender"; title = "Blender Preferences"; };
-            command = "floating enable; move position center";
-          }
-          {
-            criteria = { class = "discord"; };
-            command = "resize set width 77 ppt";
-          }
-          {
             criteria = { app_id = "vesktop"; };
             command = "resize set width 77 ppt";
           }
@@ -123,6 +111,10 @@ in {
             command = "floating enable";
           }
           {
+            criteria = { app_id = "org.gnome.clocks"; };
+            command = "floating enable";
+          }
+          {
             criteria = { class = "Godot"; };
             command = "floating enable";
           }
@@ -137,6 +129,10 @@ in {
           {
             criteria = { class = "steam"; title = "Friends List"; };
             command = "resize set width 15 ppt";
+          }
+          {
+            criteria = { app_id = "org.prismlauncher.PrismLauncher"; };
+            command = "floating enable; move position center";
           }
           {
             criteria = { app_id = "org.telegram.desktop"; };
@@ -196,10 +192,10 @@ in {
         "Alt+Print" = "exec screenshot-sway.sh window";
         "Ctrl+Print" = "exec screenshot-sway.sh video";
 
-        "XF86AudioRaiseVolume" = "exec set-volume.sh up";
-        "XF86AudioLowerVolume" = "exec set-volume.sh down";
-        "XF86AudioMute" = "exec set-volume.sh toggle-mute";
-        "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle"; # FIXME: this
+        # "XF86AudioRaiseVolume" = "";
+        # "XF86AudioLowerVolume" = "";
+        # "XF86AudioMute" = "";
+        # "XF86AudioMicMute" = "";
         "XF86AudioPlay" = "exec media-control-with-cooldown.sh toggle";
         "XF86AudioPrev" = "exec media-control-with-cooldown.sh cdprev";
         "XF86AudioNext" = "exec media-control-with-cooldown.sh next";
@@ -229,18 +225,16 @@ in {
       startup = [
         { command = "autotiling"; }
         { command = "xrandr --output \"${monitorC}\" --primary --preferred"; }
-        # { command = "mako"; }
         { command = "waybar"; }
         # { command = "fcitx5"; }
         { command = "goxlr-daemon"; }
         { command = "gammastep -O 4500"; }
-        # { command = "transmission-qt"; }
+        { command = "transmission-qt"; }
         { command = "telegram-desktop"; }
         { command = "discord.sh"; }
-        # { command = "nm-applet"; }
+        { command = "nm-applet"; }
         { command = "firefox"; }
-        # { command = "steam"; }
-        # { command = "mpd-notify"; }
+        { command = "steam"; }
         { command = "kitty --class=btop btop"; }
       ];
     };

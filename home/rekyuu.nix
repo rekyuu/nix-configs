@@ -7,6 +7,7 @@
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/kitty.nix
+    ./applications/mako.nix
     ./applications/mpd.nix
     ./applications/rofi.nix
     ./applications/sway.nix
@@ -31,11 +32,19 @@
 
   gtk = {
     enable = true;
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
   };
 
   qt = {
     enable = true;
     platformTheme.name = "gtk3";
+    style = {
+      name = "adwaita-dark";
+      package = pkgs.adwaita-qt;
+    };
   };
 
   home.packages = with pkgs; [
@@ -44,6 +53,7 @@
     btop
     comma
     dconf
+    fflogs
     firefox
     freerdp3
     gamescope
@@ -53,14 +63,25 @@
     gnome.nautilus
     gnome.seahorse
     goxlr-utility
-    jq    
+    jetbrains.clion
+    jetbrains.datagrip
+    jetbrains.pycharm-professional
+    jetbrains.rider
+    jq
+    libnotify
     lm_sensors
+    networkmanagerapplet
+    networkmanager-openvpn
     mpc-cli
     nil
     pavucontrol
+    prismlauncher # minecraft
     python3
+    steam
     telegram-desktop
+    transmission-qt
     vesktop
+    xivlauncher
     ymuse
     (callPackage ../pkgs/jellyfin-rpc {})
   ];

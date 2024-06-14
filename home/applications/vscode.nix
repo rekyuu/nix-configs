@@ -1,6 +1,4 @@
 {
-  inputs,
-  lib,
   pkgs,
   ...
 }: { 
@@ -8,8 +6,10 @@
     enable = true;
 
     extensions = with pkgs.vscode-extensions; [
-      zhuangtongfa.material-theme
+      yzhang.markdown-all-in-one
+      zhuangtongfa.material-theme  
       jnoortheen.nix-ide
+      timonwong.shellcheck
     ];
 
     userSettings = {
