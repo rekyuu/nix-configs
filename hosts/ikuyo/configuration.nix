@@ -6,34 +6,15 @@
   ...
 }:
 let
-  monitorL = "HDMI-A-1";
-  monitorC = "DP-1";
-  monitorR = "DP-2";
-  vr = "DP-3";
+  logidConfig = pkgs.writeTextFile {
+    name = "logid.cfg";
+    text = builtins.readFile ./static/logid.cfg;
+  };
 
-  westonConfig = pkgs.writeShellScript "weston.ini" ''
-    [core]
-    shell=fullscreen-shell.so
-
-    [output]
-    name=${monitorL}
-    mode=off
-
-    [output]
-    name=${monitorC}
-    mode=3440x1440@144
-
-    [output]
-    name=${monitorR}
-    mode=off
-
-    [output]
-    name=${vr}
-    mode=off
-
-    [keyboard]
-    numlock-on=true
-  '';
+  westonConfig = pkgs.writeTextFile {
+    name = "weston.ini";
+    text = builtins.readFile ./static/weston.ini;
+  };
 in {
   imports =
     [
@@ -52,13 +33,14 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
       kernelModules = [ "amdgpu" "nfs" ];
     };
-
-    kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
 
     kernelParams = [
       # power cycle fix
@@ -164,6 +146,9 @@ in {
   };
 
   environment.variables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+    SYSTEMD_EDITOR = "vim";
     # AMD_VULKAN_ICD = "RADV";
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
   };
@@ -207,6 +192,7 @@ in {
     bash
     git
     libsecret
+    logiops_0_2_3
     tree
     vim
     weston
@@ -226,7 +212,7 @@ in {
   
   services = {
     displayManager = {
-      sessionPackages = [ pkgs.sway ];
+      sessionPackages = [ pkgs.swayfx ];
       defaultSession = "sway";
 
       sddm = {
@@ -237,7 +223,7 @@ in {
         wayland = {
           enable = true;
           compositor = "weston";
-          compositorCommand = "weston -c ${westonConfig}";
+          compositorCommand = "weston --config ${westonConfig}";
         };
 
         settings = {
@@ -250,6 +236,9 @@ in {
     
     # Make sure to use the Login collection as the default keyring
     gnome.gnome-keyring.enable = true;
+
+    # For trash://
+    gvfs.enable = true;
     
     openssh = {
       enable = true;
@@ -280,6 +269,19 @@ in {
     ];
 
     services = {
+      logid = {
+        wantedBy = [ "multi-user.target" ];
+        description = "Logitech Configuration Daemon";
+        startLimitIntervalSec = 0;
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.logiops_0_2_3}/bin/logid --config ${logidConfig}";
+          User = "root";
+          ExecReload = "/bin/kill -HUP $MAINPID";
+          Restart = "on-failure";
+        };
+      };
+
       numLockOnTty = {
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {

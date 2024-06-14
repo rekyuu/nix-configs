@@ -1,9 +1,17 @@
 {
+  gst_all_1,
   pkgs,
   ...
-}: {
+}: 
+let
+  dxvkConfig = pkgs.writeTextFile {
+    name = "dxvk.conf";
+    text = builtins.readFile ./static/dxvk.conf;
+  };
+in {
   # You can import other home-manager modules here
   imports = [
+    ./applications/btop.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/kitty.nix
@@ -50,7 +58,6 @@
   home.packages = with pkgs; [
     bc
     blender-hip
-    btop
     comma
     dconf
     feh
@@ -59,6 +66,7 @@
     freerdp3
     gamescope
     gammastep
+    gnome.adwaita-icon-theme
     gnome.gnome-calculator
     gnome.gnome-clocks
     gnome.nautilus
@@ -90,44 +98,46 @@
     wl-clipboard
     ymuse
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
-    (callPackage ../pkgs/jellyfin-rpc {})
+    (callPackage ../pkgs/jellyfin-rpc {}) # TODO: config
   ];
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
+  # Nautilus GStreamer stuff
+  nixpkgs.overlays = [(self: super: {
+    gnome = super.gnome.overrideScope' (gself: gsuper: {
+      nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+        buildInputs = nsuper.buildInputs ++ (with gst_all_1; [
+          gst-plugins-good
+          gst-plugins-bad
+        ]);
+      });
+    });
+  })];
+
+  home.file = {
+    face = {
+      source = ./static/face.png;
+      target = ".face";
+    };
+  };
+
+  home.sessionPath = [ ];
 
   home.sessionVariables = {
-    TERM = "xterm-256color";
-    # QT_STYLE_OVERRIDE = adwaita-dark;
-    # QT_QPA_PLATFORMTHEME = qt5ct;
-    # PATH = "$PATH:$HOME/.local/bin:/etc/profile:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.dotnet/tools:$HOME/.pebble-sdk/SDKs/pebble-sdk-4.5-linux64/bin";
-
-    # TODO: fcitx
+    # fcitx
     # GTK_IM_MODULE = fcitx;
     # QT_IM_MODULE = fcitx;
     # XMODIFIERS = "@im=fcitx";
     # SDL_IM_MODULE = fcitx;
     # GLFW_IM_MODULE = ibus;
 
-    # TODO: maybe these can be configured elsewhere
-    EDITOR = "vim";
-    VISUAL = "vim";
-    SYSTEMD_EDITOR = "vim";
-
-    # TODO: do I need these?
     QT_QPA_PLATFORM = "wayland;xcb";
     GDK_BACKEND = "wayland,x11";
     NIXOS_OZONE_WL = "1";
-
-    # TODO: xivlauncher
-    # DALAMUD_HOME = "$HOME/.xlcore/dalamud/Hooks/dev";
-    # DXVK_CONFIG_FILE = "$HOME/dxvk.conf";
-    # VDPAU_DRIVER = "radeonsi";
-    # LIBVA_DRIVER_NAME = "radeonsi";
-
-    # MOZ_ENABLE_WAYLAND = "0"; # cocksuckers!!
     _JAVA_AWT_WM_NONREPARENTING = "1";
+
+    # xivlauncher
+    DALAMUD_HOME = "$HOME/.xlcore/dalamud/Hooks/dev";
+    DXVK_CONFIG_FILE = dxvkConfig;
   };
 
   programs = {

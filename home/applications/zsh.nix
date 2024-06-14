@@ -11,6 +11,10 @@
       tree = "tree -la";
     };
 
+    envExtra = ''
+      TERM="xterm-256color"
+    '';
+
     initExtra = ''
       # Keybinds
       bindkey "^[[H" beginning-of-line

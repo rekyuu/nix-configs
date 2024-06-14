@@ -189,7 +189,7 @@ in
 
         "SUPER, Return, exec, kitty"
         "SUPER, D, exec, rofi -modi drun,run -show run -m ${monitorC}"
-        "SUPER, Escape, exec, rofi-powermenu"
+        "SUPER, Escape, exec, rofi-powermenu.sh"
         "SUPER, E, exec, nautilus"
 
         ", Print, exec, screenshot-hyprland.sh all"
@@ -197,10 +197,10 @@ in
         "ALT, Print, exec, screenshot-hyprland.sh window"
         "CTRL, Print, exec, screenshot-hyprland.sh video"
 
-        ", XF86AudioRaiseVolume, exec, set-volume up"
-        ", XF86AudioLowerVolume, exec, set-volume down"
-        ", XF86AudioMute, exec, set-volume mute"
-        ", XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+        # ", XF86AudioRaiseVolume, exec, "
+        # ", XF86AudioLowerVolume, exec, "
+        # ", XF86AudioMute, exec, "
+        # ", XF86AudioMicMute, exec, "
         ", XF86AudioPlay, exec, media-control-with-cooldown.sh toggle"
         ", XF86AudioPrev, exec, media-control-with-cooldown.sh cdprev"
         ", XF86AudioNext, exec, media-control-with-cooldown.sh next"
@@ -253,19 +253,16 @@ in
 
       exec-once = [
         "xrandr --output \"${monitorC}\" --primary --preferred"
-        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME"
-        # "mako"
+        "mako"
         "waybar"
         # "fcitx5"
         "goxlr-daemon"
         "gammastep -O 4500"
-        # "transmission-qt"
         "telegram-desktop"
-        "vesktop"
-        # "nm-applet"
+        "discord.sh"
+        "nm-applet"
         "firefox"
-        # "steam"
-        # "mpd-notify"
+        "steam"
         "kitty --class=btop btop"
       ];
     };

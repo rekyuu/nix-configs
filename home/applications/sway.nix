@@ -17,9 +17,11 @@ in {
 
   wayland.windowManager.sway = {
     enable = true;
+    package = pkgs.swayfx;
     systemd.enable = true;
     xwayland = true;
 
+    checkConfig = false; # Need this or SwayFX build freaks out
     config = {
       input = {
         "13364:353:Keychron_Keychron_Q6_Keyboard" = {
@@ -78,7 +80,17 @@ in {
         titlebar = false;
         modifier = "Mod4";
         criteria = [
-
+          { class = "explorer.exe"; title = "Wine System Tray"; }
+          { app_id = "firefox"; title = "Firefox — Sharing Indicator"; }
+          { app_id = "org.gnome.Calculator"; }
+          { app_id = "org.gnome.clocks"; }
+          { app_id = "org.gnome.Nautilus"; }
+          { app_id = "Godot"; }
+          { class = "jetbrains-.*"; title = "splash"; }
+          { class = "jetbrains-.*"; title = "Welcome to .*"; }
+          { app_id = "org.prismlauncher.PrismLauncher"; }
+          { app_id = "org.telegram.desktop"; title = "Media viewer"; }
+          { class = "XIVLauncher.Core"; }
         ];
       };
 
@@ -91,14 +103,6 @@ in {
             command = "resize set width 77 ppt";
           }
           {
-            criteria = { class = "explorer.exe"; title = "Wine System Tray"; };
-            command = "floating enable; move position center";
-          }
-          {
-            criteria = { app_id = "firefox"; title = "Firefox — Sharing Indicator"; };
-            command = "floating enable";
-          }
-          {
             criteria = { class = ".*freerdp.*"; };
             command = "floating disable";
           }
@@ -107,44 +111,12 @@ in {
             command = "fullscreen enable";
           }
           {
-            criteria = { app_id = "org.gnome.Calculator"; };
-            command = "floating enable";
-          }
-          {
-            criteria = { app_id = "org.gnome.clocks"; };
-            command = "floating enable";
-          }
-          {
-            criteria = { class = "Godot"; };
-            command = "floating enable";
-          }
-          {
-            criteria = { class = "jetbrains-.*"; title = "splash"; };
-            command = "floating enable; move position center";
-          }
-          {
-            criteria = { class = "jetbrains-.*"; title = "Welcome to .*"; };
-            command = "floating enable; move position center";
-          }
-          {
             criteria = { class = "steam"; title = "Friends List"; };
             command = "resize set width 15 ppt";
           }
           {
-            criteria = { app_id = "org.prismlauncher.PrismLauncher"; };
-            command = "floating enable; move position center";
-          }
-          {
             criteria = { app_id = "org.telegram.desktop"; };
             command = "resize set width 23 ppt";
-          }
-          {
-            criteria = { app_id = "org.telegram.desktop"; title = "Media viewer"; };
-            command = "floating enable";
-          }
-          {
-            criteria = { class = "XIVLauncher.Core"; };
-            command = "floating enable; move position center";
           }
         ];
       };      
@@ -229,7 +201,6 @@ in {
         # { command = "fcitx5"; }
         { command = "goxlr-daemon"; }
         { command = "gammastep -O 4500"; }
-        { command = "transmission-qt"; }
         { command = "telegram-desktop"; }
         { command = "discord.sh"; }
         { command = "nm-applet"; }
@@ -238,5 +209,27 @@ in {
         { command = "kitty --class=btop btop"; }
       ];
     };
+
+    extraConfig = ''
+      blur enable
+      blur_xray disable
+      blur_passes 2
+      blur_radius 5
+      blur_noise 0.02
+      blur_brightness 0.9
+      blur_contrast 0.9
+      blur_saturation 1.1
+
+      shadows enable
+      shadows_on_csd disable
+      shadow_blur_radius 20
+      shadow_color #0000007F
+      shadow_inactive_color #0000007F
+      shadow_offset 0 0
+
+      layer_effects "mako" shadows enable; blur enable; corner_radius 0
+      layer_effects "rofi" shadows enable; blur enable; corner_radius 0
+      layer_effects "waybar" shadows enable; blur enable; corner_radius 0
+    '';
   };
 }
