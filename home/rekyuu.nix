@@ -89,6 +89,7 @@
     wf-recorder
     wl-clipboard
     ymuse
+    (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
     (callPackage ../pkgs/jellyfin-rpc {})
   ];
 
