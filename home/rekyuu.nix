@@ -18,14 +18,24 @@
   home = {
     username = "rekyuu";
     homeDirectory = "/home/rekyuu";
-  };
 
-  qt = {
-    enable = true;
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+
+      name = "Bibata-Modern-Classic";
+      size = 24;
+      package = pkgs.callPackage ../pkgs/bibata-cursor-theme {};
+    };
   };
 
   gtk = {
     enable = true;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk3";
   };
 
   home.packages = with pkgs; [
@@ -33,6 +43,7 @@
     blender-hip
     btop
     comma
+    dconf
     firefox
     freerdp3
     gamescope
@@ -61,10 +72,6 @@
 
   home.sessionVariables = {
     TERM = "xterm-256color";
-    # HYPRCURSOR_THEME = "hypr_Bibata-Modern-Classic";
-    # HYPRCURSOR_SIZE = "24";
-    # XCURSOR_THEME = "Bibata-Modern-Classic";
-    # XCURSOR_SIZE = "24";
     # QT_STYLE_OVERRIDE = adwaita-dark;
     # QT_QPA_PLATFORMTHEME = qt5ct;
     # PATH = "$PATH:$HOME/.local/bin:/etc/profile:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.dotnet/tools:$HOME/.pebble-sdk/SDKs/pebble-sdk-4.5-linux64/bin";
