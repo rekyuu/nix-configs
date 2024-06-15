@@ -39,7 +39,7 @@ in {
 
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-      kernelModules = [ "amdgpu" "nfs" ];
+      kernelModules = [ "amdgpu" "nct6775" "nfs" ];
     };
 
     kernelParams = [

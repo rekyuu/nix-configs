@@ -11,9 +11,9 @@
       modules-left = ["mpd"];
       modules-center = ["clock"];
       modules-right = [
-        # "cpu" 
-        # "custom/cpu-temp" 
-        # "custom/gpu-temp" 
+        "cpu" 
+        "custom/cpu-temp" 
+        "custom/gpu-temp" 
         "tray"
       ];
 
@@ -84,7 +84,7 @@
       };
 
       "custom/gpu-temp" = {
-        exec = "echo \"$(cat /sys/class/hwmon/hwmon6/device/gpu_busy_percent)% $(echo \"scale=1; $(cat /sys/class/hwmon/hwmon6/temp1_input) / 1000\" | bc)°C\"";
+        exec = "echo \"$(cat /sys/class/hwmon/hwmon0/device/gpu_busy_percent)% $(echo \"scale=1; $(cat /sys/class/hwmon/hwmon0/temp1_input) / 1000\" | bc)°C\"";
         format = "[GPU {}]";
         return-type = "";
         interval = 1;

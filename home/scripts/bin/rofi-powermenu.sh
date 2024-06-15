@@ -18,8 +18,6 @@ fi
 
 case "$CHOICE" in
     "$LOGOUT")
-        pkill goxlr-daemon
-
         if [[ $DESKTOP_SESSION == "hyprland" ]]; then
             hyprctl dispatch exit
         else
@@ -27,11 +25,9 @@ case "$CHOICE" in
         fi
         ;;
     "$SHUTDOWN")
-        pkill goxlr-daemon
         sudo shutdown now
         ;;
     "$REBOOT")
-        pkill goxlr-daemon
         sudo reboot
         ;;
     "$ADJUST_HYPRLAND_LAYOUT")
