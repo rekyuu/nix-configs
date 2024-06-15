@@ -24,24 +24,24 @@
         unknown-tag = "???";
         interval = 1;
         consume-icons = {
-            off = "-";
-            on = "c";
+          off = "-";
+          on = "c";
         };
         random-icons = {
-            off = "-";
-            on = "z";
+          off = "-";
+          on = "z";
         };
         repeat-icons = {
-            off = "-";
-            on = "r";
+          off = "-";
+          on = "r";
         };
         single-icons = {
-            off = "-";
-            on = "s";
+          off = "-";
+          on = "s";
         };
         state-icons = {
-            paused = "paused";
-            playing = "playing";
+          paused = "paused";
+          playing = "playing";
         };
       };
 
