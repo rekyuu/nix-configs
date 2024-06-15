@@ -60,6 +60,8 @@ in {
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
 
+    interfaces.eno1.wakeOnLan.enable = true;
+
     firewall = {
       allowedTCPPorts = [ 22 ];
       allowedUDPPorts = [ ];
@@ -124,6 +126,7 @@ in {
 
   swapDevices = [ ];
 
+  # gamescope seems to freak out if both amdvlk and radv are available, so we'll just disable amdvlk for now
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -134,14 +137,14 @@ in {
       driSupport32Bit = true;
 
       extraPackages = with pkgs; [
-        amdvlk
+        # amdvlk
         rocmPackages.clr
         rocmPackages.clr.icd
       ];
 
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
+      # extraPackages32 = with pkgs; [
+      #   driversi686Linux.amdvlk
+      # ];
     };
   };
 
@@ -149,8 +152,8 @@ in {
     EDITOR = "vim";
     VISUAL = "vim";
     SYSTEMD_EDITOR = "vim";
-    # AMD_VULKAN_ICD = "RADV";
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    AMD_VULKAN_ICD = "RADV";
+    # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json"; # amdvlk
   };
 
   nix = {
@@ -185,6 +188,7 @@ in {
       noto-fonts-monochrome-emoji
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      (callPackage ../../pkgs/scp-zh-fonts {}) # mahjong soul font
     ];
   };
 
@@ -212,7 +216,8 @@ in {
   
   services = {
     displayManager = {
-      sessionPackages = [ pkgs.swayfx ];
+      # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
+      sessionPackages = [ pkgs.sway ];
       defaultSession = "sway";
 
       sddm = {
@@ -314,6 +319,7 @@ in {
   security = {
     pam.services = {
       login.enableGnomeKeyring = true;
+      sddm.enableGnomeKeyring = true;
       hyprlock = {};
     };
     polkit.enable = true;

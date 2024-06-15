@@ -12,6 +12,7 @@ in {
   # You can import other home-manager modules here
   imports = [
     ./applications/btop.nix
+    ./applications/goxlr.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/kitty.nix
@@ -71,7 +72,6 @@ in {
     gnome.gnome-clocks
     gnome.nautilus
     gnome.seahorse
-    goxlr-utility
     grim
     jetbrains.clion
     jetbrains.datagrip
@@ -88,7 +88,20 @@ in {
     prismlauncher # minecraft
     python3
     slurp
-    steam
+    (steam.override { # https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264
+      extraPkgs = pkgs: with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+      ];
+    })
     telegram-desktop
     transmission-qt
     ungoogled-chromium

@@ -256,7 +256,6 @@ in
         "mako"
         "waybar"
         # "fcitx5"
-        "goxlr-daemon"
         "gammastep -O 4500"
         "telegram-desktop"
         "discord.sh"
