@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 WIDTH=3440
 HEIGHT=1440

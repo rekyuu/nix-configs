@@ -1,0 +1,41 @@
+{
+  "show_tray_icon": true,
+  "selected_locale": null,
+  "tts_enabled": false,
+  "allow_network_access": false,
+  "profile_directory": null,
+  "mic_profile_directory": null,
+  "samples_directory": null,
+  "presets_directory": null,
+  "icons_directory": null,
+  "logs_directory": null,
+  "log_level": "Debug",
+  "open_ui_on_launch": false,
+  "activate": null,
+  "devices": {
+    "S210712759CQK": {
+      "profile": "Custom",
+      "mic_profile": "Custom",
+      "hold_delay": 500,
+      "sampler_pre_buffer": null,
+      "chat_mute_mutes_mic_to_chat": true,
+      "lock_faders": false,
+      "enable_monitor_with_fx": false,
+      "sampler_reset_on_clear": true,
+      "shutdown_commands": [
+        {
+          "LoadProfile": [
+            "Sleep",
+            false
+          ]
+        },
+        {
+          "LoadProfileColours": "Sleep"
+        }
+      ],
+      "sleep_commands": [],
+      "wake_commands": []
+    }
+  },
+  "sample_gain": null
+}
