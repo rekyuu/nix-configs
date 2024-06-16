@@ -18,7 +18,7 @@
   meta = with lib; {
     description = "Displays the content you're currently watching on Discord";
     homepage = "https://github.com/Radiicall/jellyfin-rpc";
-    maintainers = with maintainers; [rekyuu];
+    maintainers = with maintainers; [ rekyuu ];
     platforms = platforms.linux;
     license = licenses.gpl3Only;
     mainProgram = "jellyfin-rpc";

@@ -89,6 +89,7 @@ in {
           { class = "jetbrains-.*"; title = "Welcome to .*"; }
           { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.telegram.desktop"; title = "Media viewer"; }
+          { class = "Viewnior"; }
           { class = "XIVLauncher.Core"; }
         ];
       };
@@ -116,6 +117,10 @@ in {
           {
             criteria = { app_id = "org.telegram.desktop"; };
             command = "resize set width 23 ppt";
+          }
+          {
+            criteria = { class = "Viewnior"; };
+            command = "resize set 1280 720";
           }
         ];
       };      
