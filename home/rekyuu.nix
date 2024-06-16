@@ -15,6 +15,7 @@ in {
     ./applications/goxlr.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
+    ./applications/jellyfin-rpc.nix
     ./applications/kitty.nix
     ./applications/mako.nix
     ./applications/mpd.nix
@@ -113,7 +114,6 @@ in {
     wl-clipboard
     ymuse
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
-    (callPackage ../pkgs/jellyfin-rpc {}) # TODO: config
   ];
 
   programs = {
