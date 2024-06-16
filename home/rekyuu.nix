@@ -18,6 +18,7 @@ in {
     ./applications/kitty.nix
     ./applications/mako.nix
     ./applications/mpd.nix
+    ./applications/obs.nix
     ./applications/rofi.nix
     ./applications/sway.nix
     ./applications/vscode.nix
