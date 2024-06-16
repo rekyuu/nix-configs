@@ -35,7 +35,7 @@ in {
 
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
+    extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink ];
 
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
@@ -130,6 +130,8 @@ in {
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+    decklink.enable = true;
+
     opengl = {
       enable = true;
 
@@ -194,6 +196,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     bash
+    blackmagic-desktop-video
     git
     libsecret
     logiops_0_2_3
@@ -261,10 +264,8 @@ in {
       };
     };
 
-    udev.extraRules = ''
-      # GoXLR
-      SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe4", TAG+="uaccess"
-      SUBSYSTEM=="usb", ATTR{idVendor}=="1220", ATTR{idProduct}=="8fe0", TAG+="uaccess"
+    udev.extraRules = ''      
+      ${ builtins.readFile ./static/udev-rules/goxlr.rules }
     '';
   };
 
