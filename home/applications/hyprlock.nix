@@ -1,8 +1,15 @@
-{...}: 
-let
+{
+  pkgs,
+  ...
+}: let
   monitorL = "HDMI-A-1";
   monitorC = "DP-1";
   monitorR = "DP-2";
+  
+  wallpaper = builtins.path {
+    name = "wallpaper.jpg";
+    path = ../static/wallhaven-k9rqp7.jpg;
+  };
 in {
   programs.hyprlock = {
     enable = true;
@@ -18,7 +25,7 @@ in {
         }
         {
           monitor = monitorC;
-          path = "$HOME/Pictures/wallhaven-eyk71r-no-drop-shadow-darkened-blur.png";
+          path = "${wallpaper}";
         }
         {
           monitor = monitorR;
