@@ -107,6 +107,7 @@ in {
     transmission-qt
     ungoogled-chromium
     vesktop
+    viewnior
     xivlauncher
     wf-recorder
     wl-clipboard
@@ -114,6 +115,21 @@ in {
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
     (callPackage ../pkgs/jellyfin-rpc {}) # TODO: config
   ];
+
+  programs = {
+    bash.enable = true;
+
+    git = {
+      enable = true;
+      userName = "rekyuu";
+      extraConfig = {
+        init.defaultBranch = "main";
+        commit.gpgsign = true;
+      };
+    };
+
+    home-manager.enable = true;
+  };
 
   # Nautilus GStreamer stuff
   nixpkgs.overlays = [(self: super: {
@@ -154,19 +170,25 @@ in {
     DXVK_CONFIG_FILE = dxvkConfig;
   };
 
-  programs = {
-    bash.enable = true;
-
-    git = {
+  xdg = {
+    mimeApps = {
       enable = true;
-      userName = "rekyuu";
-      extraConfig = {
-        init.defaultBranch = "main";
-        commit.gpgsign = true;
+      
+      defaultApplications = {
+        "text/html" = [ "firefox.desktop" ];
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "x-scheme-handler/about" = [ "firefox.desktop" ];
+        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+        "inode/directory" = [ "nautilus-folder-handler.desktop" ];
+        "image/jpeg" = [ "viewnior.desktop" ];
+        "image/png" = [ "viewnior.desktop" ];
+        "image/gif" = [ "viewnior.desktop" ];
+        "image/tiff" = [ "viewnior.desktop" ];
+        "text/plain" = [ "code.desktop" ];
+        "application/x-blender" = [ "blender.desktop" ];
       };
     };
-
-    home-manager.enable = true;
   };
 
   services = {

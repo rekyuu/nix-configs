@@ -25,7 +25,7 @@
   meta = with lib; {
     description = "Reactionary";
     homepage = "https://www.opencode.net/phob1an/reactionary";
-    maintainers = with maintainers; [rekyuu];
+    maintainers = with maintainers; [ rekyuu ];
     platforms = platforms.linux;
     license = licenses.gpl3Only;
   };

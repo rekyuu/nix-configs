@@ -25,7 +25,7 @@
   meta = with lib; {
     description = "Material Based Cursor Theme";
     homepage = "https://github.com/ful1e5/Bibata_Cursor";
-    maintainers = with maintainers; [rekyuu];
+    maintainers = with maintainers; [ rekyuu ];
     platforms = platforms.linux;
     license = licenses.gpl3Plus;
   };

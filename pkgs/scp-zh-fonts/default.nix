@@ -24,7 +24,7 @@
   meta = with lib; {
     description = "恒星共识协议中文翻译";
     homepage = "https://github.com/StellarCN/scp_zh";
-    maintainers = with maintainers; [rekyuu];
+    maintainers = with maintainers; [ rekyuu ];
     platforms = platforms.linux;
     license = licenses.unfree;
   };
