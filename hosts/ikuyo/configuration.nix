@@ -54,6 +54,8 @@ in {
     ];
   };
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   networking = {
     hostName = "ikuyo";
 
@@ -298,6 +300,11 @@ in {
           '');
         };
       };
+
+      rtkit-daemon.serviceConfig.ExecStart = [
+        ""
+        "${pkgs.rtkit}/libexec/rtkit-daemon --our-realtime-priority=95 --max-realtime-priority=90"
+      ];
     };
 
     user.services = {
@@ -318,10 +325,16 @@ in {
   };
 
   security = {
-    pam.services = {
-      login.enableGnomeKeyring = true;
-      sddm.enableGnomeKeyring = true;
-      hyprlock = {};
+    pam = {
+      loginLimits = [
+        { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+      ];
+      
+      services = {
+        login.enableGnomeKeyring = true;
+        sddm.enableGnomeKeyring = true;
+        hyprlock = {};
+      };
     };
     polkit.enable = true;
     # FIXME: this
@@ -330,7 +343,7 @@ in {
 
   users.users.rekyuu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "realtime" ];
     shell = pkgs.zsh;
   };
 
