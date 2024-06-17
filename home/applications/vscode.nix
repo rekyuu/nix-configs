@@ -6,10 +6,11 @@
     enable = true;
 
     extensions = with pkgs.vscode-extensions; [
-      yzhang.markdown-all-in-one
+      hashicorp.hcl
       zhuangtongfa.material-theme  
       jnoortheen.nix-ide
       timonwong.shellcheck
+      hashicorp.terraform
     ];
 
     userSettings = {
