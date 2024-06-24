@@ -13,6 +13,7 @@ in {
   imports = [
     ./applications/btop.nix
     ./applications/goxlr.nix
+    ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/jellyfin-rpc.nix
@@ -64,6 +65,7 @@ in {
     blender-hip
     comma
     dconf
+    discord
     feh
     fflogs
     firefox
@@ -181,6 +183,7 @@ in {
   };
 
   services = {
+    arrpc.enable = true;
     gpg-agent = {
       enable = true;
       pinentryPackage = pkgs.pinentry-gnome3;

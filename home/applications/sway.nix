@@ -99,7 +99,7 @@ in {
         titlebar = false;
         commands = [
           {
-            criteria = { app_id = "vesktop"; };
+            criteria = { app_id = "(vesktop)|(discord)"; };
             command = "resize set width 77 ppt";
           }
           {
@@ -203,7 +203,6 @@ in {
         { command = "xrandr --output \"${monitorC}\" --primary --preferred"; }
         { command = "waybar"; }
         # { command = "fcitx5"; }
-        { command = "goxlr-daemon"; }
         { command = "gammastep -O 4500"; }
         { command = "telegram-desktop"; }
         { command = "discord.sh"; }
