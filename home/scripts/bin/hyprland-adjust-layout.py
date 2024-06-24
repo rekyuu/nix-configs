@@ -79,9 +79,9 @@ monitor_r_pos_y = 0
 waybar_height = 32
 gap_size = 10
 
-# freerdp = get_window("sdl-freerdp")
-# if freerdp is not None:
-#     adjust_window_position(freerdp, monitor_c_pos_x + gap_size, monitor_c_pos_y + waybar_height + gap_size)
+freerdp = get_window("sdl-freerdp")
+if freerdp is not None:
+    adjust_window_position(freerdp, monitor_c_pos_x + gap_size, monitor_c_pos_y + waybar_height + gap_size)
 
 telegram = get_window("org.telegram.desktop")
 if telegram is not None:

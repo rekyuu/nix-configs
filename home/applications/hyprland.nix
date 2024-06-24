@@ -10,7 +10,7 @@ let
   vr = "DP-3";
 in
 {
-  imports = [inputs.hyprland.homeManagerModules.default];
+  imports = [ inputs.hyprland.homeManagerModules.default ];
 
   home.packages = with pkgs; [
     grimblast
@@ -85,6 +85,10 @@ in
         disable_autoreload = false;
       };
 
+      cursor = {
+        warp_on_change_workspace = true;
+      };
+
       workspace = [
         "name:1, monitor:${monitorL}"
         "name:4, monitor:${monitorL}"
@@ -98,28 +102,34 @@ in
       ];
 
       windowrulev2 = [
+        # Floating windows
+        # ----------------------------------------------------------------
+        "float, class:explorer.exe, title:Wine System Tray"
+        "float, class:firefox, title:Firefox — Sharing Indicator"
+        "float, class:org.gnome.Calculator"
+        "float, class:org.gnome.clocks"
+        "float, class:org.gnome.Nautilus"
+        "float, class:Godot"
+        "float, class:jetbrains-.*, title:splash"
+        "float, class:jetbrains-.*, title:Welcome to .*"
+        "float, class:org.prismlauncher.PrismLauncher"
+        "float, class:Rofi"
+        "float, class:org.telegram.desktop, title:Media viewer"
+        "float, class:Viewnior"
+        "float, class:XIVLauncher.Core"
+
         # Window rules
         # ----------------------------------------------------------------
-        "float, class:^(Anamnesis.exe)$"
-        "float, class:^(blender)$, title:^(Blender Render)$"
-        "float, class:^(blender)$, title:^(Blender Preferences)$"
-        "float, class:^(org.corectrl.corectrl)$"
-        "center, class:^(org.corectrl.corectrl)$"
-        "float, class:^(explorer.exe)$, title:^(Wine System Tray)$"
-        "noanim, class:^(feh)$"
-        "float, class:^(firefox)$, title:^(Firefox — Sharing Indicator)$"
-        "tile, class:^(.*freerdp.*)$"
-        "float, class:^(galculator)$"
-        "float, class:^(gnome-pomodoro)$"
-        "float, class:^(Godot.*)$"
-        "float, class:^(mpv)$"
-        "float, class:^(org.gnome.Calculator)$"
-        "float, class:^(org.gnome.clocks)$"
-        "float, class:^(org.gnome.Nautilus)$"
-        "float, class:^(org.telegram.desktop)$, title:^(Media viewer)$"
-        "float, class:^(Viewnior)$"
-        "center, class:^(Viewnior)$"
-        "size 1280 720, class:^(Viewnior)$"
+        "tile, class:.*freerdp.*"
+        "fullscreen, class:gamescope"
+        "center, class:Rofi"
+        "stayfocused, class:Rofi"
+        "center, class:Viewnior"
+        "size 1280 720, class:Viewnior"
+
+        # Godot
+        "stayfocused, class:^(Godot.*)$, title:^()$, floating:1"
+        "noborder, class:^(Godot.*)$, title:^()$, floating:1"
 
         # JetBrains
         # https://github.com/hyprwm/Hyprland/issues/3450#issuecomment-1816761575
@@ -133,45 +143,25 @@ in
         "noborder, class:^(jetbrains-.*)$, title:^()$, floating:1"
         "nofocus, class:^(jetbrains-.*)$, title:^(win.*)$, floating:1"
 
-        # Godot
-        "stayfocused, class:^(Godot.*)$, title:^()$, floating:1"
-        "noborder, class:^(Godot.*)$, title:^()$, floating:1"
-
-        # Games
-        "fullscreen, class:^(dota2)$"
-        "fullscreen, class:^(ffxiv_dx11.exe)$"
-        "fullscreen, class:^(gamescope)$"
-        "fullscreen, class:^(genshinimpact.exe)$"
-        "float, class:^(moe.launcher.an-anime-game-launcher)$"
-        "center, class:^(moe.launcher.an-anime-game-launcher)$"
-        "float, class:^(moe.launcher.the-honkers-railway-launcher)$"
-        "center, class:^(moe.launcher.the-honkers-railway-launcher)$"
-        "fullscreen, class:^(mtga.exe)$"
-        "float, class:^(XIVLauncher.Core)$"
-        "center, class:^(XIVLauncher.Core)$"
-
-        # EmoTracker
-        "noblur, class:^(emotracker.exe)"
-        "noshadow, class:^(emotracker.exe)"
-        "noborder, class:^(emotracker.exe)"
-
         # Workspace assignments
         # ----------------------------------------------------------------
-        "workspace 7, class:^(btop)$"
-        "workspace 7, class:^(vesktop)$"
-        "workspace 9, class:^(firefox)$"
-        "workspace 5, class:^(steam)$"
-        "workspace 5, class:^(steamwebhelper)$"
-        "workspace 7, class:^(org.telegram.desktop)$"
-        "workspace 8, class:(.*freerdp.*)"
+        "monitor ${monitorC}, class:Rofi"
 
-        # Games
-        "workspace 5, class:^(dota2)$"
-        "workspace 5, class:^(ffxiv_dx11.exe)$"
-        "workspace 5, class:^(gamescope)$"
-        "workspace 5, class:^(genshinimpact.exe)$"
-        "workspace 5, class:^(mtga.exe)$"
-        # "workspace 5, class:^(org.libretro.RetroArch)$"
+        # Workspace 7
+        "workspace 7, class:btop"
+        "workspace 7, class:(discord)|(vesktop)"
+        "workspace 7, class:org.telegram.desktop"
+        
+        # Workspace 8
+        "workspace 8, class:.*freerdp.*"
+
+        # Workspace 9
+        "workspace 9, class:firefox, title: Mozilla Firefox$"
+
+        # Workspace 5
+        "workspace 5, class:ffxiv_dx11.exe"
+        "workspace 5, class:gamescope"
+        "workspace 5, class:steam"
       ];
 
       bindm = [
@@ -253,7 +243,6 @@ in
 
       exec-once = [
         "xrandr --output \"${monitorC}\" --primary --preferred"
-        "mako"
         "waybar"
         # "fcitx5"
         "gammastep -O 4500"

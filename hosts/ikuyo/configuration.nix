@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   modulesPath,
@@ -19,6 +20,7 @@ in {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
+      inputs.aagl.nixosModules.default
     ];
 
   boot = {
@@ -44,7 +46,7 @@ in {
 
     kernelParams = [
       # power cycle fix
-      # "power_dpm_force_performance_level=high"
+      "power_dpm_force_performance_level=high"
       # eth random shutdown fix
       "amd_pstate=active"
       "processor.max_cstate=9"
@@ -141,14 +143,14 @@ in {
       driSupport32Bit = true;
 
       extraPackages = with pkgs; [
-        # amdvlk
+        amdvlk
         rocmPackages.clr
         rocmPackages.clr.icd
       ];
 
-      # extraPackages32 = with pkgs; [
-      #   driversi686Linux.amdvlk
-      # ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.amdvlk
+      ];
     };
   };
 
@@ -157,17 +159,21 @@ in {
     VISUAL = "vim";
     SYSTEMD_EDITOR = "vim";
     AMD_VULKAN_ICD = "RADV";
-    # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json"; # amdvlk
+    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
   };
 
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+
       substituters = [
+        "https://ezkea.cachix.org"
         "https://hyprland.cachix.org"
       ];
+
       trusted-public-keys = [
+        "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
     };
@@ -217,13 +223,17 @@ in {
 
     mtr.enable = true;
     zsh.enable = true;
+
+    # Has to be done here because of hosts file shenanigans, probably
+    anime-game-launcher.enable = true;
+    honkers-railway-launcher.enable = true;
   };
   
   services = {
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
-      sessionPackages = [ pkgs.sway ];
-      defaultSession = "sway";
+      sessionPackages = [ pkgs.hyprland pkgs.sway ];
+      defaultSession = "hyprland";
 
       sddm = {
         enable = true;
