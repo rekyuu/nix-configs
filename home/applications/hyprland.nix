@@ -106,6 +106,7 @@ in
         # ----------------------------------------------------------------
         "float, class:explorer.exe, title:Wine System Tray"
         "float, class:firefox, title:Firefox — Sharing Indicator"
+        "float, class:moe.launcher..*-launcher"
         "float, class:org.gnome.Calculator"
         "float, class:org.gnome.clocks"
         "float, class:org.gnome.Nautilus"
@@ -145,7 +146,7 @@ in
 
         # Workspace assignments
         # ----------------------------------------------------------------
-        "monitor ${monitorC}, class:Rofi"
+        # "monitor ${monitorC}, class:Rofi"
 
         # Workspace 7
         "workspace 7, class:btop"
