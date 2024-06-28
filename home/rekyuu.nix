@@ -63,9 +63,14 @@ in {
   home.packages = with pkgs; [
     bc
     blender-hip
+    bottles
     comma
     dconf
     discord
+    (with dotnetCorePackages; combinePackages [
+      sdk_6_0
+      sdk_8_0
+    ])
     feh
     fflogs
     firefox
@@ -100,7 +105,8 @@ in {
     ungoogled-chromium
     vesktop
     viewnior
-    xivlauncher
+    # xivlauncher
+    (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
     wf-recorder
     wl-clipboard
     ymuse

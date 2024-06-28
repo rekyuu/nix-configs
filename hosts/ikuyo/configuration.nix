@@ -346,7 +346,20 @@ in {
         hyprlock = {};
       };
     };
-    polkit.enable = true;
+
+    polkit = {
+      enable = true;
+
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+          if (subject.isInGroup("wheel") && action.id == "org.freedesktop.policykit.exec")
+          {
+            return polkit.Result.YES;
+          }
+        })
+      '';
+    };
+
     # FIXME: this
     sudo.wheelNeedsPassword = false;
   };
