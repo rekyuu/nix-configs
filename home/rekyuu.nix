@@ -128,6 +128,12 @@ in {
     home-manager.enable = true;
   };
 
+  nix.gc = {
+    automatic = true;
+    frequency = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   # Nautilus GStreamer stuff
   nixpkgs.overlays = [(self: super: {
     gnome = super.gnome.overrideScope' (gself: gsuper: {
@@ -187,6 +193,7 @@ in {
 
   services = {
     arrpc.enable = true;
+
     gpg-agent = {
       enable = true;
       pinentryPackage = pkgs.pinentry-gnome3;
