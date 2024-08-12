@@ -10,14 +10,27 @@ let
   vr = "DP-3";
 in
 {
-  imports = [ inputs.hyprland.homeManagerModules.default ];
+  imports = [
+    inputs.hyprland.homeManagerModules.default
+    ./mako.nix
+  ];
 
   home.packages = with pkgs; [
+    grim
     grimblast
+    slurp
+    wf-recorder
+    wl-clipboard
     xorg.xhost
     xorg.xprop
     xorg.xrandr
   ];
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland;xcb";
+    GDK_BACKEND = "wayland,x11";
+    NIXOS_OZONE_WL = "1";
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -135,7 +148,7 @@ in
         # JetBrains
         # https://github.com/hyprwm/Hyprland/issues/3450#issuecomment-1816761575
         "float, class:^(jetbrains-.*)$, title:^(Welcome to .*)$"
-        "windowdance, class:^(jetbrains-.*)$, floating:1"
+        # "windowdance, class:^(jetbrains-.*)$, floating:1"
         "center, class:^(jetbrains-.*)$, title:^(splash)$, floating:1"
         "nofocus, class:^(jetbrains-.*)$, title:^(splash)$, floating:1"
         "noborder, class:^(jetbrains-.*)$, title:^(splash)$, floating:1"

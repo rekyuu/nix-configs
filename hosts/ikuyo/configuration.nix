@@ -72,7 +72,7 @@ in {
     };
   };
 
-  time.timeZone = "America/Boise";
+  time.timeZone = "US/Mountain";
   
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -275,10 +275,34 @@ in {
         support32Bit = true;
       };
     };
-
+    
     udev.extraRules = ''      
       ${ builtins.readFile ./static/udev-rules/goxlr.rules }
     '';
+
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+
+      displayManager.session = [
+        {
+          name = "bspwm";
+          manage = "desktop";
+          start = "exec ${pkgs.bspwm}/bin/bspwm";
+        }
+        {
+          name = "i3";
+          manage = "desktop";
+          start = "exec ${pkgs.i3}/bin/i3";
+        }
+      ];
+
+      displayManager.setupCommands = ''
+        ${pkgs.xorg.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0" 
+        ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-0" --mode "3440x1440" --rate "144" --pos "2560x1440" --primary --preferred
+        ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-1" --mode "2560x2880" --rate "60" --pos "6000x0"
+      '';
+    };
   };
 
   systemd = {
