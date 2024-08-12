@@ -9,16 +9,16 @@ let
     text = builtins.readFile ./static/dxvk.conf;
   };
 in {
-  # You can import other home-manager modules here
   imports = [
+    ./applications/bspwm.nix
     ./applications/btop.nix
     ./applications/goxlr.nix
     ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
+    ./applications/i3.nix
     ./applications/jellyfin-rpc.nix
     ./applications/kitty.nix
-    ./applications/mako.nix
     ./applications/mpd.nix
     ./applications/obs.nix
     ./applications/rofi.nix
@@ -73,6 +73,7 @@ in {
     ])
     feh
     fflogs
+    ffmpeg_7-full
     firefox
     freerdp3
     gamemode
@@ -83,13 +84,14 @@ in {
     gnome.gnome-clocks
     gnome.nautilus
     gnome.seahorse
-    grim
+    imagemagick
     jetbrains.clion
     jetbrains.datagrip
     jetbrains.pycharm-professional
     jetbrains.rider
     jq
     libnotify
+    libwebp
     lm_sensors
     networkmanagerapplet
     networkmanager-openvpn
@@ -98,17 +100,15 @@ in {
     pavucontrol
     prismlauncher # minecraft
     python3
-    slurp
     telegram-desktop
     terraform
     transmission-qt
     ungoogled-chromium
     vesktop
     viewnior
-    # xivlauncher
-    (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
-    wf-recorder
-    wl-clipboard
+    vlc
+    xivlauncher
+    # (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
     ymuse
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
   ];
@@ -157,9 +157,6 @@ in {
     # SDL_IM_MODULE = fcitx;
     # GLFW_IM_MODULE = ibus;
 
-    QT_QPA_PLATFORM = "wayland;xcb";
-    GDK_BACKEND = "wayland,x11";
-    NIXOS_OZONE_WL = "1";
     _JAVA_AWT_WM_NONREPARENTING = "1";
 
     # xivlauncher
