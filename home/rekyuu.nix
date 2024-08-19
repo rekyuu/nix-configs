@@ -100,6 +100,8 @@ in {
     pavucontrol
     prismlauncher # minecraft
     python3
+    runelite
+    rsgain
     telegram-desktop
     terraform
     transmission-qt
