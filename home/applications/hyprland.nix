@@ -129,6 +129,7 @@ in
         "float, class:org.prismlauncher.PrismLauncher"
         "float, class:Rofi"
         "float, class:org.telegram.desktop, title:Media viewer"
+        "float, class:pol.exe" # PlayOnline
         "float, class:Viewnior"
         "float, class:XIVLauncher.Core"
 
