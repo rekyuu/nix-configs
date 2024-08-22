@@ -93,6 +93,7 @@ in {
     libnotify
     libwebp
     lm_sensors
+    lutris
     networkmanagerapplet
     networkmanager-openvpn
     mpc-cli

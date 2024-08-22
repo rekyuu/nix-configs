@@ -143,13 +143,13 @@ in {
       driSupport32Bit = true;
 
       extraPackages = with pkgs; [
-        amdvlk
+        # amdvlk
         rocmPackages.clr
         rocmPackages.clr.icd
       ];
 
       extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
+        # driversi686Linux.amdvlk
       ];
     };
   };
@@ -158,8 +158,8 @@ in {
     EDITOR = "vim";
     VISUAL = "vim";
     SYSTEMD_EDITOR = "vim";
-    AMD_VULKAN_ICD = "RADV";
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    # AMD_VULKAN_ICD = "RADV";
+    # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
   };
 
   nix = {
