@@ -13,7 +13,7 @@ in {
     ./applications/bspwm.nix
     ./applications/btop.nix
     ./applications/goxlr.nix
-    ./applications/hyprland.nix
+    #./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/i3.nix
@@ -100,6 +100,7 @@ in {
     nil
     pavucontrol
     prismlauncher # minecraft
+    protonup-qt
     python3
     runelite
     rsgain
@@ -110,6 +111,7 @@ in {
     vesktop
     viewnior
     vlc
+    winetricks
     xivlauncher
     # (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
     ymuse

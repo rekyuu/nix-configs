@@ -104,6 +104,7 @@ in {
           { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.telegram.desktop"; title = "Media viewer"; }
           { class = "pol.exe"; } # PlayOnline
+          { class = "steam_app_0"; title = "CatseyeXI"; }
           { class = "Viewnior"; }
           { class = "XIVLauncher.Core"; }
         ];
