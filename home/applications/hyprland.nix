@@ -130,6 +130,7 @@ in
         "float, class:Rofi"
         "float, class:org.telegram.desktop, title:Media viewer"
         "float, class:pol.exe" # PlayOnline
+        "float, class:steam_app_0, title:CatseyeXI"
         "float, class:Viewnior"
         "float, class:XIVLauncher.Core"
 

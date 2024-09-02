@@ -17,6 +17,7 @@
         steamtinkerlaunch
         libkrb5
         keyutils
+        wqy_zenhei
       ];
     })    
   ];
