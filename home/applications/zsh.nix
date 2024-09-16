@@ -9,6 +9,7 @@
       ls = "ls -Ahl --color=auto --group-directories-first";
       py = "python";
       tree = "tree -la";
+      blender3 = "nix run blender-bin#blender_3_6";
     };
 
     envExtra = ''

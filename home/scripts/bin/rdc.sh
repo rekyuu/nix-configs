@@ -13,6 +13,7 @@ function rdc() {
         /v:"$HOST" \
         /u:"$USERNAME" \
         /p:"$PASSWORD" \
+        /cert:ignore \
         /sound:sys:pulse \
         /microphone:sys:pulse,format:1 \
         /gfx:RFX \
