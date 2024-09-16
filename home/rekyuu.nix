@@ -13,7 +13,7 @@ in {
     ./applications/bspwm.nix
     ./applications/btop.nix
     ./applications/goxlr.nix
-    #./applications/hyprland.nix
+    # ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/i3.nix

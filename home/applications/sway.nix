@@ -101,6 +101,7 @@ in {
           { app_id = "Godot"; }
           { class = "jetbrains-.*"; title = "splash"; }
           { class = "jetbrains-.*"; title = "Welcome to .*"; }
+          { app_id = "moe.launcher..*-launcher"; }
           { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.telegram.desktop"; title = "Media viewer"; }
           { class = "pol.exe"; } # PlayOnline
