@@ -64,6 +64,7 @@ in {
     bc
     blender-hip
     bottles
+    bruno
     comma
     dconf
     discord
