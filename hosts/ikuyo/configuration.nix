@@ -67,8 +67,8 @@ in {
     interfaces.eno1.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ 22 7000 7001 7100 ];
+      allowedUDPPorts = [ 5353 6000 6001 7011 ];
     };
   };
 
@@ -215,6 +215,7 @@ in {
     libsecret
     logiops_0_2_3
     tree
+    uxplay
     vim
     weston
     wget
@@ -236,6 +237,20 @@ in {
   };
   
   services = {
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+
+      publish = {
+        enable = true;
+        addresses = true;
+        workstation = true;
+        userServices = true;
+        domain = true;
+      };
+    };
+
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
       sessionPackages = [ pkgs.hyprland pkgs.sway ];
