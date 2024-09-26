@@ -296,6 +296,11 @@ in {
         support32Bit = true;
       };
     };
+
+    printing = {
+      enable = true;
+      drivers = [ pkgs.brlaser ];
+    };
     
     udev.extraRules = ''      
       ${ builtins.readFile ./static/udev-rules/goxlr.rules }
