@@ -13,7 +13,7 @@ in {
     ./applications/bspwm.nix
     ./applications/btop.nix
     ./applications/goxlr.nix
-    # ./applications/hyprland.nix
+    ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/i3.nix
@@ -101,6 +101,7 @@ in {
     nil
     pavucontrol
     prismlauncher # minecraft
+    protontricks
     protonup-qt
     python3
     runelite
@@ -116,6 +117,7 @@ in {
     xivlauncher
     # (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
     ymuse
+    yt-dlp
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
   ];
 
