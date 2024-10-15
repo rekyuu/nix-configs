@@ -123,7 +123,7 @@ in {
     };
 
     "/mnt/rikka" = {
-      device = "192.168.0.16:/volume1/rikka";
+      device = "rikka-1.localdomain:/volume1/rikka";
       fsType = "nfs";
     };
   };
