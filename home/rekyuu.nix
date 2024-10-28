@@ -72,6 +72,7 @@ in {
       sdk_6_0
       sdk_8_0
     ])
+    (callPackage ../pkgs/dotnet-ef {})
     feh
     fflogs
     ffmpeg_7-full
@@ -80,6 +81,8 @@ in {
     gamemode
     gamescope
     gammastep
+    glaxnimate
+    gimp
     gnome.adwaita-icon-theme
     gnome.gnome-calculator
     gnome.gnome-clocks
@@ -91,6 +94,7 @@ in {
     jetbrains.pycharm-professional
     jetbrains.rider
     jq
+    kdePackages.kdenlive
     libnotify
     libwebp
     lm_sensors
@@ -104,6 +108,7 @@ in {
     protontricks
     protonup-qt
     python3
+    rclone
     runelite
     rsgain
     telegram-desktop
