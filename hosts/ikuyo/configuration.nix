@@ -69,6 +69,7 @@ in {
     firewall = {
       allowedTCPPorts = [ 22 7000 7001 7100 ];
       allowedUDPPorts = [ 5353 6000 6001 7011 ];
+      trustedInterfaces = [ "docker0" ];
     };
   };
 
@@ -131,6 +132,15 @@ in {
   swapDevices = [ ];
 
   hardware = {
+    bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          ControllerMode = "bredr";
+        };
+      };
+    };
+
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     decklink.enable = true;
@@ -249,6 +259,8 @@ in {
         domain = true;
       };
     };
+
+    blueman.enable = true;
 
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
@@ -415,9 +427,11 @@ in {
 
   users.users.rekyuu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "realtime" ];
+    extraGroups = [ "wheel" "realtime" "docker" ];
     shell = pkgs.zsh;
   };
+
+  virtualisation.docker.enable = true;
 
   xdg.portal = {
     enable = true;
