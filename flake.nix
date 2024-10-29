@@ -13,10 +13,6 @@
     # Anime games
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Hyprland
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = {
@@ -24,7 +20,6 @@
     nixpkgs,
     home-manager,
     aagl,
-    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;

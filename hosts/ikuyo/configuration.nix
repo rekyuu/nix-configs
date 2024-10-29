@@ -264,8 +264,8 @@ in {
 
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
-      sessionPackages = [ pkgs.hyprland pkgs.sway ];
-      defaultSession = "hyprland";
+      sessionPackages = [ pkgs.sway ];
+      defaultSession = "sway";
 
       sddm = {
         enable = true;
@@ -321,18 +321,7 @@ in {
       enable = true;
       videoDrivers = [ "amdgpu" ];
 
-      displayManager.session = [
-        {
-          name = "bspwm";
-          manage = "desktop";
-          start = "exec ${pkgs.bspwm}/bin/bspwm";
-        }
-        {
-          name = "i3";
-          manage = "desktop";
-          start = "exec ${pkgs.i3}/bin/i3";
-        }
-      ];
+      displayManager.session = [ ];
 
       displayManager.setupCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0" 
