@@ -86,15 +86,18 @@ in {
     gnome.nautilus
     gnome.seahorse
     imagemagick
+    iotop
     jetbrains.clion
     jetbrains.datagrip
     jetbrains.pycharm-professional
     jetbrains.rider
     jq
     kdePackages.kdenlive
+    kdiskmark
     libnotify
     libwebp
     lm_sensors
+    lsof
     lutris
     networkmanagerapplet
     networkmanager-openvpn

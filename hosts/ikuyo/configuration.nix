@@ -67,7 +67,7 @@ in {
     interfaces.eno1.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 22 7000 7001 7100 ];
+      allowedTCPPorts = [ 22 6600 7000 7001 7100 ];
       allowedUDPPorts = [ 5353 6000 6001 7011 ];
       trustedInterfaces = [ "docker0" ];
     };
@@ -243,6 +243,8 @@ in {
     # Has to be done here because of hosts file shenanigans, probably
     anime-game-launcher.enable = true;
     honkers-railway-launcher.enable = true;
+    sleepy-launcher.enable = true;
+    wavey-launcher.enable = true;
   };
   
   services = {
