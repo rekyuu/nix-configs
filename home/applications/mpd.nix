@@ -5,6 +5,8 @@
     musicDirectory = "/mnt/rikka/music/library";
     playlistDirectory = "/mnt/rikka/music/playlists";
 
+    network.listenAddress = "any";
+
     extraConfig = ''
       restore_paused "yes"
       auto_update "yes"
