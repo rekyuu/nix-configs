@@ -68,6 +68,7 @@ in {
     (with dotnetCorePackages; combinePackages [
       sdk_6_0
       sdk_8_0
+      sdk_9_0
     ])
     (callPackage ../pkgs/dotnet-ef {})
     feh
@@ -85,6 +86,7 @@ in {
     gnome.gnome-clocks
     gnome.nautilus
     gnome.seahorse
+    unstable.godot_4-mono
     imagemagick
     iotop
     jetbrains.clion

@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  outputs,
   lib,
   pkgs,
   modulesPath,
@@ -107,18 +108,12 @@ in {
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-    "/mnt/arch" = { 
-      device = "/dev/disk/by-uuid/d7dd0099-728d-437f-8972-90d044d606ac";
+    "/mnt/games" = { 
+      device = "/dev/disk/by-uuid/b733f944-f417-4a46-aaf6-523ad9e3c542";
       fsType = "ext4";
     };
 
-    "/mnt/arch/boot" = { 
-      device = "/dev/disk/by-uuid/9DED-37F5";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
-
-    "/mnt/games" = { 
+    "/mnt/arctic" = { 
       device = "/dev/disk/by-uuid/ba48884f-bc76-4847-ad10-915920e13b82";
       fsType = "ext4";
     };
@@ -197,7 +192,9 @@ in {
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
     
-    overlays = [ ];
+    overlays = [
+      outputs.overlays.unstable-packages
+    ];
     
     config = {
       allowUnfree = true;
