@@ -132,6 +132,10 @@ in {
             command = "resize set width 15 ppt";
           }
           {
+            criteria = { app_id = "org.libretro.RetroArch"; };
+            command = "fullscreen enable";
+          }
+          {
             criteria = { app_id = "org.telegram.desktop"; };
             command = "resize set width 23 ppt";
           }
@@ -158,6 +162,7 @@ in {
         "5" = [
           { class = "ffxiv_dx11.exe"; }
           { app_id = "gamescope"; }
+          { app_id = "org.libretro.RetroArch"; }
           { class = "steam"; }
         ];
       };

@@ -18,6 +18,7 @@ in {
     ./applications/kitty.nix
     ./applications/mpd.nix
     ./applications/obs.nix
+    ./applications/retroarch.nix
     ./applications/rofi.nix
     ./applications/steam.nix
     ./applications/sway.nix
