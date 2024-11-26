@@ -38,6 +38,7 @@
         };
       };
       "security.workspace.trust.untrustedFiles" = "open";
+      "update.mode" = "none";
       "window.autoDetectColorScheme" = false;
       "window.autoDetectHighContrast" = false;
       "window.menuBarVisibility" = "compact";
