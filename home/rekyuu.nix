@@ -67,8 +67,7 @@ in {
     dconf
     discord
     (with dotnetCorePackages; combinePackages [
-      sdk_6_0
-      sdk_8_0
+      sdk_9_0
     ])
     (callPackage ../pkgs/dotnet-ef {})
     feh
@@ -97,6 +96,7 @@ in {
     kdePackages.kdenlive
     kdiskmark
     libnotify
+    libreoffice-qt
     libwebp
     lm_sensors
     lsof
