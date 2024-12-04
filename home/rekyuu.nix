@@ -67,7 +67,8 @@ in {
     dconf
     discord
     (with dotnetCorePackages; combinePackages [
-      sdk_9_0
+      sdk_6_0
+      sdk_8_0
     ])
     (callPackage ../pkgs/dotnet-ef {})
     feh
