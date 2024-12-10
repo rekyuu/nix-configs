@@ -59,6 +59,7 @@ in {
   };
 
   home.packages = with pkgs; [
+    unstable.archipelago
     bc
     blender-hip
     bottles
@@ -114,6 +115,8 @@ in {
     rclone
     runelite
     rsgain
+    unstable.shipwright
+    unstable._2ship2harkinian
     telegram-desktop
     terraform
     transmission-qt
@@ -122,6 +125,7 @@ in {
     viewnior
     vlc
     winetricks
+    wl-mirror
     xivlauncher
     # (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
     ymuse
