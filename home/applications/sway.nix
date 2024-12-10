@@ -98,7 +98,7 @@ in {
           { app_id = "org.gnome.Calculator"; }
           { app_id = "org.gnome.clocks"; }
           { app_id = "org.gnome.Nautilus"; }
-          { app_id = "Godot"; }
+          { class = "Godot"; }
           { class = "jetbrains-.*"; title = "splash"; }
           { class = "jetbrains-.*"; title = "Welcome to .*"; }
           { app_id = "moe.launcher..*-launcher"; }
