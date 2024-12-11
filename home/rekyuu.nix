@@ -59,7 +59,8 @@ in {
   };
 
   home.packages = with pkgs; [
-    unstable.archipelago
+    adwaita-icon-theme
+    archipelago
     bc
     blender-hip
     bottles
@@ -67,10 +68,7 @@ in {
     comma
     dconf
     discord
-    (with dotnetCorePackages; combinePackages [
-      sdk_6_0
-      sdk_8_0
-    ])
+    dotnetCorePackages.sdk_8_0
     (callPackage ../pkgs/dotnet-ef {})
     feh
     fflogs
@@ -82,12 +80,9 @@ in {
     gammastep
     glaxnimate
     gimp
-    gnome.adwaita-icon-theme
-    gnome.gnome-calculator
-    gnome.gnome-clocks
-    gnome.nautilus
-    gnome.seahorse
-    unstable.godot_4-mono
+    gnome-calculator
+    gnome-clocks
+    godot_4-mono
     imagemagick
     iotop
     jetbrains.clion
@@ -103,6 +98,7 @@ in {
     lm_sensors
     lsof
     lutris
+    nautilus
     networkmanagerapplet
     networkmanager-openvpn
     mpc-cli
@@ -115,11 +111,12 @@ in {
     rclone
     runelite
     rsgain
-    unstable.shipwright
-    unstable._2ship2harkinian
+    seahorse
+    shipwright
+    _2ship2harkinian
     telegram-desktop
     terraform
-    transmission-qt
+    transmission_3-qt
     ungoogled-chromium
     vesktop
     viewnior
