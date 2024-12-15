@@ -9,13 +9,14 @@ function rdc() {
     # xfreerdp - X
     # wlfreerdp - Wayland
     # sdl-freerdp - genius shit
-    sdl-freerdp \
+    wlfreerdp \
         /v:"$HOST" \
         /u:"$USERNAME" \
         /p:"$PASSWORD" \
         /cert:ignore \
         /sound:sys:pulse \
         /microphone:sys:pulse,format:1 \
+        /monitors:0 \
         /gfx:RFX \
         +rfx \
         /size:3420x1388 \
