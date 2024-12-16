@@ -124,7 +124,6 @@ in {
     winetricks
     wl-mirror
     xivlauncher
-    # (callPackage ../pkgs/xivlauncher {}) # manually building cause of expansion
     ymuse
     yt-dlp
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
@@ -185,6 +184,9 @@ in {
     # xivlauncher
     DALAMUD_HOME = "$HOME/.xlcore/dalamud/Hooks/dev";
     DXVK_CONFIG_FILE = dxvkConfig;
+
+    # obs-vkcapture
+    # OBS_VKCAPTURE = "1";
   };
 
   xdg = {
