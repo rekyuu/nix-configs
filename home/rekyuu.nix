@@ -65,6 +65,7 @@ in {
     blender-hip
     bottles
     bruno
+    cantata
     comma
     dconf
     discord
@@ -113,10 +114,12 @@ in {
     rsgain
     seahorse
     shipwright
+    # (callPackage ../pkgs/shipwright-unstable-holiday-2024 {})
     _2ship2harkinian
+    sm64ex-coop
     telegram-desktop
     terraform
-    transmission_3-qt
+    transmission_4-qt
     ungoogled-chromium
     vesktop
     viewnior
@@ -124,7 +127,6 @@ in {
     winetricks
     wl-mirror
     xivlauncher
-    ymuse
     yt-dlp
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
   ];
