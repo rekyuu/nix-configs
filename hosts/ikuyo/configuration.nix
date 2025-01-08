@@ -200,7 +200,7 @@ in {
 
       # TODO: remove this later
       permittedInsecurePackages = [
-        "dotnet-sdk-6.0.428"
+        "dotnet-sdk-6.0.428" # Godot4
       ];
     };
   };

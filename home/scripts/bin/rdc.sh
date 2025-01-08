@@ -9,7 +9,7 @@ function rdc() {
     # xfreerdp - X
     # wlfreerdp - Wayland
     # sdl-freerdp - genius shit
-    wlfreerdp \
+    xfreerdp \
         /v:"$HOST" \
         /u:"$USERNAME" \
         /p:"$PASSWORD" \
