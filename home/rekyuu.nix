@@ -68,9 +68,8 @@ in {
     cantata
     comma
     dconf
+    direnv
     discord
-    dotnetCorePackages.sdk_8_0
-    (callPackage ../pkgs/dotnet-ef {})
     feh
     fflogs
     ffmpeg_7-full
@@ -93,6 +92,7 @@ in {
     jq
     kdePackages.kdenlive
     kdiskmark
+    kubectl
     libnotify
     libreoffice-qt
     libwebp
@@ -102,6 +102,7 @@ in {
     nautilus
     networkmanagerapplet
     networkmanager-openvpn
+    nix-direnv
     mpc-cli
     nil
     pavucontrol

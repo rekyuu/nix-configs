@@ -48,6 +48,9 @@
       ZSH_HIGHLIGHT_STYLES[path]=none
       ZSH_HIGHLIGHT_STYLES[precommand]='fg=blue,bold'
       ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=green'
+
+      # direnv
+      eval "$(direnv hook zsh)"
     '';
   };
 }
