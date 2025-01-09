@@ -16,7 +16,6 @@ function rdc() {
         /cert:ignore \
         /sound:sys:pulse \
         /microphone:sys:pulse,format:1 \
-        /monitors:0 \
         /gfx:RFX \
         +rfx \
         /size:3420x1388 \
