@@ -105,6 +105,7 @@ in {
     nix-direnv
     mpc-cli
     nil
+    obsidian
     pavucontrol
     prismlauncher # minecraft
     protontricks
@@ -117,7 +118,7 @@ in {
     shipwright
     # (callPackage ../pkgs/shipwright-unstable-holiday-2024 {})
     _2ship2harkinian
-    sm64ex-coop
+    # sm64ex-coop
     telegram-desktop
     terraform
     transmission_4-qt
@@ -125,6 +126,7 @@ in {
     vesktop
     viewnior
     vlc
+    nur.repos.ataraxiasjel.waydroid-script
     winetricks
     wl-mirror
     xivlauncher
