@@ -232,6 +232,8 @@ in {
   ];
 
   programs = {
+    adb.enable = true;
+
     appimage = {
       enable = true;
       binfmt = true;
@@ -423,11 +425,14 @@ in {
 
   users.users.rekyuu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "realtime" "docker" ];
+    extraGroups = [ "wheel" "realtime" "docker" "adbusers" ];
     shell = pkgs.zsh;
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    waydroid.enable = true;
+  };
 
   xdg.portal = {
     enable = true;

@@ -6,6 +6,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    # NUR
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
+
     # Home Manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +22,7 @@
   outputs = {
     self,
     nixpkgs,
+    nur,
     home-manager,
     aagl,
     ...
@@ -33,12 +38,14 @@
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/ikuyo/configuration.nix
+          nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.rekyuu = import ./home/rekyuu.nix;
+            home-manager.sharedModules = [ nur.modules.homeManager.default ];
           }
         ];
       };
