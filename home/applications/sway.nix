@@ -120,6 +120,10 @@ in {
             command = "resize set width 77 ppt";
           }
           {
+            criteria = { class = "ffxiv_dx11.exe"; };
+            command = "fullscreen enable";
+          }
+          {
             criteria = { class = ".*freerdp.*"; };
             command = "floating disable";
           }
