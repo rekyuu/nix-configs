@@ -69,7 +69,6 @@ in {
     comma
     dconf
     direnv
-    discord
     feh
     fflogs
     ffmpeg_7-full
