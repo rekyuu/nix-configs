@@ -86,6 +86,7 @@ in {
     iotop
     jetbrains.clion
     jetbrains.datagrip
+    jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     jetbrains.rider
     jq
@@ -194,9 +195,25 @@ in {
   };
 
   xdg = {
+    desktopEntries = {
+      blender = {
+        name = "blender";
+        exec = "${pkgs.blender}/bin/blender";
+      };
+
+      firefox = {
+        name = "firefox";
+        exec = "${pkgs.firefox}/bin/firefox";
+      };
+
+      viewnior = {
+        name = "viewnior";
+        exec = "${pkgs.viewnior}/bin/viewnior";
+      };
+    };
+
     mimeApps = {
-      enable = true;
-      
+      enable = true;      
       defaultApplications = {
         "text/html" = [ "firefox.desktop" ];
         "x-scheme-handler/http" = [ "firefox.desktop" ];
