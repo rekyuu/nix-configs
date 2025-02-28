@@ -116,7 +116,6 @@ in {
     rsgain
     seahorse
     shipwright
-    # (callPackage ../pkgs/shipwright-unstable-holiday-2024 {})
     _2ship2harkinian
     # sm64ex-coop
     telegram-desktop
@@ -129,6 +128,7 @@ in {
     nur.repos.ataraxiasjel.waydroid-script
     winetricks
     wl-mirror
+    (callPackage ../pkgs/wl_shimeji {})
     xivlauncher
     yt-dlp
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
