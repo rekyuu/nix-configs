@@ -1,9 +1,11 @@
 {
   pkgs,
   ...
-}: { 
+}: {
   programs.vscode = {
     enable = true;
+
+    mutableExtensionsDir = false;
 
     extensions = with pkgs.vscode-extensions; [
       hashicorp.hcl
@@ -11,6 +13,13 @@
       jnoortheen.nix-ide
       timonwong.shellcheck
       hashicorp.terraform
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "godot-tools";
+        publisher = "geequlim";
+        version = "2.4.0";
+        sha256 = "sha256-Xr+cfAYVKw068Xhr7EiYsTJjzAlzN7ecMhEzmZqY+II=";
+      }
     ];
 
     userSettings = {
@@ -25,6 +34,7 @@
       "explorer.confirmDragAndDrop" = false;
       "git.autofetch" = true;
       "git.confirmSync" = false;
+      "godotTools.editorPath.godot4" = "godot4";
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
       };

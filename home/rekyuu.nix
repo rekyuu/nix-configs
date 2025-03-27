@@ -81,6 +81,7 @@ in {
     gimp
     gnome-calculator
     gnome-clocks
+    godot_4
     godot_4-mono
     imagemagick
     iotop
