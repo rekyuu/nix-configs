@@ -70,7 +70,7 @@ in {
     dconf
     direnv
     feh
-    fflogs
+    (callPackage ../pkgs/fflogs {})
     ffmpeg_7-full
     firefox
     freerdp3
