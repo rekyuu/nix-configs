@@ -112,6 +112,7 @@ in {
     protontricks
     protonup-qt
     python3
+    rawtherapee
     rclone
     runelite
     rsgain
@@ -127,6 +128,10 @@ in {
     viewnior
     vlc
     nur.repos.ataraxiasjel.waydroid-script
+    (wineWowPackages.full.override {
+      wineRelease = "staging";
+      mingwSupport = true;
+    })
     winetricks
     wl-mirror
     (callPackage ../pkgs/wl_shimeji {})

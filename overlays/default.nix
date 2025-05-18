@@ -15,5 +15,10 @@
       system = final.system;
       config.allowUnfree = true;
     };
+
+    _9a3b067 = import inputs.nixpkgs-9a3b067 {
+      system = final.system;
+      config.allowUnfree = true;
+    };
   };
 }

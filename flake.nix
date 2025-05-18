@@ -6,6 +6,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    # Temporarily pin the Linux Zen kernel to 6.12 until blackmagic fixes their fucking shit
+    # https://forum.blackmagicdesign.com/viewtopic.php?f=12&t=215626
+    # https://github.com/NixOS/nixpkgs/commits/nixos-24.11/pkgs/os-specific/linux/decklink/default.nix
+    nixpkgs-9a3b067.url = "github:NixOS/nixpkgs/9a3b0671ae01a051c97e87f07922a893670affb8";
+
     # NUR
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
