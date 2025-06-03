@@ -1,5 +1,4 @@
 {
-  gst_all_1,
   pkgs,
   ...
 }: 
@@ -71,7 +70,8 @@ in {
     dconf
     direnv
     feh
-    (callPackage ../pkgs/fflogs {})
+    fflogs
+    # (callPackage ../pkgs/fflogs {})
     ffmpeg_7-full
     firefox
     freerdp3
@@ -163,18 +163,6 @@ in {
     options = "--delete-older-than 30d";
   };
 
-  # Nautilus GStreamer stuff
-  nixpkgs.overlays = [(self: super: {
-    gnome = super.gnome.overrideScope' (gself: gsuper: {
-      nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
-        buildInputs = nsuper.buildInputs ++ (with gst_all_1; [
-          gst-plugins-good
-          gst-plugins-bad
-        ]);
-      });
-    });
-  })];
-
   home.file = {
     face = {
       source = ./static/face.png;
@@ -244,7 +232,7 @@ in {
 
     gpg-agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-gnome3;
+      pinentry.package = pkgs.pinentry-gnome3;
     };
   };
 

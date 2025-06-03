@@ -16,7 +16,7 @@
       TERM="xterm-256color"
     '';
 
-    initExtra = ''
+    initContent = ''
       # Keybinds
       bindkey "^[[H" beginning-of-line
       bindkey "^[[F" end-of-line
