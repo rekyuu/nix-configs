@@ -61,6 +61,7 @@ in {
   home.packages = with pkgs; [
     adwaita-icon-theme
     archipelago
+    audacity
     bc
     blender-hip
     bottles
@@ -105,6 +106,7 @@ in {
     networkmanager-openvpn
     nix-direnv
     mpc-cli
+    mpv
     nil
     obsidian
     pavucontrol
