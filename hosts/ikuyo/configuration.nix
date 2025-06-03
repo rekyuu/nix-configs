@@ -5,6 +5,7 @@
   lib,
   pkgs,
   modulesPath,
+  gst_all_1,
   ...
 }:
 let
@@ -36,9 +37,9 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
-    kernelPackages = pkgs._9a3b067.linuxKernel.packages.linux_zen;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelModules = [ "kvm-amd" ];
-    extraModulePackages = with pkgs._9a3b067.linuxKernel.packages.linux_zen; [ decklink ];
+    extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink ];
 
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
@@ -168,6 +169,7 @@ in {
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+      download-buffer-size = 536870912; # 512 MB
 
       substituters = [
         "https://ezkea.cachix.org"
@@ -192,16 +194,22 @@ in {
     
     overlays = [
       outputs.overlays.unstable-packages
+      # Nautilus Gstreamer stuff
+      (self: super: {
+        gnome = super.gnome.overrideScope (gself: gsuper: {
+          nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+            buildInputs = nsuper.buildInputs ++ (with gst_all_1; [
+              gst-plugins-good
+              gst-plugins-bad
+            ]);
+          });
+        });
+      })
     ];
     
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
-
-      # TODO: remove this later
-      permittedInsecurePackages = [
-        "dotnet-sdk-6.0.428" # Godot4
-      ];
     };
   };
 
