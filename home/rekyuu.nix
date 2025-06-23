@@ -209,7 +209,7 @@ in {
     };
 
     mimeApps = {
-      enable = true;      
+      enable = true;
       defaultApplications = {
         "text/html" = [ "firefox.desktop" ];
         "x-scheme-handler/http" = [ "firefox.desktop" ];
@@ -225,6 +225,8 @@ in {
         "application/x-blender" = [ "blender.desktop" ];
       };
     };
+
+    configFile."mimeapps.list".force = true;
   };
 
   services = {

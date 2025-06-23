@@ -41,7 +41,7 @@ in {
           font_family = "Noto Sans Black";
           rotate = 0; # degrees, counter-clockwise
 
-          position = "0, 20";
+          position = "0, 120";
           halign = "center";
           valign = "center";
         }
@@ -55,7 +55,7 @@ in {
           font_family = "Noto Sans ExtraLight";
           rotate = 0; # degrees, counter-clockwise
 
-          position = "0, -20";
+          position = "0, 0";
           halign = "center";
           valign = "center";
         }
