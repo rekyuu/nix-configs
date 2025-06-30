@@ -108,6 +108,7 @@ in {
     mpc-cli
     mpv
     nil
+    nomacs
     obsidian
     pavucontrol
     prismlauncher # minecraft
