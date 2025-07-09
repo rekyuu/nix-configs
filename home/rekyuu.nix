@@ -7,6 +7,7 @@ let
     name = "dxvk.conf";
     text = builtins.readFile ./static/dxvk.conf;
   };
+  vesktop-version = "3982e122a7f8e95d4e639ec7744393a8eebd437b";
 in {
   imports = [
     ./applications/btop.nix
@@ -127,7 +128,15 @@ in {
     terraform
     transmission_4-qt
     ungoogled-chromium
-    vesktop
+    (vesktop.overrideAttrs (_: {
+      version = vesktop-version;
+      src = fetchFromGitHub {
+        owner = "Vencord";
+        repo = "Vesktop";
+        rev = vesktop-version;
+        hash = "sha256-aQC/vy23eEZtosuhOk7Ciz2dIze5UfoqcBLAjIrWIPs=";
+      };
+    }))
     viewnior
     vlc
     nur.repos.ataraxiasjel.waydroid-script
