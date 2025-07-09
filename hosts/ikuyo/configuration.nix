@@ -330,8 +330,9 @@ in {
       drivers = [ pkgs.brlaser ];
     };
     
-    udev.extraRules = ''      
+    udev.extraRules = ''
       ${ builtins.readFile ./static/udev-rules/goxlr.rules }
+      ${ builtins.readFile ./static/udev-rules/keychron-q6.rules }
     '';
 
     xserver = {
