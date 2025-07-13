@@ -115,6 +115,7 @@ in {
     protontricks
     protonup-qt
     python3
+    r2modman
     rawtherapee
     rclone
     runelite
