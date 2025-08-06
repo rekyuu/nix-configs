@@ -4,6 +4,7 @@ WIDTH=2560
 HEIGHT=1440
 REFRESH_RATE=144
 
+export LD_PRELOAD=""
 export DXVK_HUD=fps
 
 gamescope \

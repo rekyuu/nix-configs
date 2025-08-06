@@ -11,6 +11,7 @@
       restore_paused "yes"
       auto_update "yes"
       replaygain "track"
+      save_absolute_paths_in_playlists "yes"
 
       audio_output {
         type "pipewire"
