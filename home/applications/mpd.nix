@@ -3,7 +3,7 @@
     enable = true;
 
     musicDirectory = "/mnt/rikka/music/library";
-    playlistDirectory = "/mnt/rikka/music/playlists";
+    playlistDirectory = "/mnt/rikka/music/library/#playlists";
 
     network.listenAddress = "any";
 
