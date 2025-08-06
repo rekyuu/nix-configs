@@ -86,6 +86,7 @@ in {
     godot_4-mono
     imagemagick
     iotop
+    jellyfin-media-player
     jetbrains.clion
     jetbrains.datagrip
     jetbrains.idea-ultimate
