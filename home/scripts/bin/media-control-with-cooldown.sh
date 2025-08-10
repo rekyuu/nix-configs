@@ -13,3 +13,6 @@ else
 fi
 
 mpd-notify.sh
+
+# lol
+systemctl --user restart mpd-discord-rpc.service
