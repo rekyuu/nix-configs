@@ -59,6 +59,7 @@ in {
 
   home.packages = with pkgs; [
     adwaita-icon-theme
+    anki
     archipelago
     audacity
     bc
@@ -82,8 +83,14 @@ in {
     gimp
     gnome-calculator
     gnome-clocks
-    godot_4
-    godot_4-mono
+    godotPackages_4_3.godot
+    godotPackages_4_3.godot-mono
+    godotPackages_4_3.export-template
+    godotPackages_4_3.export-template-mono
+    # godot
+    # godot-mono
+    # godotPackages.export-template
+    # godotPackages.export-template-mono
     imagemagick
     iotop
     jellyfin-media-player
@@ -108,9 +115,11 @@ in {
     nix-direnv
     mpc-cli
     mpv
+    mkvtoolnix
     nil
     nomacs
     obsidian
+    p7zip
     pavucontrol
     prismlauncher # minecraft
     protontricks

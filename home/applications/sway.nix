@@ -102,7 +102,6 @@ in {
           { class = "jetbrains-.*"; title = "splash"; }
           { class = "jetbrains-.*"; title = "Welcome to .*"; }
           { app_id = "moe.launcher..*-launcher"; }
-          { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.telegram.desktop"; title = "Media viewer"; }
           { class = "pol.exe"; } # PlayOnline
           { class = "steam_app_0"; title = "CatseyeXI"; }
@@ -230,6 +229,7 @@ in {
         { command = "waybar"; }
         # { command = "fcitx5"; }
         { command = "gammastep -O 4500"; }
+        { command = "fcitx5 -d -r"; }
         { command = "telegram-desktop"; }
         { command = "discord.sh"; }
         { command = "nm-applet"; }

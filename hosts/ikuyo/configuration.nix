@@ -79,7 +79,8 @@ in {
   
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = ["en_US.UTF-8/UTF-8"];
+    extraLocales = [ "ja_JP.UTF-8/UTF-8" ];
+    supportedLocales = [ "en_US.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" ];
 
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
@@ -94,6 +95,20 @@ in {
       LC_PAPER = "en_US.UTF-8";
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
+    };
+
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
+
+      fcitx5 = {
+        addons = with pkgs; [
+          fcitx5-gtk
+          fcitx5-mozc
+        ];
+
+        waylandFrontend = true;
+      };
     };
   };
 
@@ -163,6 +178,11 @@ in {
     SYSTEMD_EDITOR = "vim";
     # AMD_VULKAN_ICD = "RADV"; # gamescope seems to freak out if RADV is set, so it'll be unset by default
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    SDL_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
   };
 
   nix = {
@@ -246,6 +266,8 @@ in {
       enable = true;
       binfmt = true;
     };
+
+    cdemu.enable = true;
 
     gnupg.agent = {
       enable = true;
@@ -333,6 +355,7 @@ in {
     udev.extraRules = ''
       ${ builtins.readFile ./static/udev-rules/goxlr.rules }
       ${ builtins.readFile ./static/udev-rules/keychron-q6.rules }
+      ${ builtins.readFile ./static/udev-rules/vhba.rules }
     '';
 
     xserver = {
