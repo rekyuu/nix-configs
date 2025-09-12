@@ -70,6 +70,7 @@ in {
     comma
     dconf
     direnv
+    easytag
     feh
     fflogs
     # (callPackage ../pkgs/fflogs {})
