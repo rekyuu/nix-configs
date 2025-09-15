@@ -16,6 +16,7 @@ in {
     ./applications/jellyfin-rpc.nix
     ./applications/kitty.nix
     ./applications/mpd.nix
+    ./applications/mpv.nix
     ./applications/obs.nix
     ./applications/retroarch.nix
     ./applications/rofi.nix
@@ -115,7 +116,6 @@ in {
     networkmanager-openvpn
     nix-direnv
     mpc-cli
-    mpv
     mkvtoolnix
     nil
     nomacs
@@ -224,18 +224,33 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "text/html" = [ "firefox.desktop" ];
-        "x-scheme-handler/http" = [ "firefox.desktop" ];
-        "x-scheme-handler/https" = [ "firefox.desktop" ];
-        "x-scheme-handler/about" = [ "firefox.desktop" ];
-        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
-        "inode/directory" = [ "nautilus-folder-handler.desktop" ];
+        "application/x-blender" = [ "blender.desktop" ];
+        "audio/basic" = [ "mpv.desktop" ];
+        "audio/flac" = [ "mpv.desktop" ];
+        "audio/mpeg" = [ "mpv.desktop" ];
+        "audio/ogg" = [ "mpv.desktop" ];
+        "audio/vorbis" = [ "mpv.desktop" ];
+        "audio/wav" = [ "mpv.desktop" ];
+        "audio/x-it" = [ "mpv.desktop" ];
+        "audio/x-mpegurl" = [ "mpv.desktop" ];
+        "image/gif" = [ "viewnior.desktop" ];
         "image/jpeg" = [ "viewnior.desktop" ];
         "image/png" = [ "viewnior.desktop" ];
-        "image/gif" = [ "viewnior.desktop" ];
         "image/tiff" = [ "viewnior.desktop" ];
+        "inode/directory" = [ "nautilus-folder-handler.desktop" ];
+        "text/html" = [ "firefox.desktop" ];
         "text/plain" = [ "code.desktop" ];
-        "application/x-blender" = [ "blender.desktop" ];
+        "video/mp4" = [ "mpv.desktop" ];
+        "video/quicktime" = [ "mpv.desktop" ];
+        "video/webm" = [ "mpv.desktop" ];
+        "video/x-flv" = [ "mpv.desktop" ];
+        "video/x-matroska" = [ "mpv.desktop" ];
+        "video/x-msvideo" = [ "mpv.desktop" ];
+        "video/x-ms-wmv" = [ "mpv.desktop" ];
+        "x-scheme-handler/about" = [ "firefox.desktop" ];
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
       };
     };
 
