@@ -260,6 +260,11 @@ in {
   services = {
     arrpc.enable = true;
 
+    fluidsynth = {
+      enable = true;
+      soundService = "pipewire-pulse";
+    };
+
     gpg-agent = {
       enable = true;
       pinentry.package = pkgs.pinentry-gnome3;
