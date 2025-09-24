@@ -85,6 +85,7 @@ in {
     gimp
     gnome-calculator
     gnome-clocks
+    gnome-sound-recorder
     godotPackages_4_3.godot
     godotPackages_4_3.godot-mono
     godotPackages_4_3.export-template
@@ -129,6 +130,7 @@ in {
     r2modman
     rawtherapee
     rclone
+    # rimsort
     runelite
     rsgain
     seahorse
