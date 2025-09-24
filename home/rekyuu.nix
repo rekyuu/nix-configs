@@ -188,13 +188,6 @@ in {
   home.sessionPath = [ ];
 
   home.sessionVariables = {
-    # fcitx
-    # GTK_IM_MODULE = fcitx;
-    # QT_IM_MODULE = fcitx;
-    # XMODIFIERS = "@im=fcitx";
-    # SDL_IM_MODULE = fcitx;
-    # GLFW_IM_MODULE = ibus;
-
     _JAVA_AWT_WM_NONREPARENTING = "1";
 
     # xivlauncher
