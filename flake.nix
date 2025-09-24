@@ -5,6 +5,7 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-b618ed69.url = "github:nixos/nixpkgs/b618ed69e325363246049979bec5a7a13ee31e74"; # for decklink
 
     # NUR
     nur.url = "github:nix-community/NUR";
@@ -29,7 +30,7 @@
   } @ inputs: let
     inherit (self) outputs;
   in {
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays { inherit inputs; };
     
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

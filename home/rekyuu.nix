@@ -130,7 +130,7 @@ in {
     r2modman
     rawtherapee
     rclone
-    # rimsort
+    unstable.rimsort
     runelite
     rsgain
     seahorse
