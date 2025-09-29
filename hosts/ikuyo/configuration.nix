@@ -37,9 +37,9 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
-    kernelPackages = pkgs.b618ed69.linuxKernel.packages.linux_zen;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelModules = [ "kvm-amd" ];
-    extraModulePackages = with pkgs.b618ed69.linuxKernel.packages.linux_zen; [ decklink ];
+    extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink ];
 
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];

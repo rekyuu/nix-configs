@@ -64,7 +64,7 @@ in {
     archipelago
     audacity
     bc
-    blender-hip
+    unstable.blender-hip
     bottles
     bruno
     cantata
