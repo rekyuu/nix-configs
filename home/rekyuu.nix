@@ -11,6 +11,7 @@ in {
   imports = [
     ./applications/btop.nix
     ./applications/goxlr.nix
+    ./applications/houdini.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
     ./applications/jellyfin-rpc.nix
