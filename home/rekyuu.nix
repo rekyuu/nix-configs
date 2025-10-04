@@ -142,6 +142,7 @@ in {
     terraform
     transmission_4-qt
     ungoogled-chromium
+    unrar
     vesktop
     viewnior
     vlc
