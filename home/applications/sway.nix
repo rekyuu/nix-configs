@@ -186,7 +186,7 @@ in {
 
         "Mod4+Return" = "exec kitty";
         "Mod4+D" = "exec \"rofi -modi drun,run -show run -m ${monitorC}\"";
-        "Mod4+Escape" = "exec rofi-powermenu.sh";
+        "Mod4+Escape" = "exec rofi-power-menu.sh";
         "Mod4+E" = "exec nautilus";
 
         "Print" = "exec screenshot-sway.sh desktop";
