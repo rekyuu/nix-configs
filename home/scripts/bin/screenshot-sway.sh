@@ -10,6 +10,19 @@ function get-sway-window-id() {
     swaymsg -t get_tree | jq ".. | select(.type?) | select(.pid==$1).id"
 }
 
+function grim-feh() {
+    grim -t ppm - | feh - &
+    FEH_PID=$!
+
+    swaymsg "for_window [pid=$FEH_PID] fullscreen enable global"
+
+    while [ -z "$(get-sway-window-id $FEH_PID)" ]; do
+        sleep 0.1
+    done
+
+    return "$FEH_PID"
+}
+
 filename=$(date "+%Y-%m-%d_%H-%M-%S-%3N")
 foldername=$(date "+%Y-%m")
 destination_folder=~/Screenshots/$foldername
@@ -18,10 +31,10 @@ output="$destination_folder/$filename"
 mkdir -p "$destination_folder"
 
 case $1 in
-    all) # prtscr
+    desktop) # prtscr
         grim "$output.png"
         ;;
-    window) # alt + prtscr
+    active-window) # alt + prtscr
         window=$(swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true)')
         pos_x=$(echo "$window" | jq ".rect.x")
         pos_y=$(echo "$window" | jq ".rect.y")
@@ -30,21 +43,30 @@ case $1 in
 
         grim -g "${pos_x},${pos_y} ${width}x${height}" "$output.png"
         ;;
+    active-monitor)
+        window=$(swaymsg -t get_outputs | jq '.. | select(.type?) | select(.focused==true)')
+        pos_x=$(echo "$window" | jq ".rect.x")
+        pos_y=$(echo "$window" | jq ".rect.y")
+        width=$(echo "$window" | jq ".rect.width")
+        height=$(echo "$window" | jq ".rect.height")
+
+        grim -g "${pos_x},${pos_y} ${width}x${height}" "$output.png"
+        ;;
+    selection-monitor)
+        FEH_PID="$(grim-feh)"
+
+        grim -g "$(slurp-custom -or)" "$output.png"
+
+        kill "$FEH_PID"
+        ;;
     selection) # shift + prtscr
-        grim -t ppm - | feh - &
-        FEH_PID=$!
-
-        swaymsg "for_window [pid=$FEH_PID] fullscreen enable global"
-
-        while [ -z "$(get-sway-window-id $FEH_PID)" ]; do
-            sleep 0.1
-        done
+        FEH_PID="$(grim-feh)"
 
         grim -g "$(slurp-custom)" "$output.png"
 
         kill "$FEH_PID"
         ;;
-    video) # ctrl + prtscr
+    selection-video)
         if ! [[ -f /tmp/rec-pid ]]; then
             geometry="$(slurp-custom)"
 

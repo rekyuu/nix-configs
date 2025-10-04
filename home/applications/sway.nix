@@ -178,20 +178,21 @@ in {
 
       keybindings = {
         "Alt+F4" = "kill";
-        "Alt+shift+F4" = "exec sway-kill-current-window.sh";
+        "Alt+Shift+F4" = "exec sway-kill-current-window.sh";
         "Mod4+L" = "exec hyprlock";
         "Mod4+F" = "fullscreen toggle";
         "Mod4+Space" = "floating toggle";
+        "Mod4+S" = "exec rofi-screenshot-menu.sh";
 
         "Mod4+Return" = "exec kitty";
         "Mod4+D" = "exec \"rofi -modi drun,run -show run -m ${monitorC}\"";
         "Mod4+Escape" = "exec rofi-powermenu.sh";
         "Mod4+E" = "exec nautilus";
 
-        "Print" = "exec screenshot-sway.sh all";
+        "Print" = "exec screenshot-sway.sh desktop";
         "Shift+Print" = "exec screenshot-sway.sh selection";
-        "Alt+Print" = "exec screenshot-sway.sh window";
-        "Ctrl+Print" = "exec screenshot-sway.sh video";
+        "Alt+Print" = "exec screenshot-sway.sh active-window";
+        "Ctrl+Print" = "exec screenshot-sway.sh selection-video";
 
         # "XF86AudioRaiseVolume" = "";
         # "XF86AudioLowerVolume" = "";
