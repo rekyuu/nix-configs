@@ -2,25 +2,8 @@
 
 export SLURP_ARGS="-b 00000075 -B 00000075 -c FFFFFFFF -d -w 1"
 
-function slurp-custom() {
-    eval "slurp $SLURP_ARGS"
-}
-
 function get-sway-window-id() {
     swaymsg -t get_tree | jq ".. | select(.type?) | select(.pid==$1).id"
-}
-
-function grim-feh() {
-    grim -t ppm - | feh - &
-    FEH_PID=$!
-
-    swaymsg "for_window [pid=$FEH_PID] fullscreen enable global"
-
-    while [ -z "$(get-sway-window-id $FEH_PID)" ]; do
-        sleep 0.1
-    done
-
-    return "$FEH_PID"
 }
 
 filename=$(date "+%Y-%m-%d_%H-%M-%S-%3N")
@@ -53,16 +36,30 @@ case $1 in
         grim -g "${pos_x},${pos_y} ${width}x${height}" "$output.png"
         ;;
     selection-monitor)
-        FEH_PID="$(grim-feh)"
+        grim -t ppm - | feh - &
+        FEH_PID=$!
 
-        grim -g "$(slurp-custom -or)" "$output.png"
+        swaymsg "for_window [pid=$FEH_PID] fullscreen enable global"
+
+        while [ -z "$(get-sway-window-id $FEH_PID)" ]; do
+            sleep 0.1
+        done
+
+        grim -g "$(eval slurp "$SLURP_ARGS" -or)" "$output.png"
 
         kill "$FEH_PID"
         ;;
     selection) # shift + prtscr
-        FEH_PID="$(grim-feh)"
+        grim -t ppm - | feh - &
+        FEH_PID=$!
 
-        grim -g "$(slurp-custom)" "$output.png"
+        swaymsg "for_window [pid=$FEH_PID] fullscreen enable global"
+
+        while [ -z "$(get-sway-window-id $FEH_PID)" ]; do
+            sleep 0.1
+        done
+
+        grim -g "$(eval slurp "$SLURP_ARGS")" "$output.png"
 
         kill "$FEH_PID"
         ;;
