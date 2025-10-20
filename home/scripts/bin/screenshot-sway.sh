@@ -65,7 +65,7 @@ case $1 in
         ;;
     selection-video)
         if ! [[ -f /tmp/rec-pid ]]; then
-            geometry="$(slurp-custom)"
+            geometry="$(eval slurp "$SLURP_ARGS")"
 
             if [[ "$geometry" != "" ]]; then
                 wf-recorder -g "$geometry" -r 60 -f "$output.mp4" &
