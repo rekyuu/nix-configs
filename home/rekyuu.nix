@@ -65,7 +65,9 @@ in {
     archipelago
     audacity
     bc
-    unstable.blender-hip
+    (unstable.blender-hip.withPackages (python-pkgs: [
+      python-pkgs.flatbuffers
+    ]))
     bottles
     bruno
     cantata
@@ -120,6 +122,7 @@ in {
     mpc-cli
     mkvtoolnix
     nil
+    nix-init
     nomacs
     obsidian
     p7zip
