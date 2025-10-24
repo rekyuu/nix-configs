@@ -127,6 +127,7 @@ in {
     obsidian
     p7zip
     pavucontrol
+    pomodoro-gtk
     prismlauncher # minecraft
     protontricks
     protonup-qt
