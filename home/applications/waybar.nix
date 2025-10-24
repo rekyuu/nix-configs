@@ -9,7 +9,7 @@
       spacing = 0;
       output = ["DP-1"];
       modules-left = ["mpd"];
-      modules-center = ["clock"];
+      modules-center = ["custom/jp-time"];
       modules-right = [
         "cpu" 
         "custom/cpu-temp" 
@@ -46,8 +46,9 @@
       };
 
       clock = {
+        locale = "ja_JP.utf8";
         interval = 1;
-        format = "{:%A, %B %e, %Y - %H:%M:%S}";
+        format = "{:%EY年 %m月 %d日 (%a) - %T}";
         tooltip-format = "<span size='11pt' font='Cascadia Code'>{calendar}</span>";
         calendar = {
           mode ="month";
@@ -65,8 +66,8 @@
         };
         actions = {
           on-click-right = "mode";
-          on-scroll-up = "shift_up";
-          on-scroll-down = "shift_down";
+          on-scroll-up = "shift_down";
+          on-scroll-down = "shift_up";
         };
       };
 
@@ -90,6 +91,13 @@
         interval = 1;
       };
 
+      "custom/jp-time" = {
+        exec = "/etc/profiles/per-user/rekyuu/bin/waybar-clock.py";
+        format = "{text}";
+        return-type = "json";
+        interval = 1;
+      };
+
       tray = {
         spacing = 10;
       };
@@ -97,7 +105,7 @@
 
     style = ''
       * {
-        font-family: Cascadia Code;
+        font-family: 'Cascadia Code';
         font-size: 15px;
         font-weight: bold;
       }
