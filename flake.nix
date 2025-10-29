@@ -7,6 +7,9 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-b618ed69.url = "github:nixos/nixpkgs/b618ed69e325363246049979bec5a7a13ee31e74"; # for decklink
 
+    # nixpkgs-xr
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+
     # NUR
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +26,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-xr,
     nur,
     home-manager,
     aagl,
@@ -39,6 +43,7 @@
         specialArgs = { inherit inputs outputs; };
         modules = [
           ./hosts/ikuyo/configuration.nix
+          nixpkgs-xr.nixosModules.nixpkgs-xr
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           {

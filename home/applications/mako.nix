@@ -3,7 +3,6 @@ let
   monitorL = "HDMI-A-1";
   monitorC = "DP-1";
   monitorR = "DP-2";
-  vr = "DP-3";
 in {
   services.mako = {
     enable = true;

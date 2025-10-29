@@ -75,7 +75,10 @@ in {
     };
   };
 
-  time.timeZone = "US/Mountain";
+  time = {
+    hardwareClockInLocalTime = true;
+    timeZone = "US/Mountain";
+  };
   
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -170,6 +173,8 @@ in {
         driversi686Linux.amdvlk
       ];
     };
+
+    steam-hardware.enable = true;
   };
 
   environment.variables = {
@@ -330,6 +335,12 @@ in {
 
     # For trash://
     gvfs.enable = true;
+
+    monado = {
+      enable = true;
+      defaultRuntime = true;
+      package = pkgs.unstable.monado;
+    };
     
     openssh = {
       enable = true;
@@ -368,6 +379,7 @@ in {
         ${pkgs.xorg.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0" 
         ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-0" --mode "3440x1440" --rate "144" --pos "2560x1440" --primary --preferred
         ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-1" --mode "2560x2880" --rate "60" --pos "6000x0"
+        ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-2" --prop --set non-desktop 1
       '';
     };
   };
@@ -409,6 +421,11 @@ in {
     };
 
     user.services = {
+      monado.environment = {
+        STEAMVR_LH_ENABLE = "1";
+        XRT_COMPOSITOR_COMPUTE = "1";
+      };
+
       polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
         wantedBy = [ "graphical-session.target" ];

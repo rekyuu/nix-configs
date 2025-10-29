@@ -6,7 +6,6 @@ let
   monitorL = "HDMI-A-1";
   monitorC = "DP-1";
   monitorR = "DP-2";
-  vr = "DP-3";
 in {
   imports = [
     ./mako.nix
@@ -60,10 +59,6 @@ in {
         "${monitorR}" = {
           pos = "6000 0";
           mode = "2560x2880@60Hz";
-        };
-        
-        "${vr}" = {
-          disable = "";
         };
       };
 
