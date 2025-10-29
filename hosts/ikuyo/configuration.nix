@@ -177,19 +177,6 @@ in {
     steam-hardware.enable = true;
   };
 
-  environment.variables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
-    SYSTEMD_EDITOR = "vim";
-    # AMD_VULKAN_ICD = "RADV"; # gamescope seems to freak out if RADV is set, so it'll be unset by default
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
-
-    GTK_IM_MODULE = "fcitx";
-    QT_IM_MODULE = "fcitx";
-    SDL_IM_MODULE = "fcitx";
-    XMODIFIERS = "@im=fcitx";
-  };
-
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
@@ -250,19 +237,39 @@ in {
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    bash
-    blackmagic-desktop-video
-    git
-    libsecret
-    logiops_0_2_3
-    tree
-    uxplay
-    vim
-    weston
-    wget
-    zsh
-  ];
+  environment = {
+    pathsToLink = [ "share/thumbnailers" ];
+
+    systemPackages = with pkgs; [
+      bash
+      blackmagic-desktop-video
+      ffmpeg-headless
+      ffmpegthumbnailer
+      gdk-pixbuf
+      git
+      libsecret
+      logiops_0_2_3
+      tree
+      uxplay
+      vim
+      weston
+      wget
+      zsh
+    ];
+
+    variables = {
+      EDITOR = "vim";
+      VISUAL = "vim";
+      SYSTEMD_EDITOR = "vim";
+      # AMD_VULKAN_ICD = "RADV"; # gamescope seems to freak out if RADV is set, so it'll be unset by default
+      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+
+      GTK_IM_MODULE = "fcitx";
+      QT_IM_MODULE = "fcitx";
+      SDL_IM_MODULE = "fcitx";
+      XMODIFIERS = "@im=fcitx";
+    };
+  };
 
   programs = {
     adb.enable = true;
