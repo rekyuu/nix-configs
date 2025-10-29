@@ -18,8 +18,12 @@
         libkrb5
         keyutils
         wqy_zenhei
+        # SteamVR
+        procps
+        usbutils
       ];
     })
+    steam-run
     steamtinkerlaunch
   ];
 

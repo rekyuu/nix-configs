@@ -75,6 +75,7 @@ in {
     dconf
     direnv
     easytag
+    efibootmgr
     feh
     fflogs
     # (callPackage ../pkgs/fflogs {})
@@ -158,6 +159,7 @@ in {
     winetricks
     wl-mirror
     (callPackage ../pkgs/wl_shimeji {})
+    wlx-overlay-s
     xivlauncher
     yt-dlp
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
@@ -168,6 +170,7 @@ in {
 
     git = {
       enable = true;
+      lfs.enable = true;
       userName = "rekyuu";
       extraConfig = {
         init.defaultBranch = "main";
