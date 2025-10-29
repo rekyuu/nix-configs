@@ -72,7 +72,7 @@ in {
     bruno
     cantata
     comma
-    davinci-resolve-studio
+    davinci-resolve
     dconf
     direnv
     easytag
@@ -241,6 +241,7 @@ in {
         "image/jpeg" = [ "viewnior.desktop" ];
         "image/png" = [ "viewnior.desktop" ];
         "image/tiff" = [ "viewnior.desktop" ];
+        "image/webp" = [ "viewnior.desktop" ];
         "inode/directory" = [ "nautilus-folder-handler.desktop" ];
         "text/html" = [ "firefox.desktop" ];
         "text/plain" = [ "code.desktop" ];
