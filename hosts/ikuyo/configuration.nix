@@ -346,7 +346,7 @@ in {
     monado = {
       enable = true;
       defaultRuntime = true;
-      package = pkgs.unstable.monado;
+      package = pkgs.monado;
     };
     
     openssh = {

@@ -72,6 +72,7 @@ in {
     bruno
     cantata
     comma
+    davinci-resolve-studio
     dconf
     direnv
     easytag
@@ -136,7 +137,6 @@ in {
     r2modman
     rawtherapee
     rclone
-    unstable.rimsort
     runelite
     rsgain
     seahorse
