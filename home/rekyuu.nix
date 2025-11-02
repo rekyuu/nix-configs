@@ -64,6 +64,7 @@ in {
     anki
     archipelago
     audacity
+    baobab
     bc
     (unstable.blender-hip.withPackages (python-pkgs: [
       python-pkgs.flatbuffers
