@@ -59,6 +59,12 @@ in {
     };
   };
 
+  dconf.settings = {
+    "org/gtk/settings/file-chooser" = {
+      sort-directories-first = true;
+    };
+  };
+
   home.packages = with pkgs; [
     adwaita-icon-theme
     anki
