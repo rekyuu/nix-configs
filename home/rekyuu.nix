@@ -7,6 +7,11 @@ let
     name = "dxvk.conf";
     text = builtins.readFile ./static/dxvk.conf;
   };
+
+  blender = (pkgs.unstable.blender-hip.withPackages (python-pkgs: [
+      python-pkgs.flatbuffers
+    ])
+  );
 in {
   imports = [
     ./applications/btop.nix
@@ -72,9 +77,7 @@ in {
     audacity
     baobab
     bc
-    (unstable.blender-hip.withPackages (python-pkgs: [
-      python-pkgs.flatbuffers
-    ]))
+    blender
     bottles
     bruno
     cantata
@@ -218,7 +221,7 @@ in {
     desktopEntries = {
       blender = {
         name = "blender";
-        exec = "${pkgs.blender}/bin/blender";
+        exec = "${blender}/bin/blender";
       };
 
       firefox = {
