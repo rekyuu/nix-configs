@@ -133,6 +133,7 @@ in {
     nix-direnv
     mpc-cli
     mkvtoolnix
+    (callPackage ../pkgs/neowall {})
     nil
     nix-init
     nomacs
@@ -269,7 +270,14 @@ in {
       };
     };
 
-    configFile."mimeapps.list".force = true;
+    configFile = {
+      "mimeapps.list".force = true;
+
+      "neowall/config.vibe" = {
+        text = builtins.readFile ./static/neowall.vibe;
+        force = true;
+      };
+    };
   };
 
   services = {
