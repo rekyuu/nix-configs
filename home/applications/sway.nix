@@ -232,6 +232,7 @@ in {
         { command = "firefox"; }
         { command = "steam"; }
         { command = "kitty --class=btop btop"; }
+        # { command = "neowall"; }
       ];
     };
 

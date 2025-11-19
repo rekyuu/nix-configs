@@ -1,0 +1,25 @@
+output {
+  HDMI-A-1 {
+    shader ~/.config/neowall/shaders/
+    shader_fps 1
+    shader_speed 0.1
+    vsync false
+    show_fps true
+  }
+
+  DP-1 {
+    shader ~/.config/neowall/shaders/
+    shader_fps 1
+    shader_speed 0.1
+    vsync false
+    show_fps true
+  }
+
+  DP-2 {
+    shader ~/.config/neowall/shaders/
+    shader_fps 1
+    shader_speed 0.1
+    vsync false
+    show_fps true
+  }
+}
