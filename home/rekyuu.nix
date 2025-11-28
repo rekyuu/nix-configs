@@ -62,7 +62,7 @@ in {
 
   qt = {
     enable = true;
-    platformTheme.name = "gnome";
+    platformTheme.name = "adwaita";
     style = {
       name = "adwaita-dark";
     };
@@ -157,6 +157,7 @@ in {
     runelite
     rsgain
     seahorse
+    sl
     shipwright
     unstable._2ship2harkinian
     # sm64ex-coop
