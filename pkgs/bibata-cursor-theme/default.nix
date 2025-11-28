@@ -4,12 +4,12 @@
   fetchzip,
 }: stdenvNoCC.mkDerivation rec {
   pname = "bibata-cursor-theme";
-  version = "2.0.6";
+  version = "2.0.7";
   dontConfigue = true;
 
   src = fetchzip {
     url = "https://github.com/ful1e5/Bibata_Cursor/releases/download/v${version}/Bibata.tar.xz";
-    hash = "sha256-oLd63ChDQGctwwIG6QaqQb9PqGiSDE6/AKyYLp30wtg=";
+    hash = "sha256-+xw9+rYqOeBiURmflwlWQDEiwcJP1V5G6VA14shK0XQ=";
     stripRoot = false;
   };
 
