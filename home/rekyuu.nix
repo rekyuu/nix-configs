@@ -49,24 +49,32 @@ in {
 
   gtk = {
     enable = true;
+    
     theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
     };
   };
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk3";
+    platformTheme.name = "gnome";
     style = {
       name = "adwaita-dark";
-      package = pkgs.adwaita-qt;
     };
   };
 
   dconf.settings = {
     "org/gtk/settings/file-chooser" = {
       sort-directories-first = true;
+    };
+
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
     };
   };
 
