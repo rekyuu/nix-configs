@@ -82,17 +82,15 @@ in {
     bruno
     cantata
     comma
-    davinci-resolve
+    # davinci-resolve
     dconf
     direnv
     easytag
     efibootmgr
     feh
-    fflogs
-    # (callPackage ../pkgs/fflogs {})
     ffmpeg_7-full
     firefox
-    freerdp3
+    freerdp
     gamemode
     gamescope
     gammastep
@@ -131,7 +129,7 @@ in {
     networkmanagerapplet
     networkmanager-openvpn
     nix-direnv
-    mpc-cli
+    mpc
     mkvtoolnix
     (callPackage ../pkgs/neowall {})
     nil
@@ -152,7 +150,7 @@ in {
     rsgain
     seahorse
     shipwright
-    _2ship2harkinian
+    unstable._2ship2harkinian
     # sm64ex-coop
     telegram-desktop
     terraform
@@ -182,8 +180,8 @@ in {
     git = {
       enable = true;
       lfs.enable = true;
-      userName = "rekyuu";
-      extraConfig = {
+      settings = {
+        user.name = "rekyuu";
         init.defaultBranch = "main";
         commit.gpgsign = true;
       };
@@ -194,7 +192,7 @@ in {
 
   nix.gc = {
     automatic = true;
-    frequency = "weekly";
+    dates = "weekly";
     options = "--delete-older-than 30d";
   };
 

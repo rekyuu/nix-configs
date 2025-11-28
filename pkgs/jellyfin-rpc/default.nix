@@ -4,7 +4,7 @@
   fetchFromGitHub
 }: rustPlatform.buildRustPackage rec {
   pname = "jellyfin-rpc";
-  version = "1.3.3";
+  version = "1.3.4";
   
   src = fetchFromGitHub {
     owner = "Radiicall";

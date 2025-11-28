@@ -226,7 +226,7 @@ in {
         # { command = "fcitx5"; }
         { command = "gammastep -O 4500"; }
         { command = "fcitx5 -d -r"; }
-        { command = "telegram-desktop"; }
+        { command = "Telegram"; }
         { command = "discord.sh"; }
         { command = "nm-applet"; }
         { command = "firefox"; }

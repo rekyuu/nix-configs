@@ -164,14 +164,11 @@ in {
       enable32Bit = true;
 
       extraPackages = with pkgs; [
-        amdvlk
         rocmPackages.clr
         rocmPackages.clr.icd
       ];
 
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
-      ];
+      extraPackages32 = with pkgs; [ ];
     };
 
     steam-hardware.enable = true;
@@ -228,6 +225,10 @@ in {
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
+
+      permittedInsecurePackages = [
+        "qtwebengine-5.15.19"
+      ];
     };
   };
 
@@ -235,7 +236,7 @@ in {
     packages = with pkgs; [
       cascadia-code
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-monochrome-emoji
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif

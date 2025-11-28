@@ -9,8 +9,8 @@
   src = fetchgit {
     url = "https://www.opencode.net/phob1an/reactionary.git";
     sparseCheckout = ["sddm/themes/reactionary"];
-    rev = "9607954efe880c052bbbf7d0ea12fc62fd5c9f0d";
-    hash = "sha256-eScJjh2TKvcH8cQc86s2HEyxBOfK2eAOyg5T7qfLvdk=";
+    rev = "4aa2d20f0e93ae4387a90947fcc6c90940c18122";
+    hash = "sha256-iIuaxUnos4IeXOX4zRmTPP4hWF6i7hW+xvIopRKe964=";
   };
 
   installPhase = ''
