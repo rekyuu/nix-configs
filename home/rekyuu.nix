@@ -159,7 +159,7 @@ in {
     seahorse
     sl
     shipwright
-    unstable._2ship2harkinian
+    _2ship2harkinian
     # sm64ex-coop
     telegram-desktop
     terraform
