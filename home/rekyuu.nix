@@ -178,7 +178,6 @@ in {
     wl-mirror
     (callPackage ../pkgs/wl_shimeji {})
     wlx-overlay-s
-    xivlauncher
     yt-dlp
     (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
   ];
