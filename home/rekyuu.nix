@@ -90,7 +90,6 @@ in {
     bruno
     cantata
     comma
-    # davinci-resolve
     dconf
     direnv
     easytag
