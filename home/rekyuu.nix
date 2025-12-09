@@ -156,7 +156,8 @@ in {
     rsgain
     seahorse
     sl
-    shipwright
+    # shipwright
+    (callPackage ../pkgs/shipwright {})
     _2ship2harkinian
     # sm64ex-coop
     telegram-desktop
