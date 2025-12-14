@@ -238,6 +238,26 @@ in {
       noto-fonts-cjk-serif
       (callPackage ../../pkgs/scp-zh-fonts {}) # mahjong soul font
     ];
+
+    fontconfig = {
+      defaultFonts = {
+        monospace = [
+          "Cascadia Code"
+          "Noto Sans Mono"
+          "Noto Sans Mono CJK JP"
+        ];
+
+        sansSerif = [
+          "Noto Sans"
+          "Noto Sans CJK JP"
+        ];
+
+        serif = [
+          "Noto Serif"
+          "Noto Serif CJK JP"
+        ];
+      };
+    };
   };
 
   environment = {
