@@ -98,6 +98,7 @@ in {
     ffmpeg_7-full
     firefox
     freerdp
+    font-manager
     gamemode
     gamescope
     gammastep
@@ -156,10 +157,9 @@ in {
     rsgain
     seahorse
     sl
-    # shipwright
-    (callPackage ../pkgs/shipwright {})
+    shipwright
     _2ship2harkinian
-    # sm64ex-coop
+    sm64coopdx
     telegram-desktop
     terraform
     transmission_4-qt
