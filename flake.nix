@@ -50,8 +50,22 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.rekyuu = import ./home/rekyuu.nix;
+            home-manager.users.rekyuu = import ./home/ikuyo.nix;
             home-manager.sharedModules = [ nur.modules.homeManager.default ];
+          }
+        ];
+      };
+
+      umiko = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+        modules = [
+          ./hosts/umiko/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.rekyuu = import ./home/umiko.nix;
           }
         ];
       };
