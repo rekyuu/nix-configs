@@ -515,24 +515,20 @@ in {
 
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
+    xdgOpenUsePortal = true;
 
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-wlr
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-    configPackages = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-wlr
-    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
 
-    config.common.default = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-wlr
-    ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.OpenURI" = [ "gtk" ];
+      };
+    };
   };
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
