@@ -230,11 +230,6 @@ in {
         exec = "${blender}/bin/blender";
       };
 
-      firefox = {
-        name = "firefox";
-        exec = "${pkgs.firefox}/bin/firefox";
-      };
-
       viewnior = {
         name = "viewnior";
         exec = "${pkgs.viewnior}/bin/viewnior";
