@@ -181,6 +181,12 @@
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        ChallengeResponseAuthentication = false;
+        MaxAuthTries = 2;
+        AllowTcpForwarding = false;
+        X11Forwarding = false;
+        AllowAgentForwarding = false;
       };
     };
   };
