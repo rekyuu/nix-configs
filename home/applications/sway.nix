@@ -222,8 +222,8 @@ in {
       startup = [
         { command = "autotiling"; }
         { command = "xrandr --output \"${monitorC}\" --primary --preferred"; }
+        { command = "xdg-portal-init.sh"; }
         { command = "waybar"; }
-        # { command = "fcitx5"; }
         { command = "gammastep -O 4500"; }
         { command = "fcitx5 -d -r"; }
         { command = "Telegram"; }
