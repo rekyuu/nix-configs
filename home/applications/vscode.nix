@@ -24,6 +24,8 @@
       ];
 
       userSettings = {
+        "chat.agent.enabled" = false;
+        "chat.disableAIFeatures" = true;
         "editor.find.addExtraSpaceOnTop" = false;
         "editor.fontFamily" = "'Cascadia Code', 'Noto Color Emoji', 'monospace', monospace";
         "editor.fontLigatures" = "'calt', 'ss01'";
