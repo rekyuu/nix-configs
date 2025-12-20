@@ -253,7 +253,7 @@ in {
         "image/png" = [ "viewnior.desktop" ];
         "image/tiff" = [ "viewnior.desktop" ];
         "image/webp" = [ "viewnior.desktop" ];
-        "inode/directory" = [ "nautilus-folder-handler.desktop" ];
+        "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         "text/html" = [ "firefox.desktop" ];
         "text/plain" = [ "code.desktop" ];
         "video/mp4" = [ "mpv.desktop" ];
