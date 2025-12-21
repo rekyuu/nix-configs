@@ -41,7 +41,7 @@
     interfaces.enp4s0.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 22 2283 8096 9999 ];
+      allowedTCPPorts = [ 22 2283 8096 9999 13378 ];
       allowedUDPPorts = [ 7359 ];
       trustedInterfaces = [ "docker0" ];
     };
