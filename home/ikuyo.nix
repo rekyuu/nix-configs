@@ -92,6 +92,7 @@ in {
     comma
     dconf
     direnv
+    dolphin-emu
     easytag
     efibootmgr
     feh
