@@ -144,6 +144,8 @@ in {
     nix-init
     nomacs
     obsidian
+    openrct2
+    openttd-jgrpp
     p7zip
     pavucontrol
     pomodoro-gtk
