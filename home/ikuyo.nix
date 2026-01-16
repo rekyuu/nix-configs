@@ -8,7 +8,7 @@ let
     text = builtins.readFile ./static/dxvk.conf;
   };
 
-  blender = (pkgs.unstable.blender-hip.withPackages (python-pkgs: [
+  blender = (pkgs.blender-hip.withPackages (python-pkgs: [
       python-pkgs.flatbuffers
     ])
   );
@@ -120,8 +120,8 @@ in {
     iotop
     jetbrains.clion
     jetbrains.datagrip
-    jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
+    jetbrains.idea
+    jetbrains.pycharm
     jetbrains.rider
     jq
     kdePackages.kdenlive
