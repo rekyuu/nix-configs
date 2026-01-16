@@ -98,6 +98,7 @@ in {
     feh
     ffmpeg_7-full
     firefox
+    flatpak
     freerdp
     font-manager
     gamemode
@@ -107,6 +108,7 @@ in {
     gimp
     gnome-calculator
     gnome-clocks
+    gnome-software
     gnome-sound-recorder
     godotPackages_4_3.godot
     godotPackages_4_3.godot-mono
@@ -274,6 +276,12 @@ in {
       };
     };
 
+    systemDirs.data = [
+      "/usr/share"
+      "/var/lib/flatpak/exports/share"
+      "$HOME/.local/share/flatpak/exports/share"
+    ];
+
     configFile = {
       "mimeapps.list".force = true;
 
@@ -286,6 +294,8 @@ in {
 
   services = {
     arrpc.enable = true;
+
+    flatpak.enable = true;
 
     fluidsynth = {
       enable = true;
