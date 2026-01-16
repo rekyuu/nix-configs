@@ -118,6 +118,7 @@ in {
     # godotPackages.export-template-mono
     imagemagick
     iotop
+    jellyfin-desktop
     jetbrains.clion
     jetbrains.datagrip
     jetbrains.idea
