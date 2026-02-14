@@ -175,10 +175,31 @@ in {
   };
 
   nix = {
+    # distributedBuilds = true;
+
+    # buildMachines = [
+    #   {
+    #     hostName = "fluorite.localdomain";
+    #     system = "aarch64-linux";
+    #     protocol = "ssh";
+    #     sshUser = "rekyuu";
+    #     sshKey = "/home/rekyuu/.ssh/id_ed25519";
+    #     publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUVQSUZZY0NxVEl0WE9Db2EzQjBPTndvTzg5VDdkdGNqcndaNDZmUEFnVDYgcm9vdEByYXNwYmVycnlwaQo=";
+    #     maxJobs = 3;
+    #     speedFactor = 1;
+    #     supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    #     mandatoryFeatures = [ ];
+    #   }
+    # ];
+
     settings = {
+      # builders-use-substitutes = true;
+      
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       download-buffer-size = 536870912; # 512 MB
+
+      # trusted-users = [ "rekyuu" ];
 
       substituters = [
         "https://cache.nixos.org?priority=10"

@@ -118,6 +118,7 @@ in {
     # godot-mono
     # godotPackages.export-template
     # godotPackages.export-template-mono
+    halloy
     imagemagick
     iotop
     jellyfin-desktop
@@ -153,6 +154,7 @@ in {
     pavucontrol
     pomodoro-gtk
     prismlauncher # minecraft
+    protonplus
     protontricks
     protonup-qt
     python3
@@ -180,6 +182,7 @@ in {
       mingwSupport = true;
     })
     winetricks
+    wl-color-picker
     wl-mirror
     (callPackage ../pkgs/wl_shimeji {})
     wlx-overlay-s
@@ -294,8 +297,6 @@ in {
 
   services = {
     arrpc.enable = true;
-
-    flatpak.enable = true;
 
     fluidsynth = {
       enable = true;
