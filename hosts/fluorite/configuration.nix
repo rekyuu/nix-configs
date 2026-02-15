@@ -187,7 +187,7 @@
       enable = true;
       program = "${pkgs.jellyfin-desktop}/bin/jellyfin-desktop";
       user = "kiosk";
-      extraArguments = "-d";
+      extraArguments = [ "-d" ];
     };
 
     gvfs.enable = true;
