@@ -3,7 +3,12 @@
   pkgs, 
   modulesPath, 
   ... 
-}: {
+}: let
+  kioskScript = pkgs.writeShellScriptBin "kiosk.sh" ''
+    ${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz &&
+    ${pkgs.jellyfin-desktop}/bin/jellyfin-desktop
+  '';
+in {
   imports = [ 
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -187,12 +192,7 @@
   services = {
     cage = {
       enable = true;
-      program = pkgs.writeShellScriptBin "kiosk.sh" ''
-        export DESKTOP
-
-        ${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz &&
-        ${pkgs.jellyfin-desktop}/bin/jellyfin-desktop
-      '';
+      program = "${kioskScript}/bin/kiosk.sh";
       user = "kiosk";
       extraArguments = [ "-d" ];
     };
