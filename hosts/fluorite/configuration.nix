@@ -183,8 +183,12 @@
   };
 
   services = {
-    getty.autologinUser = "rekyuu";
-    
+    cage = {
+      enable = true;
+      program = "${pkgs.jellyfin-desktop}";
+      user = "kiosk";
+    };
+
     gvfs.enable = true;
 
     openssh = {
@@ -203,14 +207,27 @@
     };
   };
 
+  systemd.services = {
+    "cage-tty1".after = [
+      "network-online.target"
+      "systemd-resolved.service"
+    ];
+  };
+
   security = {
     sudo.wheelNeedsPassword = false;
   };
 
-  users.users.rekyuu = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    shell = pkgs.zsh;
+  users.users = {
+    rekyuu = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "docker" ];
+      shell = pkgs.zsh;
+    };
+
+    kiosk = {
+      isNormalUser = true;
+    };
   };
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
