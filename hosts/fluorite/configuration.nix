@@ -187,7 +187,6 @@
   services = {
     cage = {
       enable = true;
-      program = "wlr-randr --output HDMI-A-1 --mode 1920x1080; jellyfin-desktop";
       user = "kiosk";
       extraArguments = [ "-d" ];
     };
@@ -212,6 +211,10 @@
 
   systemd.services = {
     "cage-tty1" = {
+      serviceConfig = {
+        ExecStart = "${pkgs.cage} -d -- sh -c '${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz && ${pkgs.jellyfin-desktop}/bin/jellyfin-desktop'";
+      };
+
       requires = [ 
         "network-online.target"
       ];
