@@ -187,6 +187,7 @@
       enable = true;
       program = "${pkgs.jellyfin-desktop}/bin/jellyfin-desktop";
       user = "kiosk";
+      extraArguments = "-d";
     };
 
     gvfs.enable = true;
@@ -212,7 +213,7 @@
       requires = [ 
         "network-online.target"
       ];
-      
+
       after = [
         "network-online.target"
         "systemd-resolved.service"
