@@ -183,6 +183,8 @@
   };
 
   services = {
+    getty.autologinUser = "rekyuu";
+    
     gvfs.enable = true;
 
     openssh = {
@@ -198,10 +200,6 @@
         X11Forwarding = false;
         AllowAgentForwarding = false;
       };
-    };
-
-    displayManager = {
-      getty.autologinUser = "rekyuu";
     };
   };
 
