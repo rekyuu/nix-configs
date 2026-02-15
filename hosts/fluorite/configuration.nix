@@ -199,6 +199,13 @@
         AllowAgentForwarding = false;
       };
     };
+
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "rekyuu";
+      };
+    };
   };
 
   security = {
