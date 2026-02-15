@@ -15,7 +15,7 @@
 
     Service = {
       Type = "simple";
-      ExecStart = "${(pkgs.callPackage ../../pkgs/jellyfin-rpc {})}/bin/jellyfin-rpc";
+      ExecStart = "${(pkgs.callPackage ../../../pkgs/jellyfin-rpc {})}/bin/jellyfin-rpc";
       Restart = "on-failure";
     };
   };

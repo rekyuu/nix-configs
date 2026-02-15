@@ -14,24 +14,28 @@ let
   );
 in {
   imports = [
-    ./applications/btop.nix
     ./applications/goxlr.nix
-    ./applications/houdini.nix
     ./applications/hyprlock.nix
     ./applications/hyprpaper.nix
-    ./applications/jellyfin-rpc.nix
-    ./applications/kitty.nix
-    ./applications/mpd.nix
-    ./applications/mpv.nix
-    ./applications/obs.nix
-    ./applications/retroarch.nix
-    ./applications/rofi.nix
-    ./applications/steam.nix
+    ./applications/mako.nix
     ./applications/sway.nix
-    ./applications/vscode.nix
     ./applications/waybar.nix
-    ./applications/zsh.nix
+
+    ../common/applications/btop.nix
+    ../common/applications/houdini.nix
+    ../common/applications/jellyfin-rpc.nix
+    ../common/applications/kitty.nix
+    ../common/applications/mpd.nix
+    ../common/applications/mpv.nix
+    ../common/applications/obs.nix
+    ../common/applications/retroarch.nix
+    ../common/applications/rofi.nix
+    ../common/applications/steam.nix
+    ../common/applications/vscode.nix
+    ../common/applications/zsh.nix
   ];
+
+  zsh.promptColor = "red";
 
   home = {
     username = "rekyuu";
@@ -43,7 +47,7 @@ in {
 
       name = "Bibata-Modern-Classic";
       size = 24;
-      package = pkgs.callPackage ../pkgs/bibata-cursor-theme {};
+      package = pkgs.callPackage ../../pkgs/bibata-cursor-theme {};
     };
   };
 
@@ -143,7 +147,7 @@ in {
     nix-direnv
     mpc
     mkvtoolnix
-    (callPackage ../pkgs/neowall {})
+    (callPackage ../../pkgs/neowall {})
     nil
     nix-init
     nomacs
@@ -184,10 +188,10 @@ in {
     winetricks
     wl-color-picker
     wl-mirror
-    (callPackage ../pkgs/wl_shimeji {})
+    (callPackage ../../pkgs/wl_shimeji {})
     wlx-overlay-s
     yt-dlp
-    (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
+    (buildEnv { name = "scripts"; paths = [ ../../scripts ]; })
   ];
 
   programs = {
@@ -214,7 +218,7 @@ in {
 
   home.file = {
     face = {
-      source = ./static/face.png;
+      source = ../common/static/face.png;
       target = ".face";
     };
   };
@@ -223,13 +227,6 @@ in {
 
   home.sessionVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";
-
-    # xivlauncher
-    DALAMUD_HOME = "$HOME/.xlcore/dalamud/Hooks/dev";
-    DXVK_CONFIG_FILE = dxvkConfig;
-
-    # obs-vkcapture
-    # OBS_VKCAPTURE = "1";
   };
 
   xdg = {

@@ -228,20 +228,20 @@ in {
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
     
-    overlays = [
-      outputs.overlays.unstable-packages
-      # Nautilus Gstreamer stuff
-      (self: super: {
-        gnome = super.gnome.overrideScope (gself: gsuper: {
-          nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
-            buildInputs = nsuper.buildInputs ++ (with gst_all_1; [
-              gst-plugins-good
-              gst-plugins-bad
-            ]);
-          });
-        });
-      })
-    ];
+    # overlays = [
+    #   outputs.overlays.unstable-packages
+    #   # Nautilus Gstreamer stuff
+    #   (self: super: {
+    #     gnome = super.gnome.overrideScope (gself: gsuper: {
+    #       nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+    #         buildInputs = nsuper.buildInputs ++ (with gst_all_1; [
+    #           gst-plugins-good
+    #           gst-plugins-bad
+    #         ]);
+    #       });
+    #     });
+    #   })
+    # ];
     
     config = {
       allowUnfree = true;

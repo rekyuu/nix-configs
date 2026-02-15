@@ -41,16 +41,19 @@
     nixosConfigurations = {
       ikuyo = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
+        
         modules = [
           ./hosts/ikuyo/configuration.nix
+          
           nixpkgs-xr.nixosModules.nixpkgs-xr
           nur.modules.nixos.default
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.rekyuu = import ./home/ikuyo.nix;
+            home-manager.users.rekyuu = import ./hosts/ikuyo/rekyuu.nix;
             home-manager.sharedModules = [ nur.modules.homeManager.default ];
           }
         ];
@@ -58,17 +61,23 @@
 
       umiko = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
+
         modules = [
           ./hosts/umiko/configuration.nix
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.rekyuu = import ./home/umiko.nix;
+            home-manager.users.rekyuu = import ./hosts/umiko/rekyuu.nix;
           }
         ];
       };
+
+      vivlos = nixpkgs.lib.nixosSystem { };
+
+      fluorite = nixpkgs.lib.nixosSystem { };
     };
   };
 }
