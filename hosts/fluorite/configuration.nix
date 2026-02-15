@@ -217,10 +217,6 @@
 
   systemd.services = {
     "cage-tty1" = {
-      serviceConfig = {
-        ExecStart = "${pkgs.cage} -d -- sh -c ''";
-      };
-
       requires = [ 
         "network-online.target"
       ];
