@@ -3,11 +3,6 @@
   ...
 }: 
 let
-  dxvkConfig = pkgs.writeTextFile {
-    name = "dxvk.conf";
-    text = builtins.readFile ./static/dxvk.conf;
-  };
-
   blender = (pkgs.blender-hip.withPackages (python-pkgs: [
       python-pkgs.flatbuffers
     ])
@@ -220,6 +215,11 @@ in {
     face = {
       source = ../common/static/face.png;
       target = ".face";
+    };
+
+    dxvk = {
+      source = ./static/dxvk.conf;
+      target = "dxvk.conf";
     };
   };
 
