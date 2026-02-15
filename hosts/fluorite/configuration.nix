@@ -1,5 +1,4 @@
 {
-  config, 
   lib, 
   pkgs, 
   modulesPath, 
@@ -168,6 +167,7 @@
       vim
       wget
       zsh
+      jellyfin-desktop
     ];
 
     variables = {
@@ -185,7 +185,7 @@
   services = {
     cage = {
       enable = true;
-      program = "${pkgs.jellyfin-desktop}";
+      program = "${pkgs.jellyfin-desktop}/bin/jellyfin-desktop";
       user = "kiosk";
     };
 
@@ -208,10 +208,16 @@
   };
 
   systemd.services = {
-    "cage-tty1".after = [
-      "network-online.target"
-      "systemd-resolved.service"
-    ];
+    "cage-tty1" = {
+      requires = [ 
+        "network-online.target"
+      ];
+      
+      after = [
+        "network-online.target"
+        "systemd-resolved.service"
+      ];
+    };
   };
 
   security = {
