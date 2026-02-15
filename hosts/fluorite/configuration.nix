@@ -167,7 +167,9 @@
       vim
       wget
       zsh
+
       jellyfin-desktop
+      wlr-randr
     ];
 
     variables = {
@@ -185,7 +187,7 @@
   services = {
     cage = {
       enable = true;
-      program = "${pkgs.jellyfin-desktop}/bin/jellyfin-desktop";
+      program = "wlr-randr --output HDMI-A-1 --mode 1920x1080; jellyfin-desktop";
       user = "kiosk";
       extraArguments = [ "-d" ];
     };
