@@ -90,10 +90,26 @@
         ];
       };
 
-      fluorite = nixos-raspberrypi.lib.nixosSystemFull {
-        specialArgs = { inherit inputs outputs; };
+      fluorite = nixos-raspberrypi.lib.nixosSystem {
+        specialArgs = inputs;
 
         modules = [
+          # https://github.com/nvmd/nixos-raspberrypi/issues/113#issuecomment-3698140050
+          ({ lib, ... }: let
+            renamePath = nixpkgs.outPath + "/nixos/modules/rename.nix";
+            renameModule = import renamePath { inherit lib; };
+
+            moduleFilter = module:
+              lib.attrByPath ["options" "boot" "loader" "raspberryPi"] null
+              (module {
+                config = null;
+                options = null;
+              }) == null;
+          in {
+            disabledModules = [ renamePath ];
+            imports = builtins.filter moduleFilter renameModule.imports;
+          })
+
           {
             imports = with nixos-raspberrypi.nixosModules; [
               raspberry-pi-5.base
