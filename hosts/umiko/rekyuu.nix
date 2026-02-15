@@ -3,9 +3,11 @@
   ...
 }: {
   imports = [
-    ./applications/btop.nix
-    ./applications/zsh.nix
+    ../common/applications/btop.nix
+    ../common/applications/zsh.nix
   ];
+
+  zsh.promptColor = "blue";
 
   home = {
     username = "rekyuu";
@@ -21,7 +23,7 @@
     nix-direnv
     python3
     sl
-    (buildEnv { name = "scripts"; paths = [ ./scripts ]; })
+    (buildEnv { name = "scripts"; paths = [ ../../scripts ]; })
   ];
 
   programs = {

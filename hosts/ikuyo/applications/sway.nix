@@ -7,10 +7,6 @@ let
   monitorC = "DP-1";
   monitorR = "DP-2";
 in {
-  imports = [
-    ./mako.nix
-  ];
-
   home.packages = with pkgs; [
     autotiling
     grim

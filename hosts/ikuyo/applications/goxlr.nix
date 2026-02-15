@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}: 
-let
+{ pkgs,... }: let
   goxlrConfig = pkgs.writeTextFile {
     name = "settings.json";
     text = builtins.readFile ../static/goxlr/settings.json;
