@@ -201,10 +201,7 @@
     };
 
     displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "rekyuu";
-      };
+      getty.autologinUser = "rekyuu";
     };
   };
 
