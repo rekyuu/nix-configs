@@ -1,11 +1,9 @@
 {
   config,
   inputs,
-  outputs,
   lib,
   pkgs,
   modulesPath,
-  gst_all_1,
   ...
 }:
 let
@@ -167,8 +165,6 @@ in {
         rocmPackages.clr
         rocmPackages.clr.icd
       ];
-
-      extraPackages32 = with pkgs; [ ];
     };
 
     steam-hardware.enable = true;
