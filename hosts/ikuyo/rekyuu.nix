@@ -175,7 +175,7 @@ in {
     vesktop
     viewnior
     vlc
-    nur.repos.ataraxiasjel.waydroid-script
+    # nur.repos.ataraxiasjel.waydroid-script
     (wineWowPackages.full.override {
       wineRelease = "staging";
       mingwSupport = true;
