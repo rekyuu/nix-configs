@@ -22,8 +22,10 @@ in {
       };
     };
 
+
     kernelPackages = pkgs.linuxPackages_rpi5;
 
+    kernelParams = [ "cgroup_memory=1" "cgroup_enable=memory" ];
     kernelModules = [ ];
     extraModulePackages = [ ];
 
