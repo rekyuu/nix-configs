@@ -113,6 +113,8 @@
       auto-optimise-store = true;
       download-buffer-size = 536870912; # 512 MB
 
+      trusted-users = [ "rekyuu" ];
+
       substituters = [
         "https://cache.nixos.org?priority=10"
         "https://anyrun.cachix.org"
