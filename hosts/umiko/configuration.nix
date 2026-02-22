@@ -30,6 +30,8 @@
       availableKernelModules = [ "xhci_pci" ];
       kernelModules = [ "amdgpu" "nfs" ];
     };
+
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   networking = {
