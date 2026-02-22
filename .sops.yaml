@@ -1,0 +1,14 @@
+# Create an age key with `age-keygen -o ~/.config/sops/age/keys.txt`
+# To edit secrets, type `sops secrets/common.yaml`
+# If a new key is added, run `sops updatekeys secrets/example.yaml`
+keys:
+  - &ikuyo age1r39hx3alxmcet4dqeejdyqhdeuecl6k3cvwzcz3m8vltdwva5y9qw7whm9
+  - &umiko age14p0gmk05zvk7xfnflmsqhg68tgy5v58lfx3yf5z4pxw43st6y9gs9nx752
+  - &fluorite age12g04yd2tpala4s29v3tfffq9707azfntlfhczxr4vs40vfry2f0s54xfx0
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *ikuyo
+      - *umiko
+      - *fluorite

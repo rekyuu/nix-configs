@@ -34,6 +34,10 @@
     # MacOS
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # sops
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
@@ -65,6 +69,7 @@
     aagl,
     nixos-raspberrypi,
     nix-darwin,
+    sops-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -82,6 +87,7 @@
           
           nixpkgs-xr.nixosModules.nixpkgs-xr
           # nur.modules.nixos.default
+          sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
           {
@@ -99,6 +105,8 @@
 
         modules = [
           ./hosts/umiko/configuration.nix
+          
+          sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
           {
@@ -140,6 +148,8 @@
           }
 
           ./hosts/fluorite/configuration.nix
+          
+          sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
           {

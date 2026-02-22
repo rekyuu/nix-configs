@@ -1,4 +1,5 @@
 {
+  config,
   lib, 
   pkgs, 
   modulesPath, 
@@ -39,8 +40,17 @@ in {
     useDHCP = lib.mkDefault true;
 
     firewall = {
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ 
+        22   # ssh
+        2379 # k3s, etcd clients
+        2380 # k3s, etcd peers
+        6443 # k3s
+      ];
+
+      allowedUDPPorts = [ 
+        8472 # k3s, flannel
+      ];
+
       trustedInterfaces = [ ];
     };
   };
@@ -168,8 +178,10 @@ in {
 
   environment = {
     systemPackages = with pkgs; [
+      age
       bash
       git
+      sops
       tree
       vim
       wget
@@ -201,6 +213,13 @@ in {
 
     gvfs.enable = true;
 
+    k3s = {
+      enable = true;
+      role = "agent";
+      serverAddr = "https://umiko.localdomain:6443";
+      tokenFile = config.sops.secrets.k3s-token.path;
+    };
+
     openssh = {
       enable = true;
 
@@ -214,6 +233,15 @@ in {
         X11Forwarding = false;
         AllowAgentForwarding = false;
       };
+    };
+  };
+
+  sops = {
+    defaultSopsFile = ../../secrets/common.yaml;
+    age.keyFile = "/home/rekyuu/.config/sops/age/keys.txt";
+
+    secrets = {
+      k3s-token = {};
     };
   };
 
