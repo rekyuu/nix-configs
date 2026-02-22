@@ -69,8 +69,19 @@ in {
     interfaces.eno1.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 22 6600 7000 7001 7100 ];
-      allowedUDPPorts = [ 5353 6000 6001 7011 ];
+      allowedTCPPorts = [ 
+        22   # ssh
+        2379 # k3s, etcd clients
+        2380 # k3s, etcd peers
+        6443 # k3s
+        6600 # mpd
+      ];
+
+      allowedUDPPorts = [
+        5353 # avahi
+        8472 # k3s, flannel
+      ];
+
       trustedInterfaces = [ "docker0" ];
     };
   };
@@ -295,6 +306,7 @@ in {
     pathsToLink = [ "share/thumbnailers" ];
 
     systemPackages = with pkgs; [
+      age
       bash
       blackmagic-desktop-video
       ffmpeg-headless
@@ -303,6 +315,7 @@ in {
       git
       libsecret
       logiops_0_2_3
+      sops
       tree
       uxplay
       vim
@@ -355,14 +368,6 @@ in {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
-
-      publish = {
-        enable = true;
-        addresses = true;
-        workstation = true;
-        userServices = true;
-        domain = true;
-      };
     };
 
     blueman.enable = true;
@@ -396,6 +401,13 @@ in {
 
     # For trash://
     gvfs.enable = true;
+
+    k3s = {
+      enable = true;
+      role = "agent";
+      serverAddr = "https://umiko.localdomain:6443";
+      tokenFile = config.sops.secrets.k3s-token.path;
+    };
 
     monado = {
       enable = true;
@@ -442,6 +454,15 @@ in {
         ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-1" --mode "2560x2880" --rate "60" --pos "6000x0"
         ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-2" --prop --set non-desktop 1
       '';
+    };
+  };
+
+  sops = {
+    defaultSopsFile = ../../secrets/common.yaml;
+    age.keyFile = "/home/rekyuu/.config/sops/age/keys.txt";
+
+    secrets = {
+      k3s-token = {};
     };
   };
 
@@ -565,4 +586,3 @@ in {
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-

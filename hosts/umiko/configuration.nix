@@ -43,8 +43,22 @@
     interfaces.enp4s0.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 22 2283 8096 9999 13378 ];
-      allowedUDPPorts = [ 7359 ];
+      allowedTCPPorts = [ 
+        22   # ssh
+        2283 # immich
+        2379 # k3s, etcd clients
+        2380 # k3s, etcd peers
+        6443 # k3s
+        8096 # jellyfin
+        9999 # stashapp
+        13378 # audiobookshelf
+      ];
+
+      allowedUDPPorts = [ 
+        7359 # jellyfin, client discovery
+        8472 # k3s, flannel
+      ];
+
       trustedInterfaces = [ "docker0" ];
     };
   };
@@ -156,8 +170,10 @@
 
   environment = {
     systemPackages = with pkgs; [
+      age
       bash
       git
+      sops
       tree
       vim
       wget
@@ -179,6 +195,13 @@
   services = {
     gvfs.enable = true;
 
+    k3s = {
+      enable = true;
+      role = "server";
+      clusterInit = true;
+      tokenFile = config.sops.secrets.k3s-token.path;
+    };
+    
     openssh = {
       enable = true;
 
@@ -197,6 +220,15 @@
 
   security = {
     sudo.wheelNeedsPassword = false;
+  };
+
+  sops = {
+    defaultSopsFile = ../../secrets/common.yaml;
+    age.keyFile = "/home/rekyuu/.config/sops/age/keys.txt";
+
+    secrets = {
+      k3s-token = {};
+    };
   };
 
   users.users.rekyuu = {
