@@ -54,6 +54,8 @@ in {
       "pcie_port_pm=off"
       "pcie_aspm.policy=performance"
     ];
+
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -176,7 +178,7 @@ in {
     buildMachines = [
       {
         hostName = "umiko.localdomain";
-        system = "x86_64-linux";
+        systems = [ "x86_64-linux" "aarch64-linux" ];
         protocol = "ssh";
         sshUser = "rekyuu";
         sshKey = "/home/rekyuu/.ssh/id_ed25519";
@@ -186,18 +188,18 @@ in {
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
       }
-      {
-        hostName = "fluorite.localdomain";
-        system = "aarch64-linux";
-        protocol = "ssh";
-        sshUser = "rekyuu";
-        sshKey = "/home/rekyuu/.ssh/id_ed25519";
-        publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5lZHJtYXM1bURmZFV3VlpkWFZIbzBZUHRRU0M5UmlFbi9udW5RdXdUalIgcm9vdEBuaXhvcy1pbnN0YWxsZXIK";
-        maxJobs = 3;
-        speedFactor = 1;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-        mandatoryFeatures = [ ];
-      }
+      # {
+      #   hostName = "fluorite.localdomain";
+      #   system = "aarch64-linux";
+      #   protocol = "ssh";
+      #   sshUser = "rekyuu";
+      #   sshKey = "/home/rekyuu/.ssh/id_ed25519";
+      #   publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5lZHJtYXM1bURmZFV3VlpkWFZIbzBZUHRRU0M5UmlFbi9udW5RdXdUalIgcm9vdEBuaXhvcy1pbnN0YWxsZXIK";
+      #   maxJobs = 3;
+      #   speedFactor = 1;
+      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      #   mandatoryFeatures = [ ];
+      # }
     ];
 
     settings = {
