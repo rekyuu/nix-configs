@@ -112,6 +112,10 @@ data:
             replacement: "rikka"
           - target_label: nodename
             replacement: "tsumo"
+      
+      - job_name: "unpoller"
+        static_configs:
+          - targets: [ "unpoller.default.svc.cluster.local:9130" ]
 
     remote_write:
       - url: https://mimir.riichi.me/api/v1/push
