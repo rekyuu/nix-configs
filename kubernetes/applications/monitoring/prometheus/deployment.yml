@@ -112,15 +112,6 @@ data:
             replacement: "rikka"
           - target_label: nodename
             replacement: "tsumo"
-      
-      - job_name: "jellyfin"
-        static_configs:
-          - targets: [ "umiko.localdomain:8096" ]
-        relabel_configs:
-          - target_label: instance
-            replacement: "umiko"
-          - target_label: nodename
-            replacement: "tsumo"
 
     remote_write:
       - url: https://mimir.riichi.me/api/v1/push
