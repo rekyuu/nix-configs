@@ -23,6 +23,7 @@ spec:
             - "--path.sysfs=/host/sys"
             - "--path.rootfs=/host/root"
             - "--collector.processes"
+            - "--collector.systemd"
             - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
           ports:
             - containerPort: 9100
@@ -32,6 +33,9 @@ spec:
               readOnly: true
             - mountPath: /host/sys
               name: sys              
+              readOnly: true
+            - mountPath: /var/run/dbus/system_bus_socket
+              name: dbus              
               readOnly: true
             - mountPath: /host/root
               name: root              
@@ -44,6 +48,10 @@ spec:
         - name: sys
           hostPath:
             path: /sys
+            type: ""
+        - name: dbus
+          hostPath:
+            path: /var/run/dbus/system_bus_socket
             type: ""
         - name: root
           hostPath:
