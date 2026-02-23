@@ -66,7 +66,7 @@ data:
             action: replace
             target_label: instance
           - target_label: nodename
-            replacement: "kyoto"
+            replacement: "tsumo"
       
       - job_name: "kubernetes-service-endpoints"
         kubernetes_sd_configs:
@@ -103,6 +103,15 @@ data:
             action: replace
             replacement: "tsumo"
             target_label: nodename
+      
+      - job_name: "static-node-exporter"
+        static_configs:
+          - targets: [ "rikka-1.localdomain:9100" ]
+        relabel_configs:
+          - target_label: instance
+            replacement: "rikka"
+          - target_label: nodename
+            replacement: "tsumo"
 
     remote_write:
       - url: https://mimir.riichi.me/api/v1/push
