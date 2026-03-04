@@ -17,12 +17,15 @@
   home.packages = with pkgs; [
     comma
     direnv
+    firefox
     iotop
     jq
     lsof
     nix-direnv
     python3
     sl
+    telegram-desktop
+    vesktop
     (buildEnv { name = "scripts"; paths = [ ../../scripts ]; })
   ];
 
