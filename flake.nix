@@ -118,6 +118,22 @@
         ];
       };
 
+      kyoko = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+
+        modules = [
+          ./hosts/kyoko/configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.rekyuu = import ./hosts/kyoko/rekyuu.nix;
+          }
+        ];
+      };
+
       fluorite = nixos-raspberrypi.lib.nixosSystem {
         specialArgs = inputs;
 
