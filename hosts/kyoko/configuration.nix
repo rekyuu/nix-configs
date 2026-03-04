@@ -163,6 +163,14 @@
   };
 
   services = {
+    displayManager = {
+      sddm = {
+        enable = true;
+        autoNumlock = true;
+        theme = "${(pkgs.callPackage ../../pkgs/reactionary-sddm-theme {})}/share/sddm/themes/reactionary";
+      };
+    };
+
     gvfs.enable = true;
     
     openssh = {
@@ -179,9 +187,39 @@
         AllowAgentForwarding = false;
       };
     };
+
+    xserver = {
+      enable = true;
+      desktopManager.xfce.enable = true;
+    };
   };
 
   security = {
+    pam = {
+      loginLimits = [
+        { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+      ];
+      
+      services = {
+        login.enableGnomeKeyring = true;
+        sddm.enableGnomeKeyring = true;
+        hyprlock = {};
+      };
+    };
+
+    polkit = {
+      enable = true;
+
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+          if (subject.isInGroup("wheel") && action.id == "org.freedesktop.policykit.exec")
+          {
+            return polkit.Result.YES;
+          }
+        })
+      '';
+    };
+
     sudo.wheelNeedsPassword = false;
   };
 
