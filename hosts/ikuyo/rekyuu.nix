@@ -94,10 +94,12 @@ in {
     dolphin-emu
     easytag
     efibootmgr
+    element-desktop
     feh
     ffmpeg_7-full
     firefox
     flatpak
+    fluffychat
     freerdp
     font-manager
     gamemode
