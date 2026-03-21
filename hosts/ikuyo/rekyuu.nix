@@ -88,6 +88,7 @@ in {
     bottles
     bruno
     cantata
+    cinny-desktop
     comma
     dconf
     direnv
@@ -128,6 +129,7 @@ in {
     jetbrains.idea
     jetbrains.pycharm
     jetbrains.rider
+    jetbrains.webstorm
     jq
     kdePackages.kdenlive
     kdiskmark
