@@ -13,7 +13,9 @@
 
     # bindings = {};
 
-    # config = {};
+    config = {
+      loop = "inf";
+    };
 
     scriptOpts = {
       # https://github.com/mpv-player/mpv/blob/v0.40.0/TOOLS/lua/autoload.lua#L19
