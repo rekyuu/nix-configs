@@ -150,6 +150,7 @@ in {
     nil
     nix-init
     nomacs
+    (callPackage ../../pkgs/ntsc-rs {})
     obsidian
     openrct2
     openttd-jgrpp
