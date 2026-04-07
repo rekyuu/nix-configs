@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  outputs,
   lib,
   pkgs,
   modulesPath,
@@ -249,20 +250,9 @@ in {
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
     
-    # overlays = [
-    #   outputs.overlays.unstable-packages
-    #   # Nautilus Gstreamer stuff
-    #   (self: super: {
-    #     gnome = super.gnome.overrideScope (gself: gsuper: {
-    #       nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
-    #         buildInputs = nsuper.buildInputs ++ (with gst_all_1; [
-    #           gst-plugins-good
-    #           gst-plugins-bad
-    #         ]);
-    #       });
-    #     });
-    #   })
-    # ];
+    overlays = [
+      outputs.overlays.unstable-packages   
+    ];
     
     config = {
       allowUnfree = true;
@@ -313,6 +303,13 @@ in {
       ffmpegthumbnailer
       gdk-pixbuf
       git
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gst-libav
+      gst_all_1.gst-vaapi
       libsecret
       logiops_0_2_3
       sops
@@ -335,6 +332,8 @@ in {
       QT_IM_MODULE = "fcitx";
       SDL_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
+
+      GST_PLUGIN_PATH = "/run/current-system/sw/lib/gstreamer-1.0/";
     };
   };
 
