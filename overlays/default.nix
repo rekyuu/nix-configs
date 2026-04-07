@@ -17,10 +17,12 @@
       system = final.system;
       config.allowUnfree = true;
     };
-
-    # b618ed69 = import inputs.nixpkgs-b618ed69 {
-    #   system = final.system;
-    #   config.allowUnfree = true;
-    # };
   };
+
+  # commit-b618ed69-packages = final: _prev: {
+  #   b618ed69 = import inputs.nixpkgs-b618ed69 {
+  #     system = final.system;
+  #     config.allowUnfree = true;
+  #   };
+  # };
 }
