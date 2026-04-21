@@ -310,6 +310,8 @@ in {
       gst_all_1.gst-plugins-ugly
       gst_all_1.gst-libav
       gst_all_1.gst-vaapi
+      ifuse
+      libimobiledevice
       libsecret
       logiops_0_2_3
       sops
@@ -440,6 +442,11 @@ in {
       ${ builtins.readFile ./static/udev-rules/keychron-q6.rules }
       ${ builtins.readFile ./static/udev-rules/vhba.rules }
     '';
+
+    usbmuxd = {
+      enable = true;
+      package = pkgs.usbmuxd2;
+    };
 
     xserver = {
       enable = true;
