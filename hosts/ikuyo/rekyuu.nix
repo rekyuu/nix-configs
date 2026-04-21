@@ -3,7 +3,7 @@
   ...
 }: 
 let
-  blender = (pkgs.unstable.blender.withPackages (python-pkgs: [
+  blender = (pkgs.blender-hip.withPackages (python-pkgs: [
       python-pkgs.flatbuffers
     ])
   );
