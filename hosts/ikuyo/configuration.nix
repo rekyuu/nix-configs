@@ -311,6 +311,7 @@ in {
       gst_all_1.gst-libav
       gst_all_1.gst-vaapi
       ifuse
+      libheif
       libimobiledevice
       libsecret
       logiops_0_2_3
