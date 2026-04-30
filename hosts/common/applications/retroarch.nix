@@ -7,6 +7,7 @@
     citra
     desmume
     dolphin
+    fceumm
     gambatte
     mgba
     mupen64plus
