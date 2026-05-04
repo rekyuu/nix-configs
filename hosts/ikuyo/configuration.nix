@@ -37,7 +37,7 @@ in {
     };
 
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ "kvm-amd" "uinput" ]; # uinput required by OpenTabletDriver
     extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink ];
 
     initrd = {
@@ -181,7 +181,12 @@ in {
       ];
     };
 
+    opentabletdriver.enable = true;
+
     steam-hardware.enable = true;
+
+    # Required by OpenTabletDriver
+    uinput.enable = true;
   };
 
   nix = {
