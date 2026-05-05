@@ -121,6 +121,16 @@
   
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        rocmPackages.clr
+        rocmPackages.clr.icd
+      ];
+    };
   };
 
   nix = {
@@ -184,6 +194,8 @@
       EDITOR = "vim";
       VISUAL = "vim";
       SYSTEMD_EDITOR = "vim";
+      # AMD_VULKAN_ICD = "RADV"; # gamescope seems to freak out if RADV is set, so it'll be unset by default
+      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
     };
   };
 

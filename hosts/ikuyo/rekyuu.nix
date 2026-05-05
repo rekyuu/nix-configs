@@ -167,6 +167,7 @@ in {
     rclone
     runelite
     rsgain
+    screen
     seahorse
     sl
     shipwright

@@ -15,6 +15,7 @@
   };
 
   home.packages = with pkgs; [
+    blender-hip
     comma
     direnv
     iotop
@@ -22,6 +23,7 @@
     lsof
     nix-direnv
     python3
+    screen
     sl
     (buildEnv { name = "scripts"; paths = [ ../../scripts ]; })
   ];
