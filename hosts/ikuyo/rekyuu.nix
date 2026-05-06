@@ -3,10 +3,11 @@
   ...
 }: 
 let
-  blender = (pkgs.blender-hip.withPackages (python-pkgs: [
-      python-pkgs.flatbuffers
-    ])
-  );
+  blender = pkgs.blender-hip;
+  # blender = (pkgs.blender-hip.withPackages (python-pkgs: [
+  #     python-pkgs.flatbuffers
+  #   ])
+  # );
 in {
   imports = [
     ./applications/goxlr.nix
@@ -17,6 +18,7 @@ in {
     ./applications/waybar.nix
 
     ../common/applications/btop.nix
+    ../common/applications/flamenco-worker.nix
     ../common/applications/houdini.nix
     ../common/applications/jellyfin-rpc.nix
     ../common/applications/kitty.nix

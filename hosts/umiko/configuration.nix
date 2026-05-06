@@ -49,6 +49,7 @@
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
         6443 # k3s
+        8080 # flamenco
         8096 # jellyfin
         9999 # stashapp
         13378 # audiobookshelf

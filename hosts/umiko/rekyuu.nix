@@ -4,6 +4,8 @@
 }: {
   imports = [
     ../common/applications/btop.nix
+    ../common/applications/flamenco-manager.nix
+    ../common/applications/flamenco-worker.nix
     ../common/applications/zsh.nix
   ];
 
