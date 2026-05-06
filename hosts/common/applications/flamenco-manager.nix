@@ -10,6 +10,10 @@
       After = [ "network.target" ];
     };
 
+    Install = {
+      WantedBy = [ "multi-user.target" ];
+    };
+
     Service = {
       Type = "simple";
       WorkingDirectory = "/home/rekyuu/services/flamenco";
