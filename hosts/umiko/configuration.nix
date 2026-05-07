@@ -45,6 +45,8 @@
     firewall = {
       allowedTCPPorts = [ 
         22   # ssh
+        80   # http
+        443  # https
         2283 # immich
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
@@ -56,6 +58,7 @@
       ];
 
       allowedUDPPorts = [ 
+        443  # https
         7359 # jellyfin, client discovery
         8472 # k3s, flannel
       ];
