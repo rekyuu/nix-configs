@@ -1,4 +1,9 @@
 # https://developers.cloudflare.com/tunnel/deployment-guides/kubernetes/
+# In the Cloudflare Tunnel settings, you need to go to Zero Trust > Networks > Connectors 
+#   and for each route, click on "Origin request and connection settings" > TLS
+#   - Add Origin Server Name, should be the same as the route URL
+#   - Enable "No TLS Verify"
+# In the Domain settings, go to SSL/TLS > Overview, and configer as "Full"
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -1,3 +1,4 @@
+# After applying, run `kubectl rollout restart deployment argocd-server -n argocd`
 apiVersion: v1
 kind: ConfigMap
 metadata:
