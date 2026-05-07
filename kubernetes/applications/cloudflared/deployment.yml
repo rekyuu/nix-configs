@@ -40,6 +40,8 @@ spec:
             - 0.0.0.0:2000
             - --url
             - https://caddy.default.svc.cluster.local
+            - --origin-server-name
+            - caddy.default.svc.cluster.local
             - --no-tls-verify
             - run
           livenessProbe:
