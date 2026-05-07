@@ -41,7 +41,6 @@ spec:
             - --url
             - https://caddy.default.svc.cluster.local
             - --no-tls-verify
-            - "true"
             - run
           livenessProbe:
             httpGet:
