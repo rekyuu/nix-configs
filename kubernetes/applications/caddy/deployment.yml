@@ -1,0 +1,158 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: caddy-config-volume
+  labels:
+    app: caddy
+spec:
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: "/srv/caddy/config"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - umiko
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: caddy-data-volume
+  labels:
+    app: caddy
+spec:
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: "/srv/caddy/data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - umiko
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: caddy-config-volume-claim
+spec:
+  volumeName: caddy-config-volume
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: caddy-data-volume-claim
+spec:
+  volumeName: caddy-data-volume
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caddy
+  labels:
+    app: caddy
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: caddy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: caddy
+    spec:
+      containers:
+        - name: caddy
+          image: ghcr.io/caddybuilds/caddy-cloudflare:alpine
+          imagePullPolicy: Always
+          env:
+            - name: DOMAIN	
+              valueFrom:	
+                secretKeyRef:	
+                  key: domain	
+                  name: caddy-secrets	
+            - name: CLOUDFLARE_API_TOKEN	
+              valueFrom:	
+                secretKeyRef:	
+                  key: cloudflare-api-token	
+                  name: caddy-secrets
+          ports:
+            - containerPort: 80	
+              protocol: TCP	
+            - containerPort: 443	
+              protocol: TCP	
+          volumeMounts:	
+            - mountPath: /etc/caddy/Caddyfile	
+              name: caddyfile-mount	
+              subPath: Caddyfile	
+            - mountPath: /config	
+              name: caddy-config-volume-mount	
+            - mountPath: /data	
+              name: caddy-data-volume-mount	
+      volumes:	
+        - configMap:	
+            defaultMode: 420	
+            name: caddyfile	
+          name: caddyfile-mount	
+        - name: caddy-config-volume-mount	
+          persistentVolumeClaim:	
+            claimName: caddy-config-volume-claim	
+        - name: caddy-data-volume-mount	
+          persistentVolumeClaim:	
+            claimName: caddy-data-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: caddy
+spec:
+  type: ClusterIP
+  selector:
+    app: caddy
+  ports:
+    - name: http-tcp	
+      port: 80	
+      protocol: TCP	
+      targetPort: 80	
+    - name: https-tcp	
+      port: 443	
+      protocol: TCP	
+      targetPort: 443	
+    - name: https-udp	
+      port: 443	
+      protocol: UDP	
+      targetPort: 443	
+    - name: caddy-admin	
+      port: 2019	
+      protocol: TCP	
+      targetPort: 2019	
