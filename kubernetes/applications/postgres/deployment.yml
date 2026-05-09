@@ -106,7 +106,7 @@ spec:
           volumeMounts:	
             - mountPath: /data	
               name: postgres-data-volume-mount	
-            - mountPath: /var/lib/postgresql/data	
+            - mountPath: /var/lib/postgresql	
               name: postgres-pg-data-volume-mount	
       volumes:	
         - name: postgres-data-volume-mount	
