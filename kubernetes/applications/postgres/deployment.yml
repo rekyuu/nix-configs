@@ -93,7 +93,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:18.3-alpine
+          image: ghcr.io/immich-app/postgres:18-vectorchord0.5.3-pgvector0.8.1
           imagePullPolicy: Always
           env:
             - name: POSTGRES_PASSWORD
