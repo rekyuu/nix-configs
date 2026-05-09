@@ -1,3 +1,79 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-data-volume
+  labels:
+    app: postgres
+spec:
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: "/srv/postgres/data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - umiko
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pg-data-volume
+  labels:
+    app: postgres
+spec:
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: "/srv/postgres/pg_data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - umiko
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-volume-claim
+spec:
+  volumeName: postgres-data-volume
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pg-data-volume-claim
+spec:
+  volumeName: postgres-pg-data-volume
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,6 +101,20 @@ spec:
                 secretKeyRef:
                   name: postgres-secrets
                   key: password
+          ports:
+            - containerPort: 5432
+          volumeMounts:	
+            - mountPath: /data	
+              name: postgres-data-volume-mount	
+            - mountPath: /var/lib/postgresql/data	
+              name: postgres-pg-data-volume-mount	
+      volumes:	
+        - name: postgres-data-volume-mount	
+          persistentVolumeClaim:	
+            claimName: postgres-data-volume-claim	
+        - name: postgres-pg-data-volume-mount	
+          persistentVolumeClaim:	
+            claimName: postgres-pg-data-volume-claim
 ---
 apiVersion: v1
 kind: Service
