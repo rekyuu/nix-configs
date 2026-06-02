@@ -101,6 +101,7 @@ in {
     feh
     ffmpeg_7-full
     firefox
+    flameshot
     flatpak
     fluffychat
     freerdp
@@ -142,6 +143,7 @@ in {
     lm_sensors
     lsof
     lutris
+    unstable.me3
     nautilus
     networkmanagerapplet
     networkmanager-openvpn

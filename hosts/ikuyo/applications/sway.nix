@@ -114,6 +114,10 @@ in {
             command = "fullscreen enable";
           }
           {
+            criteria = { title = "flameshot"; };
+            command = "border pixel 0, floating enable, fullscreen disable, move absolute position 0 0";
+          }
+          {
             criteria = { class = ".*freerdp.*"; };
             command = "floating disable";
           }
@@ -181,7 +185,7 @@ in {
         "Mod4+E" = "exec nautilus";
 
         "Print" = "exec screenshot-sway.sh desktop";
-        "Shift+Print" = "exec screenshot-sway.sh selection";
+        "Shift+Print" = "exec flameshot gui";
         "Alt+Print" = "exec screenshot-sway.sh active-window";
         "Ctrl+Print" = "exec screenshot-sway.sh selection-video";
 
