@@ -231,6 +231,7 @@ in {
         { command = "nm-applet"; }
         { command = "firefox"; }
         { command = "steam"; }
+        { command = "flameshot"; }
         { command = "kitty --class=btop btop"; }
         # { command = "neowall"; }
       ];
