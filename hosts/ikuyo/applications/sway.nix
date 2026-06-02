@@ -11,11 +11,12 @@ in {
     autotiling
     grim
     slurp
+    swaybg
     wf-recorder
     wl-clipboard
-    xorg.xhost
-    xorg.xprop
-    xorg.xrandr
+    xhost
+    xprop
+    xrandr
   ];
 
   home.sessionVariables = {
@@ -224,6 +225,7 @@ in {
         { command = "xrandr --output \"${monitorC}\" --primary --preferred"; }
         { command = "xdg-portal-init.sh"; }
         { command = "waybar"; }
+        { command = "waypaper --restore"; }
         { command = "gammastep -O 4500"; }
         { command = "fcitx5 -d -r"; }
         { command = "Telegram"; }

@@ -10,13 +10,13 @@
   which
 }: with python3Packages; buildPythonApplication {
   pname = "wl_shimeji";
-  version = "0.0.1.r104.651e296";
+  version = "8ae15cf7";
   format = "other";
   
   src = fetchgit {
     url = "https://github.com/CluelessCatBurger/wl_shimeji";
-    rev = "651e2962902cc1c71a1a5ee7e61ea2633625e7aa";
-    hash = "sha256-BvAlP9SHtl5bb/VQn2XBQh/l+ewSQvoYzX37uUBKLQQ=";
+    rev = "8ae15cf7e56325b08708e1b8d851baef679962d1";
+    hash = "sha256-dNShG6SS1jiT0JpI817TSIS7v1JLHSY8T04vhGpD6xo=";
     fetchSubmodules = true;
   };
 

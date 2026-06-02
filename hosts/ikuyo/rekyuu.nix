@@ -3,8 +3,8 @@
   ...
 }: 
 let
-  blender = pkgs.blender-hip;
-  # blender = (pkgs.blender-hip.withPackages (python-pkgs: [
+  blender = pkgs.blender;
+  # blender = (pkgs.blender.withPackages (python-pkgs: [
   #     python-pkgs.flatbuffers
   #   ])
   # );
@@ -12,13 +12,11 @@ in {
   imports = [
     ./applications/goxlr.nix
     ./applications/hyprlock.nix
-    ./applications/hyprpaper.nix
     ./applications/mako.nix
     ./applications/sway.nix
     ./applications/waybar.nix
 
     ../common/applications/btop.nix
-    ../common/applications/flamenco-worker.nix
     ../common/applications/houdini.nix
     ../common/applications/jellyfin-rpc.nix
     ../common/applications/kitty.nix
@@ -56,8 +54,11 @@ in {
       package = pkgs.gnome-themes-extra;
     };
 
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
+    gtk4 = {
+      theme = null;
+      extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
     };
   };
 
@@ -95,6 +96,7 @@ in {
     dconf
     direnv
     dolphin-emu
+    dusklight
     easytag
     efibootmgr
     element-desktop
@@ -143,7 +145,7 @@ in {
     lm_sensors
     lsof
     lutris
-    unstable.me3
+    me3
     nautilus
     networkmanagerapplet
     networkmanager-openvpn
@@ -154,7 +156,7 @@ in {
     nil
     nix-init
     nomacs
-    (callPackage ../../pkgs/ntsc-rs {})
+    # (callPackage ../../pkgs/ntsc-rs {})
     obsidian
     openrct2
     openttd-jgrpp
@@ -186,15 +188,16 @@ in {
     viewnior
     vlc
     # nur.repos.ataraxiasjel.waydroid-script
-    (wineWowPackages.full.override {
+    waypaper
+    wayvr
+    (wineWow64Packages.full.override {
       wineRelease = "staging";
       mingwSupport = true;
     })
     winetricks
     wl-color-picker
     wl-mirror
-    (callPackage ../../pkgs/wl_shimeji {})
-    wlx-overlay-s
+    # (callPackage ../../pkgs/wl_shimeji {})
     yt-dlp
     (buildEnv { name = "scripts"; paths = [ ../../scripts ]; })
   ];

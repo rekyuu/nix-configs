@@ -12,16 +12,12 @@ let
     name = "logid.cfg";
     text = builtins.readFile ./static/logid.cfg;
   };
-
-  westonConfig = pkgs.writeTextFile {
-    name = "weston.ini";
-    text = builtins.readFile ./static/weston.ini;
-  };
 in {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       inputs.aagl.nixosModules.default
+      ../common/applications/flamenco-worker.nix
     ];
 
   boot = {
@@ -256,12 +252,13 @@ in {
     hostPlatform = lib.mkDefault "x86_64-linux";
     
     overlays = [
-      outputs.overlays.unstable-packages   
+      # outputs.overlays.unstable-packages   
     ];
     
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
+      rocmSupport = true;
     };
   };
 
@@ -302,6 +299,7 @@ in {
 
     systemPackages = with pkgs; [
       age
+      android-tools
       bash
       blackmagic-desktop-video
       ffmpeg-headless
@@ -319,7 +317,7 @@ in {
       libheif
       libimobiledevice
       libsecret
-      logiops_0_2_3
+      logiops
       sops
       tree
       uxplay
@@ -346,14 +344,14 @@ in {
   };
 
   programs = {
-    adb.enable = true;
-
     appimage = {
       enable = true;
       binfmt = true;
     };
 
-    cdemu.enable = true;
+    # Causes a build failure on Linux 7.0
+    # https://github.com/NixOS/nixpkgs/issues/522038
+    cdemu.enable = false;
 
     gnupg.agent = {
       enable = true;
@@ -388,16 +386,14 @@ in {
         enable = true;
         autoNumlock = true;
         theme = "${(pkgs.callPackage ../../pkgs/reactionary-sddm-theme {})}/share/sddm/themes/reactionary";
-        
-        wayland = {
-          enable = true;
-          compositor = "weston";
-          compositorCommand = "weston --config ${westonConfig}";
-        };
 
         settings = {
-          General = {
-            GreeterEnvironment = "QT_WAYLAND_SHELL_INTEGRATION=fullscreen-shell-v1";
+          X11 = {
+            DisplayCommand = toString(pkgs.writeShellScript "Xsetup" ''
+              ${pkgs.xrandr}/bin/xrandr --output "HDMI-A-0" --off # Left monitor
+              ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-1" --off # Right monitor
+              ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-2" --off # VR
+            '');
           };
         };
       };
@@ -461,10 +457,10 @@ in {
       displayManager.session = [ ];
 
       displayManager.setupCommands = ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0" 
-        ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-0" --mode "3440x1440" --rate "144" --pos "2560x1440" --primary --preferred
-        ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-1" --mode "2560x2880" --rate "60" --pos "6000x0"
-        ${pkgs.xorg.xrandr}/bin/xrandr --output "DisplayPort-2" --prop --set non-desktop 1
+        ${pkgs.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0" 
+        ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-0" --mode "3440x1440" --rate "144" --pos "2560x1440" --primary --preferred
+        ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-1" --mode "2560x2880" --rate "60" --pos "6000x0"
+        ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-2" --prop --set non-desktop 1
       '';
     };
   };
@@ -490,7 +486,7 @@ in {
         startLimitIntervalSec = 0;
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pkgs.logiops_0_2_3}/bin/logid --config ${logidConfig}";
+          ExecStart = "${pkgs.logiops}/bin/logid --config ${logidConfig}";
           User = "root";
           ExecReload = "/bin/kill -HUP $MAINPID";
           Restart = "on-failure";

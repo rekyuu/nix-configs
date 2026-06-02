@@ -4,13 +4,13 @@
   fetchgit
 }: stdenvNoCC.mkDerivation rec {
   pname = "reactionary-sddm-theme";
-  version = "1.0.0";
+  version = "d0294611";
   
   src = fetchgit {
     url = "https://www.opencode.net/phob1an/reactionary.git";
     sparseCheckout = ["sddm/themes/reactionary"];
-    rev = "4aa2d20f0e93ae4387a90947fcc6c90940c18122";
-    hash = "sha256-iIuaxUnos4IeXOX4zRmTPP4hWF6i7hW+xvIopRKe964=";
+    rev = "d02946110b87c9c61607ff4913dcbf9d070f6b6a";
+    hash = "sha256-zC+6tv/azp8hMLQZuXypIy8zOnbhzI88rAHc+wh2WmM=";
   };
 
   installPhase = ''

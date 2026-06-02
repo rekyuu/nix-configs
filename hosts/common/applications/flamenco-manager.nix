@@ -3,26 +3,23 @@
   pkgs,
   ...
 }: {
-  systemd.user.services.flamenco-manager = {    
-    Unit = {
-      Description = "Flamenco Manager";
-      Documentation = "https://flamenco.blender.org";
-      After = [ "network.target" ];
-    };
+  systemd.services.flamenco-manager = {
+    description = "Flamenco Manager";
+    documentation = [ "https://flamenco.blender.org" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
 
-    Install = {
-      WantedBy = [ "multi-user.target" ];
-    };
-
-    Service = {
+    serviceConfig = {
       Type = "simple";
-      WorkingDirectory = "/home/rekyuu/services/flamenco";
-      ExecStart = toString(
-        pkgs.writeShellScript "flamenco-manager.sh" ''
-          export PATH=$PATH:${lib.makeBinPath [ pkgs.blender-hip pkgs.ffmpeg_7-full ]}
-          ${(pkgs.callPackage ../../../pkgs/flamenco-manager {})}/bin/flamenco-manager
-        ''
-      );
+      WorkingDirectory = "-/etc/flamenco";
+      ExecStart = toString(pkgs.writeShellScript "flamenco-manager.sh" ''
+        export PATH=$PATH:${lib.makeBinPath [ pkgs.blender pkgs.ffmpeg_7-full ]}
+
+        mkdir -p /etc/flamenco
+        cd /etc/flamenco
+
+        ${(pkgs.callPackage ../../../pkgs/flamenco-manager {})}/bin/flamenco-manager
+      '');
       Restart = "on-failure";
     };
   };

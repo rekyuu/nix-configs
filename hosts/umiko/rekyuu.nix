@@ -4,8 +4,6 @@
 }: {
   imports = [
     ../common/applications/btop.nix
-    ../common/applications/flamenco-manager.nix
-    ../common/applications/flamenco-worker.nix
     ../common/applications/zsh.nix
   ];
 
@@ -17,7 +15,7 @@
   };
 
   home.packages = with pkgs; [
-    blender-hip
+    blender
     comma
     direnv
     iotop

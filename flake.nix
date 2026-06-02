@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs-b618ed69.url = "github:nixos/nixpkgs/b618ed69e325363246049979bec5a7a13ee31e74"; # for decklink
 
@@ -20,11 +20,11 @@
     # nur.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home Manager
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Anime games
-    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
 
     # Raspberry Pi

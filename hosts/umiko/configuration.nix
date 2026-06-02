@@ -8,6 +8,8 @@
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
+      ../common/applications/flamenco-manager.nix
+      ../common/applications/flamenco-worker.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -177,6 +179,7 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
+      rocmSupport = true;
     };
   };
 

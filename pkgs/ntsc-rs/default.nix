@@ -10,8 +10,11 @@
   expat,
   fontconfig,
   freetype,
-  libGL,
-  xorg,
+  libGL,  
+  libX11,
+  libXcursor,
+  libXi,
+  libXrandr,
   wayland,
   libxkbcommon,
   vulkan-loader
@@ -52,10 +55,10 @@ in rustPlatform.buildRustPackage rec {
     freetype
     freetype.dev
     libGL
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXrandr
+    libX11
+    libXcursor
+    libXi
+    libXrandr
     wayland
     libxkbcommon
     vulkan-loader

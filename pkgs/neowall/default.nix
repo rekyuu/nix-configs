@@ -7,13 +7,14 @@
   libpng,
   mesa,
   wayland,
-  xorg,
+  libX11,
+  libXrandr,
   fetchFromGitHub,
 }:
 
 stdenv.mkDerivation rec {
   pname = "neowall";
-  version = "0.4.3";
+  version = "0.4.7";
 
   src = fetchFromGitHub {
     owner = "1ay1";
@@ -24,7 +25,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ pkg-config ];
 
-  buildInputs = [ libGL libjpeg libpng mesa wayland xorg.libX11 xorg.libXrandr ];
+  buildInputs = [ libGL libjpeg libpng mesa wayland libX11 libXrandr ];
 
   installPhase = ''
     runHook preInstall
