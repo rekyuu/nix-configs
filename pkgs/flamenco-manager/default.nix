@@ -9,7 +9,7 @@
 
   src = fetchzip {
     url = "https://flamenco.blender.org/downloads/flamenco-${version}-linux-amd64.tar.gz";
-    hash = "sha256-zXO3rP32Y6CE9OaBYuN1NnZQ8WlTepbgLgHmHwKfpCc=";
+    hash = "sha256-Oy7akssWDwuvPGquVTRFo0cBatA9Tg3yLXii6+KijSI=";
   };
 
   buildInputs = [ ffmpeg ];

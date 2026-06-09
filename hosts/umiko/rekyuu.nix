@@ -18,6 +18,7 @@
     blender
     comma
     direnv
+    (callPackage ../../pkgs/gdown {})
     iotop
     jq
     lsof
