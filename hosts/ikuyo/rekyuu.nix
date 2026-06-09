@@ -5,6 +5,7 @@
 let
   blender = pkgs.blender;
   # blender = (pkgs.blender.withPackages (python-pkgs: [
+  #     python-pkgs.cattrs
   #     python-pkgs.flatbuffers
   #   ])
   # );
@@ -111,6 +112,7 @@ in {
     gamemode
     gamescope
     gammastep
+    (callPackage ../../pkgs/gdown {})
     glaxnimate
     gimp
     gnome-calculator

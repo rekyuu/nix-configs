@@ -5,7 +5,7 @@
   ffmpeg
 }: stdenv.mkDerivation rec {
   pname = "flamenco-worker";
-  version = "3.9.1";
+  version = "3.9.2";
 
   src = fetchzip {
     url = "https://flamenco.blender.org/downloads/flamenco-${version}-linux-amd64.tar.gz";
