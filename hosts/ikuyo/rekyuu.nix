@@ -104,7 +104,6 @@ in {
     feh
     ffmpeg_7-full
     firefox
-    flameshot
     flatpak
     fluffychat
     freerdp

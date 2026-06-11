@@ -186,7 +186,7 @@ in {
         "Mod4+E" = "exec nautilus";
 
         "Print" = "exec screenshot-sway.sh desktop";
-        "Shift+Print" = "exec flameshot gui";
+        "Shift+Print" = "exec screenshot-sway.sh selection";
         "Alt+Print" = "exec screenshot-sway.sh active-window";
         "Ctrl+Print" = "exec screenshot-sway.sh selection-video";
 
@@ -233,7 +233,6 @@ in {
         { command = "nm-applet"; }
         { command = "firefox"; }
         { command = "steam"; }
-        { command = "flameshot"; }
         { command = "kitty --class=btop btop"; }
         # { command = "neowall"; }
       ];
