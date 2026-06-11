@@ -27,6 +27,7 @@ in {
 
   wayland.windowManager.sway = {
     enable = true;
+    package = pkgs.unstable.sway;
     systemd.enable = true;
     xwayland = true;
 
@@ -237,29 +238,5 @@ in {
         # { command = "neowall"; }
       ];
     };
-
-    # Uncomment to use SwayFX
-    # package = pkgs.swayfx;
-    # extraConfig = ''
-    #   blur enable
-    #   blur_xray disable
-    #   blur_passes 2
-    #   blur_radius 5
-    #   blur_noise 0.02
-    #   blur_brightness 0.9
-    #   blur_contrast 0.9
-    #   blur_saturation 1.1
-
-    #   shadows enable
-    #   shadows_on_csd disable
-    #   shadow_blur_radius 20
-    #   shadow_color #0000007F
-    #   shadow_inactive_color #0000007F
-    #   shadow_offset 0 0
-
-    #   layer_effects "mako" shadows enable; blur enable; corner_radius 0
-    #   layer_effects "rofi" shadows enable; blur enable; corner_radius 0
-    #   layer_effects "waybar" shadows enable; blur enable; corner_radius 0
-    # '';
   };
 }

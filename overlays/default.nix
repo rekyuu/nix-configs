@@ -12,17 +12,12 @@
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
-  # unstable-packages = final: _prev: {
-  #   unstable = import inputs.nixpkgs-unstable {
-  #     stdenv.hostPlatform.system = final.stdenv.hostPlatform.system;
-  #     config.allowUnfree = true;
-  #   };
-  # };
+  unstable-packages = final: _prev: {
+    unstable = import inputs.nixpkgs-unstable {
+      inherit (final.stdenv.hostPlatform) system;
 
-  # commit-b618ed69-packages = final: _prev: {
-  #   b618ed69 = import inputs.nixpkgs-b618ed69 {
-  #     system = final.system;
-  #     config.allowUnfree = true;
-  #   };
-  # };
+      stdenv.hostPlatform.system = final.stdenv.hostPlatform.system;
+      config.allowUnfree = true;
+    };
+  };
 }
