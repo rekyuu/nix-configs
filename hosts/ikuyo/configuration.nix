@@ -359,6 +359,16 @@ in {
     };
 
     mtr.enable = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        curlMinimal
+        openssl
+        (runCommand "steamrun-lib" {} "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
+      ];
+    };
+
     zsh.enable = true;
 
     # Has to be done here because of hosts file shenanigans, probably

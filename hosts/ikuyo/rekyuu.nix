@@ -4,9 +4,10 @@
 }: 
 let
   blender = pkgs.blender;
-  # blender = (pkgs.blender.withPackages (python-pkgs: [
-  #     python-pkgs.cattrs
-  #     python-pkgs.flatbuffers
+  # blender = (pkgs.blender.withPackages (ps: [
+  #     ps.cattrs
+  #     ps.flatbuffers
+  #     ps.pyqt6
   #   ])
   # );
 in {
