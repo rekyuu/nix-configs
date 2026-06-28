@@ -173,8 +173,9 @@ in {
     r2modman
     rawtherapee
     rclone
-    runelite
+    rpi-imager
     rsgain
+    runelite
     screen
     seahorse
     sl
