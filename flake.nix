@@ -176,6 +176,24 @@
           }
         ];
       };
+
+      qingque = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+
+        modules = [
+          ./hosts/qingque/configuration.nix
+          
+          sops-nix.nixosModules.sops
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.rekyuu = import ./hosts/qingque/rekyuu.nix;
+          }
+        ];
+      };
     };
 
     darwinConfigurations = {

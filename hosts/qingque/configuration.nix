@@ -1,69 +1,52 @@
-{ 
+{
   config,
-  lib,
+  lib, 
   pkgs, 
   modulesPath, 
   ... 
 }: {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      ../common/applications/flamenco-manager.nix
-      ../common/applications/flamenco-worker.nix
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
-  # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
-      systemd-boot = {
-        enable = true;
-        consoleMode = "max";
-        editor = false;
-        configurationLimit = 4;
-      };
+      # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
+      grub.enable = false;
 
-      efi.canTouchEfiVariables = true;
+      # Enables the generation of /boot/extlinux/extlinux.conf
+      generic-extlinux-compatible.enable = true;
     };
 
-    kernelModules = [ "kvm-amd" ];
+    kernelParams = [ ];
+    kernelModules = [ ];
     extraModulePackages = [ ];
 
     initrd = {
-      availableKernelModules = [ "xhci_pci" ];
-      kernelModules = [ "amdgpu" "nfs" ];
+      availableKernelModules = [ "xhci_pci" "usbhid" ];
+      kernelModules = [ ];
     };
-
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   networking = {
-    hostName = "umiko";
-
+    hostName = "qingque";
+    
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
-
-    interfaces.enp4s0.wakeOnLan.enable = true;
 
     firewall = {
       allowedTCPPorts = [ 
         22   # ssh
-        2283 # immich
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
         6443 # k3s
-        8080 # flamenco
-        8096 # jellyfin
-        9999 # stashapp
-        13378 # audiobookshelf
       ];
 
       allowedUDPPorts = [ 
-        443  # https
-        7359 # jellyfin, client discovery
         8472 # k3s, flannel
       ];
 
-      trustedInterfaces = [ "docker0" ];
+      trustedInterfaces = [ ];
     };
   };
 
@@ -95,47 +78,15 @@
 
   fileSystems = {
     "/" = { 
-      device = "/dev/disk/by-uuid/a911fe90-f453-4236-bcfc-d4f2b69aa5a7";
+      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-uuid/4687-4D2C";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-    "/mnt/alpha" = {
-      device = "/dev/disk/by-uuid/78a4ff36-b4bf-4b99-afc2-d31e5e66dfdd";
-      fsType = "ext4";
-    };
-
-    "/mnt/beta" = {
-      device = "/dev/disk/by-uuid/0beb5ab5-d502-43fc-bb35-a8d562be065a";
-      fsType = "ext4";
-    };
-
-    "/mnt/rikka" = {
-      device = "rikka-1.localdomain:/volume1/rikka";
-      fsType = "nfs";
+      options = [ "noatime" ];
     };
   };
 
   swapDevices = [ ];
-  
-  hardware = {
-    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-
-      extraPackages = with pkgs; [
-        rocmPackages.clr
-        rocmPackages.clr.icd
-      ];
-    };
-  };
+  hardware = { };
 
   nix = {
     settings = {
@@ -151,6 +102,7 @@
         "https://hyprland.cachix.org"
         "https://nix-community.cachix.org"
         "https://nix-gaming.cachix.org"
+        "https://nixos-raspberrypi.cachix.org"
       ];
 
       trusted-public-keys = [
@@ -159,6 +111,7 @@
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+        "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
       ];
     };
 
@@ -167,19 +120,14 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-  };  
+  };
 
   nixpkgs = {
-    hostPlatform = lib.mkDefault "x86_64-linux";
-
-    overlays = [
-      # outputs.overlays.unstable-packages
-    ];
+    hostPlatform = lib.mkDefault "aarch64-linux";
     
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
-      rocmSupport = true;
     };
   };
 
@@ -199,8 +147,6 @@
       EDITOR = "vim";
       VISUAL = "vim";
       SYSTEMD_EDITOR = "vim";
-      # AMD_VULKAN_ICD = "RADV"; # gamescope seems to freak out if RADV is set, so it'll be unset by default
-      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
     };
   };
 
@@ -214,11 +160,10 @@
 
     k3s = {
       enable = true;
-      role = "agent";
-      serverAddr = "https://qingque.localdomain:6443";
+      role = "server";
       tokenFile = config.sops.secrets.k3s-token.path;
     };
-    
+
     openssh = {
       enable = true;
 
@@ -235,10 +180,6 @@
     };
   };
 
-  security = {
-    sudo.wheelNeedsPassword = false;
-  };
-
   sops = {
     defaultSopsFile = ../../secrets/common.yaml;
     age.keyFile = "/home/rekyuu/.config/sops/age/keys.txt";
@@ -248,16 +189,18 @@
     };
   };
 
-  users.users.rekyuu = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-    shell = pkgs.zsh;
+  security = {
+    sudo.wheelNeedsPassword = false;
   };
 
-  virtualisation = {
-    docker.enable = true;
+  users.users = {
+    rekyuu = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "docker" ];
+      shell = pkgs.zsh;
+    };
   };
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 }

@@ -418,7 +418,7 @@ in {
     k3s = {
       enable = true;
       role = "agent";
-      serverAddr = "https://umiko.localdomain:6443";
+      serverAddr = "https://qingque.localdomain:6443";
       tokenFile = config.sops.secrets.k3s-token.path;
     };
 
