@@ -151,7 +151,7 @@ kind: Service
 metadata:
   name: pihole-dns
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: pihole
   ports:
@@ -159,9 +159,7 @@ spec:
       port: 53
       protocol: TCP
       targetPort: 53
-      nodePort: 53
     - name: dns-udp
       port: 53
       protocol: UDP
       targetPort: 53
-      nodePort: 53
