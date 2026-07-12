@@ -60,14 +60,6 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - qingque
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -81,14 +73,6 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - qingque
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -102,14 +86,6 @@ spec:
     matchLabels:
       app: caddy
   replicas: 1
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - qingque
   template:
     metadata:
       labels:
@@ -154,6 +130,14 @@ spec:
         - name: caddy-data-volume-mount	
           persistentVolumeClaim:	
             claimName: caddy-data-volume-claim
+      nodeAffinity:
+        required:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - qingque
 ---
 apiVersion: v1
 kind: Service
@@ -179,12 +163,4 @@ spec:
     - name: caddy-admin	
       port: 2019	
       protocol: TCP	
-      targetPort: 2019	
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - qingque
+      targetPort: 2019
