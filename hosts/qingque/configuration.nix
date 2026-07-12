@@ -1,9 +1,9 @@
 {
   config,
-  lib, 
-  pkgs, 
-  modulesPath, 
-  ... 
+  lib,
+  pkgs,
+  modulesPath,
+  ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -30,19 +30,21 @@
 
   networking = {
     hostName = "qingque";
-    
+
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
 
     firewall = {
-      allowedTCPPorts = [ 
+      allowedTCPPorts = [
         22   # ssh
+        53   # pihole DNS
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
         6443 # k3s
       ];
 
-      allowedUDPPorts = [ 
+      allowedUDPPorts = [
+        53   # pihole DNS
         8472 # k3s, flannel
       ];
 
@@ -77,7 +79,7 @@
   };
 
   fileSystems = {
-    "/" = { 
+    "/" = {
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
       options = [ "noatime" ];
@@ -124,7 +126,7 @@
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "aarch64-linux";
-    
+
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
