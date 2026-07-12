@@ -130,14 +130,15 @@ spec:
         - name: caddy-data-volume-mount	
           persistentVolumeClaim:	
             claimName: caddy-data-volume-claim
-      nodeAffinity:
-        required:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - qingque
+      affinity:
+        nodeAffinity:
+          required:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - qingque
 ---
 apiVersion: v1
 kind: Service
