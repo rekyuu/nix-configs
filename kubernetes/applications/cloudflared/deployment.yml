@@ -15,6 +15,14 @@ spec:
     matchLabels:
       pod: cloudflared
   replicas: 2
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - qingque
   template:
     metadata:
       labels:
