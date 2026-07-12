@@ -132,7 +132,7 @@ spec:
             claimName: caddy-data-volume-claim
       affinity:
         nodeAffinity:
-          required:
+          requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: kubernetes.io/hostname

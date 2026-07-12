@@ -55,7 +55,7 @@ spec:
             periodSeconds: 10
       affinity:
         nodeAffinity:
-          required:
+          requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: kubernetes.io/hostname
