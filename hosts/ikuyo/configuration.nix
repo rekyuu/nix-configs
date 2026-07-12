@@ -34,7 +34,10 @@ in {
 
     kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelModules = [ "kvm-amd" "uinput" ]; # uinput required by OpenTabletDriver
-    extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink ];
+    extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink v4l2loopback ];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    '';
 
     initrd = {
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
