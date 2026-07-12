@@ -35,6 +35,7 @@
         "editor.wordWrap" = "on";
         "explorer.confirmDelete" = false;
         "explorer.confirmDragAndDrop" = false;
+        "files.trimTrailingWhitespace" = true;
         "git.autofetch" = true;
         "git.confirmSync" = false;
         "godotTools.editorPath.godot4" = "godot4";
