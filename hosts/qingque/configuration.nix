@@ -37,14 +37,12 @@
     firewall = {
       allowedTCPPorts = [
         22   # ssh
-        53   # pihole DNS
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
         6443 # k3s
       ];
 
       allowedUDPPorts = [
-        53   # pihole DNS
         8472 # k3s, flannel
       ];
 
@@ -179,6 +177,63 @@
         X11Forwarding = false;
         AllowAgentForwarding = false;
       };
+    };
+
+    pihole-ftl = {
+      enable = true;
+      openFirewallDNS = true;
+      openFirewallWebserver = true;
+
+      settings = {
+        dns = {
+          upstreams = [
+            "9.9.9.9" "149.112.112.112" # Quad9
+            # "1.1.1.1" "1.0.0.1" # Cloudflare
+          ];
+
+          hosts = [
+            "192.168.1.80 fluorite.localdomain"
+            "192.168.1.195 homeassistant.localdomain"
+            "192.168.1.119 ikuyo.localdomain"
+            "192.168.1.135 qingque.localdomain"
+            "192.168.1.240 rikka-1.localdomain"
+            "192.168.1.241 rikka-2.localdomain"
+            "192.168.1.178 umiko.localdomain"
+            "192.168.1.214 vivlos.localdomain"
+            "192.168.1.148 zooey.localdomain"
+          ];
+
+          domainNeeded = true;
+
+          rateLimit.count = 0;
+          rateLimit.interval = 0;
+        };
+
+        # To manage the web login:
+        # 1) Temporarily set misc.readOnly to false in
+        #    configuration.nix and switch to it.
+        # 2) Manually set a password:
+        #    Pi-hole web console > Settings > All settings >
+        #    Webserver and API > webserver.api.password > Value: ******
+        # 3) Read the generated hash:
+        #    sudo pihole-FTL --config webserver.api.pwhash
+        # misc.readOnly = false;
+        webserver.api.pwhash = "$BALLOON-SHA256$v=1$s=1024,t=32$FptrpynjfnPv7y4dHfHM6g==$ynRGIuVw8yTlYTFhWMn7QI2SWn0VpP2JCKbgUgCuA3o=";
+      };
+
+      lists = [
+        {
+          url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+          type = "block";
+          enabled = true;
+          description = "StevenBlack's Unified Hosts List";
+        }
+      ];
+    };
+
+    pihole-web = {
+      enable = true;
+      ports = [ "8000" ];
     };
   };
 
