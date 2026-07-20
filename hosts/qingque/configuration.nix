@@ -207,6 +207,8 @@
 
           rateLimit.count = 0;
           rateLimit.interval = 0;
+
+          specialDomains.iCloudPrivateRelay = false;
         };
 
         # To manage the web login:
