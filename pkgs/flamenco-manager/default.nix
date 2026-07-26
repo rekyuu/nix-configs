@@ -5,11 +5,11 @@
   ffmpeg
 }: stdenv.mkDerivation rec {
   pname = "flamenco-manager";
-  version = "3.9.2";
+  version = "3.9.3";
 
   src = fetchzip {
     url = "https://flamenco.blender.org/downloads/flamenco-${version}-linux-amd64.tar.gz";
-    hash = "sha256-Oy7akssWDwuvPGquVTRFo0cBatA9Tg3yLXii6+KijSI=";
+    hash = "sha256-BXfwitzygeEo5zct1vRBomjnZZnHxuCK2JVbCmB18vE=";
   };
 
   buildInputs = [ ffmpeg ];

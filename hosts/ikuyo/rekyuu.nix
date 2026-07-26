@@ -1,9 +1,9 @@
 {
   pkgs,
   ...
-}: 
+}:
 let
-  blender = pkgs.blender;
+  blender = pkgs.unstable.blender;
   # blender = (pkgs.blender.withPackages (ps: [
   #     ps.cattrs
   #     ps.flatbuffers
@@ -50,7 +50,7 @@ in {
 
   gtk = {
     enable = true;
-    
+
     theme = {
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
