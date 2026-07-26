@@ -67,7 +67,7 @@ data:
             target_label: instance
           - target_label: nodename
             replacement: "tsumo"
-      
+
       - job_name: "kubernetes-service-endpoints"
         kubernetes_sd_configs:
           - role: endpoints
@@ -103,7 +103,7 @@ data:
             action: replace
             replacement: "tsumo"
             target_label: nodename
-      
+
       - job_name: "static-node-exporter"
         static_configs:
           - targets: [ "rikka-1.localdomain:9100" ]
@@ -112,7 +112,7 @@ data:
             replacement: "rikka"
           - target_label: nodename
             replacement: "tsumo"
-      
+
       - job_name: "unpoller"
         static_configs:
           - targets: [ "unpoller.default.svc.cluster.local:9130" ]
@@ -173,6 +173,15 @@ spec:
         - name: mimir-basicauth-mount
           secret:
             secretName: mimir-basicauth
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - qingque
 ---
 apiVersion: v1
 kind: Service
