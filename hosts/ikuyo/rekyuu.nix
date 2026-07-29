@@ -189,6 +189,7 @@ in {
     unrar
     vesktop
     viewnior
+    vintagestory
     vlc
     # nur.repos.ataraxiasjel.waydroid-script
     waypaper
