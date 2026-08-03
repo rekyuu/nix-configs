@@ -1,11 +1,16 @@
 {
   config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}: {
-  imports = [
+  lib, 
+  pkgs, 
+  modulesPath, 
+  ... 
+}: let
+  kioskScript = pkgs.writeShellScriptBin "kiosk.sh" ''
+    ${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --mode 1920x1080@60Hz &&
+    ${pkgs.jellyfin-desktop}/bin/jellyfin-desktop
+  '';
+in {
+  imports = [ 
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -31,19 +36,19 @@
 
   networking = {
     hostName = "fluorite";
-
+    
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
 
     firewall = {
-      allowedTCPPorts = [
+      allowedTCPPorts = [ 
         22   # ssh
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
         6443 # k3s
       ];
 
-      allowedUDPPorts = [
+      allowedUDPPorts = [ 
         8472 # k3s, flannel
       ];
 
@@ -78,7 +83,7 @@
   };
 
   fileSystems = {
-    "/" = {
+    "/" = { 
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
       options = [ "noatime" ];
@@ -98,10 +103,10 @@
 
   swapDevices = [ ];
 
-  hardware = {
+  hardware = { 
     # https://github.com/nvmd/nixos-raspberrypi-demo/blob/main/pi5-configtxt.nix
     # raspberry-pi.config = {
-    #   all = {
+    #   all = { 
     #     options = {
     #       enable_uart = {
     #         enable = true;
@@ -165,7 +170,7 @@
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "aarch64-linux";
-
+    
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -182,6 +187,9 @@
       vim
       wget
       zsh
+
+      jellyfin-desktop
+      wlr-randr
     ];
 
     variables = {
@@ -197,11 +205,19 @@
   };
 
   services = {
+    cage = {
+      enable = true;
+      program = "${kioskScript}/bin/kiosk.sh";
+      user = "kiosk";
+      extraArguments = [ "-d" ];
+    };
+
     gvfs.enable = true;
 
     k3s = {
       enable = true;
-      role = "server";
+      role = "agent";
+      serverAddr = "https://umiko.localdomain:6443";
       tokenFile = config.sops.secrets.k3s-token.path;
     };
 
@@ -227,6 +243,19 @@
 
     secrets = {
       k3s-token = {};
+    };
+  };
+
+  systemd.services = {
+    "cage-tty1" = {
+      requires = [ 
+        "network-online.target"
+      ];
+
+      after = [
+        "network-online.target"
+        "systemd-resolved.service"
+      ];
     };
   };
 
