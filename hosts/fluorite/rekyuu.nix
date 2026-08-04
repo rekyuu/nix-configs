@@ -16,12 +16,8 @@
 
   home.packages = with pkgs; [
     comma
-    direnv
     iotop
-    jq
     lsof
-    nix-direnv
-    python3
     sl
     (buildEnv { name = "scripts"; paths = [ ../../scripts ]; })
   ];
