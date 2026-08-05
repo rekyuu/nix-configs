@@ -160,7 +160,8 @@
 
     k3s = {
       enable = true;
-      role = "server";
+      role = "agent";
+      serverAddr = "https://fluorite.localdomain:6443";
       tokenFile = config.sops.secrets.k3s-token.path;
     };
 

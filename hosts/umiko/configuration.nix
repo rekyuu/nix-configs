@@ -1,9 +1,9 @@
-{ 
+{
   config,
   lib,
-  pkgs, 
-  modulesPath, 
-  ... 
+  pkgs,
+  modulesPath,
+  ...
 }: {
   imports =
     [
@@ -45,7 +45,7 @@
     interfaces.enp4s0.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 
+      allowedTCPPorts = [
         22   # ssh
         2283 # immich
         2379 # k3s, etcd clients
@@ -57,7 +57,7 @@
         13378 # audiobookshelf
       ];
 
-      allowedUDPPorts = [ 
+      allowedUDPPorts = [
         443  # https
         7359 # jellyfin, client discovery
         8472 # k3s, flannel
@@ -94,7 +94,7 @@
   };
 
   fileSystems = {
-    "/" = { 
+    "/" = {
       device = "/dev/disk/by-uuid/a911fe90-f453-4236-bcfc-d4f2b69aa5a7";
       fsType = "ext4";
     };
@@ -122,7 +122,7 @@
   };
 
   swapDevices = [ ];
-  
+
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -167,7 +167,7 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-  };  
+  };
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
@@ -175,7 +175,7 @@
     overlays = [
       # outputs.overlays.unstable-packages
     ];
-    
+
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -215,10 +215,10 @@
     k3s = {
       enable = true;
       role = "agent";
-      serverAddr = "https://qingque.localdomain:6443";
+      serverAddr = "https://fluorite.localdomain:6443";
       tokenFile = config.sops.secrets.k3s-token.path;
     };
-    
+
     openssh = {
       enable = true;
 

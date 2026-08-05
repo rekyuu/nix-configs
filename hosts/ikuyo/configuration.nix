@@ -55,7 +55,7 @@ in {
       "pcie_aspm.policy=performance"
     ];
 
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    # binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -69,7 +69,7 @@ in {
     interfaces.eno1.wakeOnLan.enable = true;
 
     firewall = {
-      allowedTCPPorts = [ 
+      allowedTCPPorts = [
         22   # ssh
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
@@ -90,7 +90,7 @@ in {
     hardwareClockInLocalTime = true;
     timeZone = "US/Mountain";
   };
-  
+
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocales = [ "ja_JP.UTF-8/UTF-8" ];
@@ -127,7 +127,7 @@ in {
   };
 
   fileSystems = {
-    "/" = { 
+    "/" = {
       device = "/dev/disk/by-uuid/38902bdc-90ff-4de0-8f37-cb8ce304ff1b";
       fsType = "ext4";
     };
@@ -138,12 +138,12 @@ in {
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-    "/mnt/games" = { 
+    "/mnt/games" = {
       device = "/dev/disk/by-uuid/b733f944-f417-4a46-aaf6-523ad9e3c542";
       fsType = "ext4";
     };
 
-    "/mnt/arctic" = { 
+    "/mnt/arctic" = {
       device = "/dev/disk/by-uuid/ba48884f-bc76-4847-ad10-915920e13b82";
       fsType = "ext4";
     };
@@ -194,7 +194,7 @@ in {
     buildMachines = [
       {
         hostName = "umiko.localdomain";
-        systems = [ "x86_64-linux" "aarch64-linux" ];
+        systems = [ "x86_64-linux" ]; # "aarch64-linux" ];
         protocol = "ssh";
         sshUser = "rekyuu";
         sshKey = "/home/rekyuu/.ssh/id_ed25519";
@@ -204,23 +204,23 @@ in {
         supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
         mandatoryFeatures = [ ];
       }
-      # {
-      #   hostName = "fluorite.localdomain";
-      #   system = "aarch64-linux";
-      #   protocol = "ssh";
-      #   sshUser = "rekyuu";
-      #   sshKey = "/home/rekyuu/.ssh/id_ed25519";
-      #   publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5lZHJtYXM1bURmZFV3VlpkWFZIbzBZUHRRU0M5UmlFbi9udW5RdXdUalIgcm9vdEBuaXhvcy1pbnN0YWxsZXIK";
-      #   maxJobs = 3;
-      #   speedFactor = 1;
-      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      #   mandatoryFeatures = [ ];
-      # }
+      {
+        hostName = "fluorite.localdomain";
+        system = "aarch64-linux";
+        protocol = "ssh";
+        sshUser = "rekyuu";
+        sshKey = "/home/rekyuu/.ssh/id_ed25519";
+        publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5lZHJtYXM1bURmZFV3VlpkWFZIbzBZUHRRU0M5UmlFbi9udW5RdXdUalIgcm9vdEBuaXhvcy1pbnN0YWxsZXIK";
+        maxJobs = 2;
+        speedFactor = 1;
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+      }
     ];
 
     settings = {
       builders-use-substitutes = true;
-      
+
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       download-buffer-size = 536870912; # 512 MB
@@ -249,15 +249,15 @@ in {
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-  };  
+  };
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
-    
+
     overlays = [
       outputs.overlays.unstable-packages
     ];
-    
+
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
@@ -380,7 +380,7 @@ in {
     sleepy-launcher.enable = true;
     wavey-launcher.enable = true;
   };
-  
+
   services = {
     avahi = {
       enable = true;
@@ -411,7 +411,7 @@ in {
         };
       };
     };
-    
+
     # Make sure to use the Login collection as the default keyring
     gnome.gnome-keyring.enable = true;
 
@@ -421,7 +421,7 @@ in {
     k3s = {
       enable = true;
       role = "agent";
-      serverAddr = "https://qingque.localdomain:6443";
+      serverAddr = "https://fluorite.localdomain:6443";
       tokenFile = config.sops.secrets.k3s-token.path;
     };
 
@@ -430,14 +430,14 @@ in {
       defaultRuntime = true;
       package = pkgs.monado;
     };
-    
+
     openssh = {
       enable = true;
     };
 
     pipewire = {
       enable = true;
-      
+
       wireplumber.enable = true;
       pulse.enable = true;
       jack.enable = true;
@@ -451,7 +451,7 @@ in {
       enable = true;
       drivers = [ pkgs.brlaser ];
     };
-    
+
     udev.extraRules = ''
       ${ builtins.readFile ./static/udev-rules/goxlr.rules }
       ${ builtins.readFile ./static/udev-rules/keychron-q6.rules }
@@ -470,7 +470,7 @@ in {
       displayManager.session = [ ];
 
       displayManager.setupCommands = ''
-        ${pkgs.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0" 
+        ${pkgs.xrandr}/bin/xrandr --output "HDMI-A-0" --mode "2560x2880" --rate "60" --pos "0x0"
         ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-0" --mode "3440x1440" --rate "144" --pos "2560x1440" --primary --preferred
         ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-1" --mode "2560x2880" --rate "60" --pos "6000x0"
         ${pkgs.xrandr}/bin/xrandr --output "DisplayPort-2" --prop --set non-desktop 1
@@ -550,7 +550,7 @@ in {
       loginLimits = [
         { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
       ];
-      
+
       services = {
         login.enableGnomeKeyring = true;
         sddm.enableGnomeKeyring = true;
