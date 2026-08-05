@@ -21,7 +21,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - qingque
+                - fluorite
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -46,7 +46,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - qingque
+                - fluorite
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -96,39 +96,39 @@ spec:
           image: ghcr.io/caddybuilds/caddy-cloudflare:alpine
           imagePullPolicy: Always
           env:
-            - name: DOMAIN	
-              valueFrom:	
-                secretKeyRef:	
-                  key: domain	
-                  name: caddy-secrets	
-            - name: CLOUDFLARE_API_TOKEN	
-              valueFrom:	
-                secretKeyRef:	
-                  key: cloudflare-api-token	
+            - name: DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  key: domain
+                  name: caddy-secrets
+            - name: CLOUDFLARE_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: cloudflare-api-token
                   name: caddy-secrets
           ports:
-            - containerPort: 80	
-              protocol: TCP	
-            - containerPort: 443	
-              protocol: TCP	
-          volumeMounts:	
-            - mountPath: /etc/caddy/Caddyfile	
-              name: caddyfile-mount	
-              subPath: Caddyfile	
-            - mountPath: /config	
-              name: caddy-config-volume-mount	
-            - mountPath: /data	
-              name: caddy-data-volume-mount	
-      volumes:	
-        - configMap:	
-            defaultMode: 420	
-            name: caddyfile	
-          name: caddyfile-mount	
-        - name: caddy-config-volume-mount	
-          persistentVolumeClaim:	
-            claimName: caddy-config-volume-claim	
-        - name: caddy-data-volume-mount	
-          persistentVolumeClaim:	
+            - containerPort: 80
+              protocol: TCP
+            - containerPort: 443
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/caddy/Caddyfile
+              name: caddyfile-mount
+              subPath: Caddyfile
+            - mountPath: /config
+              name: caddy-config-volume-mount
+            - mountPath: /data
+              name: caddy-data-volume-mount
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: caddyfile
+          name: caddyfile-mount
+        - name: caddy-config-volume-mount
+          persistentVolumeClaim:
+            claimName: caddy-config-volume-claim
+        - name: caddy-data-volume-mount
+          persistentVolumeClaim:
             claimName: caddy-data-volume-claim
       affinity:
         nodeAffinity:
@@ -138,7 +138,7 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - qingque
+                      - fluorite
 ---
 apiVersion: v1
 kind: Service
@@ -149,19 +149,19 @@ spec:
   selector:
     app: caddy
   ports:
-    - name: http-tcp	
-      port: 80	
-      protocol: TCP	
-      targetPort: 80	
-    - name: https-tcp	
-      port: 443	
-      protocol: TCP	
-      targetPort: 443	
-    - name: https-udp	
-      port: 443	
-      protocol: UDP	
-      targetPort: 443	
-    - name: caddy-admin	
-      port: 2019	
-      protocol: TCP	
+    - name: http-tcp
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    - name: https-tcp
+      port: 443
+      protocol: TCP
+      targetPort: 443
+    - name: https-udp
+      port: 443
+      protocol: UDP
+      targetPort: 443
+    - name: caddy-admin
+      port: 2019
+      protocol: TCP
       targetPort: 2019

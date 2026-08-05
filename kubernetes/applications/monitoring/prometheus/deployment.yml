@@ -181,7 +181,7 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - qingque
+                      - fluorite
 ---
 apiVersion: v1
 kind: Service

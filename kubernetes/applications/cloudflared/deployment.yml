@@ -1,5 +1,5 @@
 # https://developers.cloudflare.com/tunnel/deployment-guides/kubernetes/
-# In the Cloudflare Tunnel settings, you need to go to Zero Trust > Networks > Connectors 
+# In the Cloudflare Tunnel settings, you need to go to Zero Trust > Networks > Connectors
 #   and for each route, click on "Origin request and connection settings" > TLS
 #   - Add Origin Server Name, should be the same as the route URL
 #   - Enable "No TLS Verify"
@@ -61,4 +61,4 @@ spec:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - qingque
+                      - fluorite
