@@ -2,5 +2,5 @@
 
 sudo mount -a &&
 systemctl --user restart mpd mpd-discord-rpc &&
-pkill waybar && waybar &&
-waypaper --restore
+waypaper --restore &&
+pkill waybar && waybar &
