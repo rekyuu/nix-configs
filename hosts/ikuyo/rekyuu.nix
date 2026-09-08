@@ -87,6 +87,7 @@ in {
     anki
     archipelago
     audacity
+    banjorecomp
     baobab
     bc
     blender
