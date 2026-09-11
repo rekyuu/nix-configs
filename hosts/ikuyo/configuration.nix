@@ -322,6 +322,7 @@ in {
       libimobiledevice
       libsecret
       logiops
+      samba
       sops
       tree
       uxplay
