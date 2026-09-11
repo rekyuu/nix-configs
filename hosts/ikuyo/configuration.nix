@@ -82,7 +82,7 @@ in {
         8472 # k3s, flannel
       ];
 
-      trustedInterfaces = [ "docker0" ];
+      trustedInterfaces = [ "docker0" "virbr0" ];
     };
   };
 
@@ -305,6 +305,7 @@ in {
       android-tools
       bash
       blackmagic-desktop-video
+      dnsmasq
       ffmpeg-headless
       ffmpegthumbnailer
       gdk-pixbuf
@@ -371,6 +372,8 @@ in {
         (runCommand "steamrun-lib" {} "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
       ];
     };
+
+    virt-manager.enable = true;
 
     zsh.enable = true;
 
@@ -577,12 +580,13 @@ in {
 
   users.users.rekyuu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "realtime" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "realtime" "docker" "adbusers" "libvirtd" ];
     shell = pkgs.zsh;
   };
 
   virtualisation = {
     docker.enable = true;
+    libvirtd.enable = true;
     waydroid.enable = true;
   };
 
