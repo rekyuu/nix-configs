@@ -180,8 +180,6 @@ in {
     screen
     seahorse
     sl
-    shipwright
-    _2ship2harkinian
     sm64coopdx
     telegram-desktop
     terraform
