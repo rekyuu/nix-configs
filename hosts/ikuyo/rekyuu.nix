@@ -94,7 +94,8 @@ in {
     bottles
     bruno
     cantata
-    cinny-desktop
+    # seems broken, using flatpak for now
+    # cinny-desktop
     comma
     dconf
     direnv
