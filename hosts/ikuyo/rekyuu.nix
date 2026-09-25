@@ -97,6 +97,7 @@ in {
     # seems broken, using flatpak for now
     # cinny-desktop
     comma
+    davinci-resolve
     dconf
     direnv
     dolphin-emu
