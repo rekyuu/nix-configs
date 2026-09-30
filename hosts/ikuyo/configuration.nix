@@ -303,6 +303,7 @@ in {
 
     systemPackages = with pkgs; [
       age
+      arrpc
       android-tools
       bash
       blackmagic-desktop-video
@@ -494,6 +495,10 @@ in {
   };
 
   systemd = {
+    packages = with pkgs; [
+      arrpc
+    ];
+
     tmpfiles.rules = [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];

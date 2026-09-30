@@ -1,8 +1,8 @@
 #! /usr/bin/env bash
 
 while true; do
-    vesktop &
-    # discord &
+    # vesktop &
+    discord &
     D_PID=$!
 
     wait $D_PID

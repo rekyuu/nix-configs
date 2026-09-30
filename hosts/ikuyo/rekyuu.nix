@@ -100,6 +100,7 @@ in {
     davinci-resolve-studio
     dconf
     direnv
+    discord
     dolphin-emu
     dusklight
     easytag
@@ -311,8 +312,6 @@ in {
   };
 
   services = {
-    arrpc.enable = true;
-
     fluidsynth = {
       enable = true;
       soundService = "pipewire-pulse";
