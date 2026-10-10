@@ -3,13 +3,19 @@
   ...
 }:
 let
-  blender = pkgs.unstable.blender;
-  # blender = (pkgs.blender.withPackages (ps: [
-  #     ps.cattrs
-  #     ps.flatbuffers
-  #     ps.pyqt6
-  #   ])
-  # );
+  # blender = pkgs.unstable.blender;
+  blender = (pkgs.unstable.blender.withPackages (ps: [
+      pkgs.opencc
+      ps.cattrs
+      ps.flatbuffers
+      ps.glfw
+      ps.iglo
+      ps.networkx
+      # ps.opencc
+      ps.pyqt6
+      ps.xxhash
+    ])
+  );
 in {
   imports = [
     ./applications/goxlr.nix
@@ -188,6 +194,7 @@ in {
     terraform
     transmission_4-qt
     ungoogled-chromium
+    unityhub
     unrar
     vesktop
     viewnior
