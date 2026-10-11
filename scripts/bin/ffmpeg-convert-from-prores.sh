@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 FILEPATH=$1
-CRF=${2:-28}
+CRF=${2:-18}
 
 FILE=$(basename -- "$FILEPATH")
 FILENAME="${FILE%.*}"
