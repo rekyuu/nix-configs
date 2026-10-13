@@ -1,7 +1,7 @@
 {
   pkgs,
   ...
-}: 
+}:
 let
   monitorL = "HDMI-A-1";
   monitorC = "DP-1";
@@ -48,12 +48,12 @@ in {
           pos = "0 0";
           mode = "2560x2880@60Hz";
         };
-        
+
         "${monitorC}" = {
           pos = "2560 1440";
           mode = "3440x1440@144Hz";
         };
-        
+
         "${monitorR}" = {
           pos = "6000 0";
           mode = "2560x2880@60Hz";
@@ -92,8 +92,8 @@ in {
           { app_id = "org.gnome.clocks"; }
           { app_id = "org.gnome.Nautilus"; }
           { class = "Godot"; }
-          { class = "jetbrains-.*"; title = "splash"; }
-          { class = "jetbrains-.*"; title = "Welcome to .*"; }
+          { app_id = "jetbrains-.*"; title = "splash"; }
+          { app_id = "jetbrains-.*"; title = "Welcome to .*"; }
           { app_id = "moe.launcher..*-launcher"; }
           { app_id = "org.telegram.desktop"; title = "Media viewer"; }
           { class = "pol.exe"; } # PlayOnline
@@ -144,7 +144,7 @@ in {
             command = "resize set 1280 720";
           }
         ];
-      };      
+      };
 
       assigns = {
         "1" = [
