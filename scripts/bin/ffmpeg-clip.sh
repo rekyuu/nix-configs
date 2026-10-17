@@ -8,4 +8,4 @@ FILE=$(basename -- "$FILEPATH")
 FILENAME="${FILE%.*}"
 FILEEXTENSION="${FILE##*.}"
 
-ffmpeg -i "$FILE" -ss "$START_TIME" -to "$END_TIME" -c:v copy -c:a copy "${FILENAME}_trim.${FILEEXTENSION}"
+ffmpeg -i "$FILE" -ss "$START_TIME" -to "$END_TIME" -c copy -avoid_negative_ts make_zero "${FILENAME}_trim.${FILEEXTENSION}"
