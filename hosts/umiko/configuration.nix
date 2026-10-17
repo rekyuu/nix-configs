@@ -187,6 +187,7 @@
     systemPackages = with pkgs; [
       age
       bash
+      ffmpeg-headless
       git
       sops
       tree
