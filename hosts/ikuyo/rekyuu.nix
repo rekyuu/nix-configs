@@ -19,6 +19,7 @@ let
 in {
   imports = [
     ./applications/goxlr.nix
+    ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/mako.nix
     ./applications/sway.nix

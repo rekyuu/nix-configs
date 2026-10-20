@@ -399,8 +399,8 @@ in {
 
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
-      sessionPackages = [ pkgs.sway ];
-      defaultSession = "sway";
+      sessionPackages = [ pkgs.sway pkgs.hyprland ];
+      defaultSession = "hyprland";
 
       sddm = {
         enable = true;
