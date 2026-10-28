@@ -235,7 +235,7 @@ in {
         { command = "firefox"; }
         { command = "steam"; }
         { command = "kitty --class=btop btop"; }
-        # { command = "neowall"; }
+        { command = "wl-paste --type text --watch clipboard.sh"; }
       ];
     };
   };
