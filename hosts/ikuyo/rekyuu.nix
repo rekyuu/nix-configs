@@ -171,6 +171,7 @@ in {
     # (callPackage ../../pkgs/ntsc-rs {})
     obsidian
     openrct2
+    openssl
     openttd-jgrpp
     p7zip
     pavucontrol
