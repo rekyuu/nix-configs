@@ -32,9 +32,8 @@ in {
       efi.canTouchEfiVariables = true;
     };
 
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelModules = [ "kvm-amd" "uinput" ]; # uinput required by OpenTabletDriver
-    extraModulePackages = with pkgs.linuxKernel.packages.linux_zen; [ decklink v4l2loopback ];
+    extraModulePackages = with pkgs.linuxPackages; [ decklink v4l2loopback ];
     extraModprobeConfig = ''
       options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     '';
@@ -384,8 +383,6 @@ in {
     # Has to be done here because of hosts file shenanigans, probably
     anime-game-launcher.enable = true;
     honkers-railway-launcher.enable = true;
-    sleepy-launcher.enable = true;
-    wavey-launcher.enable = true;
   };
 
   services = {
@@ -430,12 +427,6 @@ in {
       role = "agent";
       serverAddr = "https://fluorite.localdomain:6443";
       tokenFile = config.sops.secrets.k3s-token.path;
-    };
-
-    monado = {
-      enable = true;
-      defaultRuntime = true;
-      package = pkgs.monado;
     };
 
     openssh = {
@@ -535,11 +526,6 @@ in {
     };
 
     user.services = {
-      monado.environment = {
-        STEAMVR_LH_ENABLE = "1";
-        XRT_COMPOSITOR_COMPUTE = "1";
-      };
-
       polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
         wantedBy = [ "graphical-session.target" ];

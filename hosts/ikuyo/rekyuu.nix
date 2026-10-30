@@ -90,7 +90,7 @@ in {
 
   home.packages = with pkgs; [
     adwaita-icon-theme
-    anki
+    # anki
     archipelago
     audacity
     banjorecomp
@@ -201,7 +201,7 @@ in {
     vintagestory
     vlc
     # nur.repos.ataraxiasjel.waydroid-script
-    waypaper
+    unstable.waypaper
     wayvr
     (wineWow64Packages.full.override {
       wineRelease = "staging";

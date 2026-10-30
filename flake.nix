@@ -7,15 +7,11 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs-b618ed69.url = "github:nixos/nixpkgs/b618ed69e325363246049979bec5a7a13ee31e74"; # for decklink
 
-    # nixpkgs-xr
-    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
-    nixpkgs-xr.inputs.nixpkgs.follows = "nixpkgs";
-
     # NUR
     # Disabled since this causes the obnoxious error below
     # You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`.
     # This will soon not be possible. Please remove all `nixpkgs` options when using `home-manager.useGlobalPkgs`.
-    # https://github.com/nix-community/NUR/issues/877 
+    # https://github.com/nix-community/NUR/issues/877
     # nur.url = "github:nix-community/NUR";
     # nur.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -63,7 +59,6 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-xr,
     # nur,
     home-manager,
     aagl,
@@ -75,17 +70,16 @@
     inherit (self) outputs;
   in {
     overlays = import ./overlays { inherit inputs; };
-    
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild [switch/boot] --sudo --flake .#hostname [--build-target hostname]'
     nixosConfigurations = {
       ikuyo = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
-        
+
         modules = [
           ./hosts/ikuyo/configuration.nix
-          
-          nixpkgs-xr.nixosModules.nixpkgs-xr
+
           # nur.modules.nixos.default
           sops-nix.nixosModules.sops
 
@@ -105,7 +99,7 @@
 
         modules = [
           ./hosts/umiko/configuration.nix
-          
+
           sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
@@ -164,7 +158,7 @@
           }
 
           ./hosts/fluorite/configuration.nix
-          
+
           sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
@@ -182,7 +176,7 @@
 
         modules = [
           ./hosts/qingque/configuration.nix
-          
+
           sops-nix.nixosModules.sops
 
           home-manager.nixosModules.home-manager
