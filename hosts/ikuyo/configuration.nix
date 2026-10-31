@@ -450,6 +450,8 @@ in {
       drivers = [ pkgs.brlaser ];
     };
 
+    tailscale.enable = true;
+
     udev.extraRules = ''
       ${ builtins.readFile ./static/udev-rules/goxlr.rules }
       ${ builtins.readFile ./static/udev-rules/keychron-q6.rules }
