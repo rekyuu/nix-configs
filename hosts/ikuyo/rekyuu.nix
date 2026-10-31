@@ -151,6 +151,7 @@ in {
     kdePackages.kdenlive
     kdiskmark
     kubectl
+    kubernetes-helm
     libnotify
     libreoffice-qt
     libwebp
