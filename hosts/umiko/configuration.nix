@@ -47,6 +47,7 @@
     firewall = {
       allowedTCPPorts = [
         22   # ssh
+        443  # https
         2283 # immich
         2379 # k3s, etcd clients
         2380 # k3s, etcd peers
@@ -234,6 +235,8 @@
         AllowAgentForwarding = false;
       };
     };
+
+    tailscale.enable = true;
   };
 
   security = {
