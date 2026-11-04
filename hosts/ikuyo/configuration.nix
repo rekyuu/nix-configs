@@ -365,6 +365,12 @@ in {
       enableSSHSupport = true;
     };
 
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+
     mtr.enable = true;
 
     niri.enable = true;
@@ -376,6 +382,28 @@ in {
         openssl
         (runCommand "steamrun-lib" {} "mkdir $out; ln -s ${steam-run.fhsenv}/usr/lib64 $out/lib")
       ];
+    };
+
+    uwsm = {
+      enable = true;
+
+      # waylandCompositors = {
+      #   hyprland = {
+      #     prettyName = "Hyprland";
+      #     comment = "Hyprland compositor managed by UWSM";
+      #     binPath = "${config.programs.hyprland.package}/bin/hyprland";
+      #   };
+      #   niri = {
+      #     prettyName = "Niri";
+      #     comment = "Niri compositor managed by UWSM";
+      #     binPath = "${config.programs.niri.package}/bin/niri-session";
+      #   };
+      #   sway = {
+      #     prettyName = "Sway";
+      #     comment = "Sway compositor managed by UWSM";
+      #     binPath = "${pkgs.sway}/bin/sway";
+      #   };
+      # };
     };
 
     virt-manager.enable = true;
@@ -398,7 +426,7 @@ in {
 
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
-      sessionPackages = [ pkgs.sway config.programs.niri.package ];
+      sessionPackages = [ pkgs.hyprland config.programs.niri.package pkgs.sway ];
       defaultSession = "sway";
 
       sddm = {

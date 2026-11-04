@@ -19,6 +19,7 @@ let
 in {
   imports = [
     ./applications/goxlr.nix
+    ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/mako.nix
     ./applications/niri.nix
@@ -47,11 +48,11 @@ in {
 
     pointerCursor = {
       gtk.enable = true;
-      x11.enable = true;
+      # x11.enable = true;
 
       name = "Bibata-Modern-Classic";
       size = 24;
-      package = pkgs.callPackage ../../pkgs/bibata-cursor-theme {};
+      package = pkgs.bibata-cursors;
     };
   };
 
