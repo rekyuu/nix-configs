@@ -367,6 +367,8 @@ in {
 
     mtr.enable = true;
 
+    niri.enable = true;
+
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -396,7 +398,7 @@ in {
 
     displayManager = {
       # Add pkgs.swayfx if you're using it here. they have the same binary name for some reason
-      sessionPackages = [ pkgs.sway ];
+      sessionPackages = [ pkgs.sway config.programs.niri.package ];
       defaultSession = "sway";
 
       sddm = {
@@ -528,6 +530,8 @@ in {
     };
 
     user.services = {
+      niri.enableDefaultPath = false;
+
       polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
         wantedBy = [ "graphical-session.target" ];
