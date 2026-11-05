@@ -22,7 +22,6 @@ in {
     ./applications/hyprland.nix
     ./applications/hyprlock.nix
     ./applications/mako.nix
-    ./applications/niri.nix
     ./applications/sway.nix
     ./applications/waybar.nix
 
