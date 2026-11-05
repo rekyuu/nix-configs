@@ -330,7 +330,7 @@ local workspaceMap = {
 
 for i, numpadKey in pairs(numpadKeys) do
     hl.bind("SUPER + " .. numpadKey, hl.dsp.focus({ workspace = workspaceMap[i] }))
-    hl.bind("SUPER + SHIFT + " .. numpadKey, hl.dsp.window.move({ workspace = workspaceMap[i] }))
+    hl.bind("SUPER + SHIFT + " .. numpadKey, hl.dsp.window.move({ workspace = workspaceMap[i], follow = false }))
 end
 
 -- Scrolling layout keybinds
