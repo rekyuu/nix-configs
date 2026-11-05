@@ -4,14 +4,10 @@ LOGOUT="Logout"
 SHUTDOWN="Shutdown"
 REBOOT="Reboot"
 RELOAD_SWAY="Reload Sway"
-ADJUST_HYPRLAND_LAYOUT="Adjust Hyprland Layout"
 
 DEFAULT_OPTIONS="$LOGOUT;$SHUTDOWN;$REBOOT"
 
-if [[ $DESKTOP_SESSION == "hyprland" ]]; then
-    CHOICE=$(echo "$ADJUST_HYPRLAND_LAYOUT;$DEFAULT_OPTIONS" \
-        | rofi -dmenu -sep ';' -m DP-1)
-elif [[ $DESKTOP_SESSION == "sway" ]]; then
+if [[ $DESKTOP_SESSION == "sway" ]]; then
     CHOICE=$(echo "$RELOAD_SWAY;$DEFAULT_OPTIONS" \
         | rofi -dmenu -sep ';' -m DP-1)
 else
@@ -21,8 +17,8 @@ fi
 
 case "$CHOICE" in
     "$LOGOUT")
-        if [[ $DESKTOP_SESSION == "hyprland" ]]; then
-            hyprctl dispatch exit
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            hyprshutdown --post-cmd "hyprctl dispatch exit"
         elif [[ $DESKTOP_SESSION == "niri" ]]; then
             niri msg action quit
         elif [[ $DESKTOP_SESSION == "sway" ]]; then
@@ -30,13 +26,18 @@ case "$CHOICE" in
         fi
         ;;
     "$SHUTDOWN")
-        sudo shutdown now
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            hyprshutdown --post-cmd "sudo shutdown now"
+        else
+            sudo shutdown now
+        fi
         ;;
     "$REBOOT")
-        sudo reboot
-        ;;
-    "$ADJUST_HYPRLAND_LAYOUT")
-        hyprland-adjust-layout.py
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            hyprshutdown --post-cmd "sudo reboot"
+        else
+            sudo reboot
+        fi
         ;;
     "$RELOAD_SWAY")
         swaymsg reload

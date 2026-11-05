@@ -63,7 +63,7 @@ case $1 in
 
         kill "$FEH_PID"
         ;;
-    selection-video)
+    selection-video) # ctrl + prtscr
         if ! [[ -f /tmp/rec-pid ]]; then
             geometry="$(eval slurp "$SLURP_ARGS")"
 

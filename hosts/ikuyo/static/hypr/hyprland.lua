@@ -62,7 +62,7 @@ hl.env("GDK_BACKEND", "wayland,x11")
 hl.env("NIXOS_OZONE_WL", "1")
 
 hl.env("XCURSOR_SIZE", "24")
-hl.env("GTK_THEME", "Adwaita-dark")
+-- hl.env("GTK_THEME", "Adwaita-dark")
 hl.env("QT_QPA_PLATFORMTHEME", "adwaita-dark")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 
@@ -94,11 +94,11 @@ hl.config({
         gaps_in  = 5,
         gaps_out = 10,
 
-        border_size = 2,
+        border_size = 3,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {"rgb(DA848A)", "rgb(79A3B1)"}, angle = 45 },
+            inactive_border = "rgb(595959)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -111,25 +111,26 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 0,
-        rounding_power = 2,
+        rounding = 5,
+        rounding_power = 3,
 
         -- Change transparency of focused and unfocused windows
-        active_opacity   = 1.0,
+        active_opacity = 1.0,
         inactive_opacity = 1.0,
 
         shadow = {
-            enabled      = true,
-            range        = 4,
+            enabled = true,
+            range = 25,
             render_power = 3,
-            color        = 0xee1a1a1a,
+            color = 0xCC1A1A1A,
+            color_inactive = 0x771A1A1A
         },
 
         blur = {
-            enabled   = true,
-            size      = 3,
-            passes    = 1,
-            vibrancy  = 0.1696,
+            enabled = true,
+            size = 3,
+            passes = 1,
+            vibrancy = 0.1696,
         },
     },
 
@@ -389,6 +390,18 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "blender",
+
+    match = {
+        class = "^blender$",
+        title = "^File Browser$",
+    },
+
+    size = { 1280, 720 },
+    center = true,
+})
+
+hl.window_rule({
     name = "blender-render",
 
     match = {
@@ -398,12 +411,14 @@ hl.window_rule({
 
     float = true,
     size = { 1920, 1080 },
+    center = true,
 })
 
 hl.on("window.title", function(w)
     if w ~= nil and w.title == "Blender Render" then
-        hl.dispatch(hl.dsp.window.float({ action = "set" }))
-        hl.dispatch(hl.dsp.window.resize({ x = 1920, y = 1080, relative = false }))
+        hl.dispatch(hl.dsp.window.float({ window = w, action = "set" }))
+        hl.dispatch(hl.dsp.window.resize({ window = w, x = 1920, y = 1080, relative = false }))
+        hl.dispatch(hl.dsp.window.center({ window = w }))
     end
 end)
 
@@ -456,6 +471,8 @@ hl.window_rule({
     },
 
     float = true,
+    center = true,
+    size = { 970, 590 },
 })
 
 hl.window_rule({

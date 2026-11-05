@@ -13,21 +13,45 @@ CHOICE=$(echo "$OPTS" | rofi -dmenu -sep ';' -m DP-1)
 
 case "$CHOICE" in
     "$DESKTOP")
-        screenshot-sway.sh desktop
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh desktop
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            screenshot-sway.sh desktop
+        fi
         ;;
     "$ACTIVE_WINDOW")
-        screenshot-sway.sh active-window
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh active-window
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            screenshot-sway.sh active-window
+        fi
         ;;
     "$ACTIVE_MONITOR")
-        screenshot-sway.sh active-monitor
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh active-monitor
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            screenshot-sway.sh active-monitor
+        fi
         ;;
     "$SELECTION_MONITOR")
-        screenshot-sway.sh selection-monitor
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh selection-monitor
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            screenshot-sway.sh selection-monitor
+        fi
         ;;
     "$SELECTION")
-        screenshot-sway.sh selection
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh selection
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            screenshot-sway.sh selection
+        fi
         ;;
     "$SELECTION_VIDEO")
-        screenshot-sway.sh selection-video
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh selection-video
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            screenshot-sway.sh selection-video
+        fi
         ;;
 esac

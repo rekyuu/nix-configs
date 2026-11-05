@@ -2,10 +2,6 @@
 
 export SLURP_ARGS="-b 00000075 -B 00000075 -c FFFFFFFF -d -w 1"
 
-function slurp-custom() {
-    eval "slurp $SLURP_ARGS"
-}
-
 filename=$(date "+%Y-%m-%d_%H-%M-%S-%3N")
 foldername=$(date "+%Y-%m")
 destination_folder=~/Screenshots/$foldername
@@ -14,18 +10,26 @@ output="$destination_folder/$filename"
 mkdir -p "$destination_folder"
 
 case $1 in
-    all) # prtscr
-        grimblast --freeze save screen "$output.png"
+    desktop) # prtscr
+        grimblast copysave screen "$output.png"
         ;;
-    window) # alt + prtscr
-        grimblast --freeze save active "$output.png"
+    active-window) # alt + prtscr
+        grimblast copysave active "$output.png"
+        ;;
+    active-monitor)
+        # not yet implemented
+        exit 0
+        ;;
+    selection-monitor)
+        # not yet implemented
+        exit 0
         ;;
     selection) # shift + prtscr
-        grimblast --freeze save area "$output.png"
+        grimblast --freeze copysave area "$output.png"
         ;;
-    video) # ctrl + prtscr
+    selection-video) # ctrl + prtscr
         if ! [[ -f /tmp/rec-pid ]]; then
-            geometry="$(slurp-custom)"
+            geometry="$(eval slurp "$SLURP_ARGS")"
 
             if [[ "$geometry" != "" ]]; then
                 wf-recorder -g "$geometry" -r 60 -f "$output.mp4" &
@@ -41,7 +45,7 @@ case $1 in
 
             rm /tmp/rec-pid
 
-            notify-send "Video recording finished."z
+            notify-send "Video recording finished."
         fi
         ;;
 esac

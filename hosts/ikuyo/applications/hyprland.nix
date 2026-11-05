@@ -11,6 +11,8 @@ in {
   home.packages = with pkgs; [
     grim
     grimblast
+    hyprpicker
+    hyprshutdown
     slurp
     wf-recorder
     wl-clipboard
