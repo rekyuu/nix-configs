@@ -22,7 +22,7 @@ case $1 in
         ;;
     selection-monitor)
         # not yet implemented
-        exit 0
+        grim -g "$(eval slurp "$SLURP_ARGS" -or)" "$output.png"
         ;;
     selection) # shift + prtscr
         grimblast --freeze copysave area "$output.png"
