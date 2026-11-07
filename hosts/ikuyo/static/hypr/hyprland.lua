@@ -353,6 +353,12 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
 
+hl.layer_rule {
+    name = "no-anim-for-selection",
+    match = { namespace = "selection" },
+    no_anim = true,
+}
+
 -- See https://wiki.hypr.land/configuring/core/rules/
 local suppressMaximizeRule = hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
@@ -376,6 +382,12 @@ hl.window_rule({
     },
 
     no_focus = true,
+})
+
+hl.window_rule({
+    name = "center-floating-windows",
+    match = { float = true },
+    center = true,
 })
 
 hl.window_rule({
@@ -552,9 +564,3 @@ hl.on("window.active", function(w)
         end
     end
 end)
-
-hl.layer_rule {
-    name = "no-anim-for-selection",
-    match = { namespace = "selection" },
-    no_anim = true,
-}
