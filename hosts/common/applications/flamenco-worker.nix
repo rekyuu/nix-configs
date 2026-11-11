@@ -12,7 +12,7 @@
     serviceConfig = {
       Type = "simple";
       ExecStart = toString(pkgs.writeShellScript "flamenco-worker.sh" ''
-        export PATH=$PATH:${lib.makeBinPath [ pkgs.blender pkgs.ffmpeg_7-full ]}
+        export PATH=$PATH:${lib.makeBinPath [ pkgs.unstable.blender pkgs.ffmpeg_7-full ]}
         ${(pkgs.callPackage ../../../pkgs/flamenco-worker {})}/bin/flamenco-worker -manager http://umiko.localdomain:8080
       '');
       Restart = "on-failure";

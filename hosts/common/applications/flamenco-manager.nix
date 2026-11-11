@@ -13,7 +13,7 @@
       Type = "simple";
       WorkingDirectory = "-/etc/flamenco";
       ExecStart = toString(pkgs.writeShellScript "flamenco-manager.sh" ''
-        export PATH=$PATH:${lib.makeBinPath [ pkgs.blender pkgs.ffmpeg_7-full ]}
+        export PATH=$PATH:${lib.makeBinPath [ pkgs.unstable.blender pkgs.ffmpeg_7-full ]}
 
         mkdir -p /etc/flamenco
         cd /etc/flamenco

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  outputs,
   pkgs,
   modulesPath,
   ...
@@ -174,7 +175,7 @@
     hostPlatform = lib.mkDefault "x86_64-linux";
 
     overlays = [
-      # outputs.overlays.unstable-packages
+      outputs.overlays.unstable-packages
     ];
 
     config = {

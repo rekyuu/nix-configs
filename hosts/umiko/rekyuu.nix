@@ -3,6 +3,7 @@
   ...
 }: {
   imports = [
+    ../common/applications/blender.nix
     ../common/applications/btop.nix
     ../common/applications/zsh.nix
   ];
@@ -15,7 +16,6 @@
   };
 
   home.packages = with pkgs; [
-    blender
     comma
     direnv
     (callPackage ../../pkgs/gdown {})

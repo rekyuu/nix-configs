@@ -1,22 +1,7 @@
 {
   pkgs,
   ...
-}:
-let
-  # blender = pkgs.unstable.blender;
-  blender = (pkgs.unstable.blender.withPackages (ps: [
-      pkgs.opencc
-      ps.cattrs
-      ps.flatbuffers
-      ps.glfw
-      ps.iglo
-      ps.networkx
-      # ps.opencc
-      ps.pyqt6
-      ps.xxhash
-    ])
-  );
-in {
+}: {
   imports = [
     ./applications/goxlr.nix
     ./applications/hyprland.nix
@@ -25,6 +10,7 @@ in {
     ./applications/sway.nix
     ./applications/waybar.nix
 
+    ../common/applications/blender.nix
     ../common/applications/btop.nix
     ../common/applications/houdini.nix
     ../common/applications/jellyfin-rpc.nix
@@ -97,7 +83,6 @@ in {
     banjorecomp
     baobab
     bc
-    blender
     bottles
     bruno
     cantata
@@ -260,11 +245,6 @@ in {
 
   xdg = {
     desktopEntries = {
-      blender = {
-        name = "blender";
-        exec = "${blender}/bin/blender";
-      };
-
       viewnior = {
         name = "viewnior";
         exec = "${pkgs.viewnior}/bin/viewnior";
