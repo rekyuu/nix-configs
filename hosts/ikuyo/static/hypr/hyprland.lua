@@ -445,6 +445,18 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "davinci-resolve",
+
+    match = {
+        class = "^resolve$",
+    },
+
+    monitor = monitorC,
+    scrolling_width = 1.0,
+    center = false
+})
+
+hl.window_rule({
     name = "discord",
 
     match = {
@@ -521,7 +533,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name = "steam",
+    name = "steam-friends-list",
 
     match = {
         class = "^steam$",
@@ -536,14 +548,14 @@ hl.window_rule({
     name = "telegram",
 
     match = {
-        class = "^org.telegram.desktop$",
+        class = "^org.telegram.desktop$"
     },
 
     workspace = workspaceMap[1],
 })
 
 hl.window_rule({
-    name = "telegram",
+    name = "telegram-media-viewer",
 
     match = {
         class = "^org.telegram.desktop$",
@@ -555,7 +567,7 @@ hl.window_rule({
 })
 
 hl.on("window.active", function(w)
-    if w ~= nil and w.class == "org.telegram.desktop" then
+    if w ~= nil and w.class == "org.telegram.desktop" and w.title =="Telegram" then
         local desiredWidth = 600
         local desiredHeight = 1425
 
