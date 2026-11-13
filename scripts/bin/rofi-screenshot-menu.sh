@@ -6,8 +6,9 @@ ACTIVE_MONITOR="Active monitor"
 SELECTION_MONITOR="Select monitor"
 SELECTION="Selection [SHIFT + PRTSCR]"
 SELECTION_VIDEO="Selection (Video) [CTRL + PRTSCR]"
+TIMELAPSE="Timelapse"
 
-OPTS="$ACTIVE_MONITOR;$SELECTION_MONITOR;$ACTIVE_WINDOW;$SELECTION;$SELECTION_VIDEO;$DESKTOP"
+OPTS="$ACTIVE_MONITOR;$SELECTION_MONITOR;$ACTIVE_WINDOW;$SELECTION;$SELECTION_VIDEO;$DESKTOP;$TIMELAPSE"
 
 CHOICE=$(echo "$OPTS" | rofi -dmenu -sep ';' -m DP-1)
 
@@ -52,6 +53,13 @@ case "$CHOICE" in
             screenshot-hyprland.sh selection-video
         elif [[ $DESKTOP_SESSION == "sway" ]]; then
             screenshot-sway.sh selection-video
+        fi
+        ;;
+    "$TIMELAPSE")
+        if [[ $DESKTOP_SESSION == hyprland* ]]; then
+            screenshot-hyprland.sh timelapse
+        elif [[ $DESKTOP_SESSION == "sway" ]]; then
+            exit 0
         fi
         ;;
 esac

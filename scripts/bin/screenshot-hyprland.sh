@@ -9,25 +9,24 @@ output="$destination_folder/$filename"
 
 mkdir -p "$destination_folder"
 
-case $1 in
-    desktop) # prtscr
+case "$1" in
+    "desktop") # prtscr
         grimblast copysave screen "$output.png"
         ;;
-    active-window) # alt + prtscr
+    "active-window") # alt + prtscr
         grimblast copysave active "$output.png"
         ;;
-    active-monitor)
+    "active-monitor")
         # not yet implemented
         exit 0
         ;;
-    selection-monitor)
-        # not yet implemented
+    "selection-monitor")
         grim -g "$(eval slurp "$SLURP_ARGS" -or)" "$output.png"
         ;;
-    selection) # shift + prtscr
+    "selection") # shift + prtscr
         grimblast --freeze copysave area "$output.png"
         ;;
-    selection-video) # ctrl + prtscr
+    "selection-video") # ctrl + prtscr
         if ! [[ -f /tmp/rec-pid ]]; then
             geometry="$(eval slurp "$SLURP_ARGS")"
 
@@ -46,6 +45,36 @@ case $1 in
             rm /tmp/rec-pid
 
             notify-send "Video recording finished."
+        fi
+        ;;
+    "timelapse")
+        if ! [[ -f /tmp/timelapse-pid ]]; then
+            geometry="$(eval slurp "$SLURP_ARGS" -or)"
+            timelapse_folder=~/Screenshots/timelapses/$filename
+
+            mkdir -p "$timelapse_folder"
+
+            if [[ "$geometry" != "" ]]; then
+                i=0
+                while true; do
+                    timelapse_filename=$(printf "%05d" "$i")
+                    grim -g "$geometry" "$timelapse_folder/$timelapse_filename.png"
+                    i=$((i+1))
+                    sleep 5
+                done &
+                TIMELAPSE_PID=$!
+
+                echo "$TIMELAPSE_PID" >> /tmp/timelapse-pid
+
+                notify-send "Timelapse started."
+            fi
+        else
+            TIMELAPSE_PID="$(cat /tmp/timelapse-pid)"
+            kill "$TIMELAPSE_PID"
+
+            rm /tmp/timelapse-pid
+
+            notify-send "Timelapse finished."
         fi
         ;;
 esac
