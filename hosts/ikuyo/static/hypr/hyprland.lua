@@ -567,7 +567,7 @@ hl.window_rule({
 })
 
 hl.on("window.active", function(w)
-    if w ~= nil and w.class == "org.telegram.desktop" and w.title =="Telegram" then
+    if w ~= nil and w.class == "org.telegram.desktop" and w. == "Telegram" then
         local desiredWidth = 600
         local desiredHeight = 1425
 
