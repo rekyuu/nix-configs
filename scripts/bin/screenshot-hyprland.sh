@@ -58,8 +58,7 @@ case "$1" in
                 i=0
                 while true; do
                     timelapse_filename=$(printf "%05d" "$i")
-                    grim -g "$geometry" "$timelapse_folder/$timelapse_filename.png"
-                    i=$((i+1))
+                    grim -g "$geometry" "$timelapse_folder/$timelapse_filename.png" && i=$((i+1))
                     sleep 5
                 done &
                 TIMELAPSE_PID=$!
