@@ -91,6 +91,7 @@
     comma
     davinci-resolve-studio
     dconf
+    deadlock-mod-manager
     direnv
     discord
     dolphin-emu
