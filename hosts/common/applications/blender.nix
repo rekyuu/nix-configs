@@ -14,6 +14,7 @@
     ps.flatbuffers
     ps.glfw
     ps.iglo
+    (ps.callPackage ../../../pkgs/python-packages/libigl {})
     ps.networkx
     ps.pyqt6
     ps.xxhash
