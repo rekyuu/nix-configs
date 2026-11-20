@@ -324,6 +324,7 @@ in {
       libsecret
       logiops
       samba
+      smartmontools
       sops
       tree
       uxplay
@@ -471,6 +472,11 @@ in {
     printing = {
       enable = true;
       drivers = [ pkgs.brlaser ];
+    };
+
+    smartd = {
+      enable = true;
+      autodetect = true;
     };
 
     tailscale.enable = true;
