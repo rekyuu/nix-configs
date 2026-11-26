@@ -2,11 +2,11 @@
   pkgs,
   ...
 }: let
-  blender = pkgs.unstable.blender;
+  blender = pkgs.blender-53.blender;
 
   blenderOverride = blender.override {
-    config.rocmSupport = true;
-    config.cudaSupport = false;
+    # config.rocmSupport = true;
+    # config.cudaSupport = false;
   };
 
   blenderOverrideWithPackages = blenderOverride.withPackages (ps: [

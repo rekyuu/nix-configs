@@ -6,6 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs-b618ed69.url = "github:nixos/nixpkgs/b618ed69e325363246049979bec5a7a13ee31e74"; # for decklink
+    nixpkgs-blender53.url = "github:amarshall/nixpkgs/blender-5.3"; # for decklink
 
     # NUR
     # Disabled since this causes the obnoxious error below

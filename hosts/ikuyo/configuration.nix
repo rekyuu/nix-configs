@@ -192,30 +192,30 @@ in {
     distributedBuilds = true;
 
     buildMachines = [
-      {
-        hostName = "umiko.localdomain";
-        systems = [ "x86_64-linux" ]; # "aarch64-linux" ];
-        protocol = "ssh";
-        sshUser = "rekyuu";
-        sshKey = "/home/rekyuu/.ssh/id_ed25519";
-        publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUhvWTFxckdUK0tJZEl5bFBGYlB5NFZ4MTVhYkZRQmtMZ0taV0FROGo1T1Qgcm9vdEB1bWlrbwo=";
-        maxJobs = 3;
-        speedFactor = 1;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-        mandatoryFeatures = [ ];
-      }
-      {
-        hostName = "fluorite.localdomain";
-        system = "aarch64-linux";
-        protocol = "ssh";
-        sshUser = "rekyuu";
-        sshKey = "/home/rekyuu/.ssh/id_ed25519";
-        publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5lZHJtYXM1bURmZFV3VlpkWFZIbzBZUHRRU0M5UmlFbi9udW5RdXdUalIgcm9vdEBuaXhvcy1pbnN0YWxsZXIK";
-        maxJobs = 2;
-        speedFactor = 1;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-        mandatoryFeatures = [ ];
-      }
+      # {
+      #   hostName = "umiko.localdomain";
+      #   systems = [ "x86_64-linux" ]; # "aarch64-linux" ];
+      #   protocol = "ssh";
+      #   sshUser = "rekyuu";
+      #   sshKey = "/home/rekyuu/.ssh/id_ed25519";
+      #   publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUhvWTFxckdUK0tJZEl5bFBGYlB5NFZ4MTVhYkZRQmtMZ0taV0FROGo1T1Qgcm9vdEB1bWlrbwo=";
+      #   maxJobs = 3;
+      #   speedFactor = 1;
+      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      #   mandatoryFeatures = [ ];
+      # }
+      # {
+      #   hostName = "fluorite.localdomain";
+      #   system = "aarch64-linux";
+      #   protocol = "ssh";
+      #   sshUser = "rekyuu";
+      #   sshKey = "/home/rekyuu/.ssh/id_ed25519";
+      #   publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU5lZHJtYXM1bURmZFV3VlpkWFZIbzBZUHRRU0M5UmlFbi9udW5RdXdUalIgcm9vdEBuaXhvcy1pbnN0YWxsZXIK";
+      #   maxJobs = 2;
+      #   speedFactor = 1;
+      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      #   mandatoryFeatures = [ ];
+      # }
     ];
 
     settings = {

@@ -19,5 +19,12 @@
       stdenv.hostPlatform.system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
+
+    blender-53 = import inputs.nixpkgs-blender53 {
+      inherit (final.stdenv.hostPlatform) system;
+
+      stdenv.hostPlatform.system = final.stdenv.hostPlatform.system;
+      config.allowUnfree = true;
+    };
   };
 }
