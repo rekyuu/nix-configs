@@ -86,6 +86,7 @@
     bottles
     bruno
     cantata
+    chatterino7
     # seems broken, using flatpak for now
     # cinny-desktop
     comma
@@ -179,6 +180,7 @@
     seahorse
     sl
     sm64coopdx
+    streamlink
     telegram-desktop
     terraform
     transmission_4-qt
